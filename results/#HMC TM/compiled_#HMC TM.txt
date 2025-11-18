@@ -1,0 +1,188 @@
+============================================================
+FILE: HMC_TM_010120_15m_0.05_20251105_173838.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 696
+--- Final Performance Metrics ---
+Total PnL: $-366.25
+Overall Sharpe Ratio (Annualized): -0.1259
+Overall Calmar Ratio (Annualized): -0.0130
+Maximum Dollar Drawdown (MDD): $1,314.67
+
+--- Execution Time ---
+Total Elapsed Time: 32.66 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: HMC_TM_010120_15m_0.1_20251105_173921.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 80
+Total Trades Executed: 921
+--- Final Performance Metrics ---
+Total PnL: $507.76
+Overall Sharpe Ratio (Annualized): 0.1306
+Overall Calmar Ratio (Annualized): 0.0292
+Maximum Dollar Drawdown (MDD): $780.21
+
+--- Execution Time ---
+Total Elapsed Time: 38.19 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: HMC_TM_010120_1h_0.05_20251105_173723.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 204
+--- Final Performance Metrics ---
+Total PnL: $-700.26
+Overall Sharpe Ratio (Annualized): -0.2464
+Overall Calmar Ratio (Annualized): -0.0217
+Maximum Dollar Drawdown (MDD): $1,538.70
+
+--- Execution Time ---
+Total Elapsed Time: 28.61 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: HMC_TM_010120_1h_0.1_20251105_173801.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 253
+--- Final Performance Metrics ---
+Total PnL: $-456.65
+Overall Sharpe Ratio (Annualized): -0.1228
+Overall Calmar Ratio (Annualized): -0.0146
+Maximum Dollar Drawdown (MDD): $1,377.86
+
+--- Execution Time ---
+Total Elapsed Time: 30.67 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: HMC_TM_010120_1m_0.05_20251105_174005.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 45
+Total Trades Executed: 6834
+--- Final Performance Metrics ---
+Total PnL: $1,209.37
+Overall Sharpe Ratio (Annualized): 0.2485
+Overall Calmar Ratio (Annualized): 0.0696
+Maximum Dollar Drawdown (MDD): $827.57
+
+--- Execution Time ---
+Total Elapsed Time: 96.85 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: HMC_TM_010120_1m_0.1_20251105_174148.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 45
+Total Trades Executed: 7617
+--- Final Performance Metrics ---
+Total PnL: $936.27
+Overall Sharpe Ratio (Annualized): 0.1505
+Overall Calmar Ratio (Annualized): 0.0477
+Maximum Dollar Drawdown (MDD): $827.57
+
+--- Execution Time ---
+Total Elapsed Time: 97.61 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: HMC_TM_080120_1m_0.05_20251105_174332.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 45
+Total Trades Executed: 5587
+--- Final Performance Metrics ---
+Total PnL: $356.02
+Overall Sharpe Ratio (Annualized): 0.0767
+Overall Calmar Ratio (Annualized): 0.0206
+Maximum Dollar Drawdown (MDD): $744.21
+
+--- Execution Time ---
+Total Elapsed Time: 100.50 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: HMC_TM_150120_1m_0.05_20251105_174518.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 45
+Total Trades Executed: 3312
+--- Final Performance Metrics ---
+Total PnL: $228.80
+Overall Sharpe Ratio (Annualized): 0.0982
+Overall Calmar Ratio (Annualized): 0.0207
+Maximum Dollar Drawdown (MDD): $628.99
+
+--- Execution Time ---
+Total Elapsed Time: 96.27 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: HMC_TM_220120_1m_0.05_20251105_174701.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 45
+Total Trades Executed: 3925
+--- Final Performance Metrics ---
+Total PnL: $-817.15
+Overall Sharpe Ratio (Annualized): -0.3093
+Overall Calmar Ratio (Annualized): -0.0356
+Maximum Dollar Drawdown (MDD): $1,371.93
+
+--- Execution Time ---
+Total Elapsed Time: 94.78 seconds
+############################################################
+[0m
+
+

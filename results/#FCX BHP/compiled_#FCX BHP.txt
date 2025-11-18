@@ -1,0 +1,188 @@
+============================================================
+FILE: FCX_BHP_010120_15m_0.05_20251105_181125.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 633
+--- Final Performance Metrics ---
+Total PnL: $-2,490.03
+Overall Sharpe Ratio (Annualized): -0.6058
+Overall Calmar Ratio (Annualized): -0.0402
+Maximum Dollar Drawdown (MDD): $3,070.49
+
+--- Execution Time ---
+Total Elapsed Time: 50.01 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: FCX_BHP_010120_15m_0.1_20251105_181224.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 80
+Total Trades Executed: 965
+--- Final Performance Metrics ---
+Total PnL: $-3,428.82
+Overall Sharpe Ratio (Annualized): -0.6306
+Overall Calmar Ratio (Annualized): -0.0454
+Maximum Dollar Drawdown (MDD): $3,715.86
+
+--- Execution Time ---
+Total Elapsed Time: 57.10 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: FCX_BHP_010120_1h_0.05_20251105_180946.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 75
+--- Final Performance Metrics ---
+Total PnL: $-675.90
+Overall Sharpe Ratio (Annualized): -0.3477
+Overall Calmar Ratio (Annualized): -0.0678
+Maximum Dollar Drawdown (MDD): $732.31
+
+--- Execution Time ---
+Total Elapsed Time: 42.51 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: FCX_BHP_010120_1h_0.1_20251105_181035.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 147
+--- Final Performance Metrics ---
+Total PnL: $-1,390.67
+Overall Sharpe Ratio (Annualized): -0.4075
+Overall Calmar Ratio (Annualized): -0.0483
+Maximum Dollar Drawdown (MDD): $1,717.75
+
+--- Execution Time ---
+Total Elapsed Time: 43.01 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: FCX_BHP_010120_1m_0.05_20251105_181327.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 3883
+--- Final Performance Metrics ---
+Total PnL: $-870.22
+Overall Sharpe Ratio (Annualized): -0.3036
+Overall Calmar Ratio (Annualized): -0.0354
+Maximum Dollar Drawdown (MDD): $1,397.64
+
+--- Execution Time ---
+Total Elapsed Time: 145.62 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: FCX_BHP_010120_1m_0.1_20251105_181557.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 80
+Total Trades Executed: 6616
+--- Final Performance Metrics ---
+Total PnL: $-105.65
+Overall Sharpe Ratio (Annualized): -0.0183
+Overall Calmar Ratio (Annualized): -0.0040
+Maximum Dollar Drawdown (MDD): $1,377.27
+
+--- Execution Time ---
+Total Elapsed Time: 105.49 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: FCX_BHP_080120_1m_0.05_20251105_181745.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 3984
+--- Final Performance Metrics ---
+Total PnL: $-888.11
+Overall Sharpe Ratio (Annualized): -0.2494
+Overall Calmar Ratio (Annualized): -0.0369
+Maximum Dollar Drawdown (MDD): $1,314.32
+
+--- Execution Time ---
+Total Elapsed Time: 99.18 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: FCX_BHP_150120_1m_0.05_20251105_181927.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 6430
+--- Final Performance Metrics ---
+Total PnL: $-1,448.96
+Overall Sharpe Ratio (Annualized): -0.2969
+Overall Calmar Ratio (Annualized): -0.0348
+Maximum Dollar Drawdown (MDD): $1,918.99
+
+--- Execution Time ---
+Total Elapsed Time: 149.64 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: FCX_BHP_220120_1m_0.05_20251105_182159.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 6575
+--- Final Performance Metrics ---
+Total PnL: $-1,198.29
+Overall Sharpe Ratio (Annualized): -0.2948
+Overall Calmar Ratio (Annualized): -0.0358
+Maximum Dollar Drawdown (MDD): $1,498.24
+
+--- Execution Time ---
+Total Elapsed Time: 160.31 seconds
+############################################################
+[0m
+
+
