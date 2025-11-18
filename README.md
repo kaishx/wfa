@@ -10,7 +10,7 @@
 
 ---
 
-**Write Up:**
+**Small Informal Write Up that is hosted on HackMD:**
 
 [Write-Up (Hosted on HackMD)](https://hackmd.io/@k-a-i/H12dLFqCge)
 
