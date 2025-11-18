@@ -1,0 +1,188 @@
+============================================================
+FILE: SAP_JPM_010120_15m_0.05_20251107_193940.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 218
+--- Final Performance Metrics ---
+Total PnL: $229.25
+Overall Sharpe Ratio (Annualized): 0.0816
+Overall Calmar Ratio (Annualized): 0.0178
+Maximum Dollar Drawdown (MDD): $663.22
+
+--- Execution Time ---
+Total Elapsed Time: 38.67 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SAP_JPM_010120_15m_0.1_20251107_194020.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 80
+Total Trades Executed: 488
+--- Final Performance Metrics ---
+Total PnL: $-516.08
+Overall Sharpe Ratio (Annualized): -0.1065
+Overall Calmar Ratio (Annualized): -0.0140
+Maximum Dollar Drawdown (MDD): $1,584.50
+
+--- Execution Time ---
+Total Elapsed Time: 38.41 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SAP_JPM_010120_1h_0.05_20251107_193815.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 74
+--- Final Performance Metrics ---
+Total PnL: $484.42
+Overall Sharpe Ratio (Annualized): 0.1219
+Overall Calmar Ratio (Annualized): 0.0351
+Maximum Dollar Drawdown (MDD): $532.64
+
+--- Execution Time ---
+Total Elapsed Time: 36.85 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SAP_JPM_010120_1h_0.1_20251107_193854.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 117
+--- Final Performance Metrics ---
+Total PnL: $1,527.97
+Overall Sharpe Ratio (Annualized): 0.3086
+Overall Calmar Ratio (Annualized): 0.1359
+Maximum Dollar Drawdown (MDD): $414.38
+
+--- Execution Time ---
+Total Elapsed Time: 44.08 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SAP_JPM_010120_1m_0.05_20251107_194101.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 72
+Total Trades Executed: 3134
+--- Final Performance Metrics ---
+Total PnL: $-622.83
+Overall Sharpe Ratio (Annualized): -0.2845
+Overall Calmar Ratio (Annualized): -0.0442
+Maximum Dollar Drawdown (MDD): $1,147.95
+
+--- Execution Time ---
+Total Elapsed Time: 84.40 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SAP_JPM_010120_1m_0.1_20251107_194227.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 72
+Total Trades Executed: 6207
+--- Final Performance Metrics ---
+Total PnL: $191.10
+Overall Sharpe Ratio (Annualized): 0.0423
+Overall Calmar Ratio (Annualized): 0.0065
+Maximum Dollar Drawdown (MDD): $1,147.95
+
+--- Execution Time ---
+Total Elapsed Time: 84.91 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SAP_JPM_080120_1m_0.05_20251107_194354.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 72
+Total Trades Executed: 3758
+--- Final Performance Metrics ---
+Total PnL: $-798.30
+Overall Sharpe Ratio (Annualized): -0.3129
+Overall Calmar Ratio (Annualized): -0.0289
+Maximum Dollar Drawdown (MDD): $1,299.57
+
+--- Execution Time ---
+Total Elapsed Time: 83.63 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SAP_JPM_150120_1m_0.05_20251107_194520.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 72
+Total Trades Executed: 4767
+--- Final Performance Metrics ---
+Total PnL: $501.03
+Overall Sharpe Ratio (Annualized): 0.0950
+Overall Calmar Ratio (Annualized): 0.0180
+Maximum Dollar Drawdown (MDD): $1,199.30
+
+--- Execution Time ---
+Total Elapsed Time: 87.19 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SAP_JPM_220120_1m_0.05_20251107_194649.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 72
+Total Trades Executed: 972
+--- Final Performance Metrics ---
+Total PnL: $-448.42
+Overall Sharpe Ratio (Annualized): -0.1440
+Overall Calmar Ratio (Annualized): -0.0734
+Maximum Dollar Drawdown (MDD): $336.56
+
+--- Execution Time ---
+Total Elapsed Time: 84.95 seconds
+############################################################
+[0m
+
+

@@ -1,0 +1,209 @@
+============================================================
+FILE: compiled_#PEP KO.txt
+============================================================
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 11205
+--- Final Performance Metrics ---
+Total PnL: $177.88
+Overall Sharpe Ratio (Annualized): 0.0613
+Overall Calmar Ratio (Annualized): 0.0154
+Maximum Dollar Drawdown (MDD): $476.33
+
+--- Execution Time ---
+Total Elapsed Time: 99.19 seconds
+############################################################
+[0m
+
+
+
+
+
+============================================================
+FILE: PEP_KO_010120_15m_0.05_20251105_144157.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 819
+--- Final Performance Metrics ---
+Total PnL: $-467.56
+Overall Sharpe Ratio (Annualized): -0.2392
+Overall Calmar Ratio (Annualized): -0.0362
+Maximum Dollar Drawdown (MDD): $561.95
+
+--- Execution Time ---
+Total Elapsed Time: 38.01 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: PEP_KO_010120_15m_0.1_20251105_144237.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 1025
+--- Final Performance Metrics ---
+Total PnL: $-803.98
+Overall Sharpe Ratio (Annualized): -0.2988
+Overall Calmar Ratio (Annualized): -0.0389
+Maximum Dollar Drawdown (MDD): $914.54
+
+--- Execution Time ---
+Total Elapsed Time: 39.08 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: PEP_KO_010120_1h_0.05_20251105_144039.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 180
+--- Final Performance Metrics ---
+Total PnL: $824.72
+Overall Sharpe Ratio (Annualized): 0.2496
+Overall Calmar Ratio (Annualized): 0.1221
+Maximum Dollar Drawdown (MDD): $350.99
+
+--- Execution Time ---
+Total Elapsed Time: 36.68 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: PEP_KO_010120_1h_0.1_20251105_144118.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 231
+--- Final Performance Metrics ---
+Total PnL: $906.51
+Overall Sharpe Ratio (Annualized): 0.2305
+Overall Calmar Ratio (Annualized): 0.1033
+Maximum Dollar Drawdown (MDD): $350.99
+
+--- Execution Time ---
+Total Elapsed Time: 36.60 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: PEP_KO_010120_1m_0.05_20251105_144318.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 14407
+--- Final Performance Metrics ---
+Total PnL: $-659.51
+Overall Sharpe Ratio (Annualized): -0.2160
+Overall Calmar Ratio (Annualized): -0.0279
+Maximum Dollar Drawdown (MDD): $1,038.53
+
+--- Execution Time ---
+Total Elapsed Time: 98.54 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: PEP_KO_010120_1m_0.1_20251105_144458.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 80
+Total Trades Executed: 21080
+--- Final Performance Metrics ---
+Total PnL: $-309.23
+Overall Sharpe Ratio (Annualized): -0.0628
+Overall Calmar Ratio (Annualized): -0.0162
+Maximum Dollar Drawdown (MDD): $807.06
+
+--- Execution Time ---
+Total Elapsed Time: 98.04 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: PEP_KO_080120_1m_0.05_20251105_144639.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 12585
+--- Final Performance Metrics ---
+Total PnL: $-180.67
+Overall Sharpe Ratio (Annualized): -0.0445
+Overall Calmar Ratio (Annualized): -0.0065
+Maximum Dollar Drawdown (MDD): $1,181.11
+
+--- Execution Time ---
+Total Elapsed Time: 93.54 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: PEP_KO_150120_1m_0.05_20251105_144814.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 11547
+--- Final Performance Metrics ---
+Total PnL: $472.00
+Overall Sharpe Ratio (Annualized): 0.1462
+Overall Calmar Ratio (Annualized): 0.0330
+Maximum Dollar Drawdown (MDD): $625.90
+
+--- Execution Time ---
+Total Elapsed Time: 97.53 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: PEP_KO_220120_1m_0.05_20251105_144954.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 11205
+--- Final Performance Metrics ---
+Total PnL: $177.88
+Overall Sharpe Ratio (Annualized): 0.0613
+Overall Calmar Ratio (Annualized): 0.0154
+Maximum Dollar Drawdown (MDD): $476.33
+
+--- Execution Time ---
+Total Elapsed Time: 99.19 seconds
+############################################################
+[0m
+
+
