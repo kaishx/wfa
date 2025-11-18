@@ -1,0 +1,188 @@
+============================================================
+FILE: IXUS_VEU_010120_15m_0.05_20251118_092712.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 293
+--- Final Performance Metrics ---
+Total PnL: $56.64
+Overall Sharpe Ratio (Annualized): 0.3431
+Overall Calmar Ratio (Annualized): 0.1171
+Maximum Dollar Drawdown (MDD): $21.65
+
+--- Execution Time ---
+Total Elapsed Time: 40.29 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: IXUS_VEU_010120_15m_0.1_20251118_092758.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 560
+--- Final Performance Metrics ---
+Total PnL: $19.22
+Overall Sharpe Ratio (Annualized): 0.0931
+Overall Calmar Ratio (Annualized): 0.0211
+Maximum Dollar Drawdown (MDD): $37.15
+
+--- Execution Time ---
+Total Elapsed Time: 42.05 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: IXUS_VEU_010120_1h_0.05_20251118_092544.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 174
+--- Final Performance Metrics ---
+Total PnL: $180.43
+Overall Sharpe Ratio (Annualized): 0.1609
+Overall Calmar Ratio (Annualized): 0.0923
+Maximum Dollar Drawdown (MDD): $76.04
+
+--- Execution Time ---
+Total Elapsed Time: 38.48 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: IXUS_VEU_010120_1h_0.1_20251118_092628.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 192
+--- Final Performance Metrics ---
+Total PnL: $197.42
+Overall Sharpe Ratio (Annualized): 0.1759
+Overall Calmar Ratio (Annualized): 0.1009
+Maximum Dollar Drawdown (MDD): $76.04
+
+--- Execution Time ---
+Total Elapsed Time: 37.85 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: IXUS_VEU_010120_1m_0.05_20251118_092844.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 75
+Total Trades Executed: 6269
+--- Final Performance Metrics ---
+Total PnL: $-28.82
+Overall Sharpe Ratio (Annualized): -0.0563
+Overall Calmar Ratio (Annualized): -0.0084
+Maximum Dollar Drawdown (MDD): $138.48
+
+--- Execution Time ---
+Total Elapsed Time: 142.00 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: IXUS_VEU_010120_1m_0.1_20251118_093110.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 75
+Total Trades Executed: 8382
+--- Final Performance Metrics ---
+Total PnL: $-60.22
+Overall Sharpe Ratio (Annualized): -0.1080
+Overall Calmar Ratio (Annualized): -0.0129
+Maximum Dollar Drawdown (MDD): $189.19
+
+--- Execution Time ---
+Total Elapsed Time: 137.92 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: IXUS_VEU_080120_1m_0.05_20251118_093332.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 75
+Total Trades Executed: 4569
+--- Final Performance Metrics ---
+Total PnL: $163.08
+Overall Sharpe Ratio (Annualized): 0.3922
+Overall Calmar Ratio (Annualized): 0.0885
+Maximum Dollar Drawdown (MDD): $80.46
+
+--- Execution Time ---
+Total Elapsed Time: 133.80 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: IXUS_VEU_150120_1m_0.05_20251118_093550.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 75
+Total Trades Executed: 6922
+--- Final Performance Metrics ---
+Total PnL: $218.43
+Overall Sharpe Ratio (Annualized): 0.4505
+Overall Calmar Ratio (Annualized): 0.1396
+Maximum Dollar Drawdown (MDD): $63.29
+
+--- Execution Time ---
+Total Elapsed Time: 138.79 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: IXUS_VEU_220120_1m_0.05_20251118_093812.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 75
+Total Trades Executed: 7748
+--- Final Performance Metrics ---
+Total PnL: $197.44
+Overall Sharpe Ratio (Annualized): 0.3797
+Overall Calmar Ratio (Annualized): 0.0993
+Maximum Dollar Drawdown (MDD): $85.20
+
+--- Execution Time ---
+Total Elapsed Time: 133.61 seconds
+############################################################
+[0m
+
+
