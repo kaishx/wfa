@@ -1,0 +1,209 @@
+============================================================
+FILE: AMD_MU_010120_15m_0.05_20251105_162344.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 247
+--- Final Performance Metrics ---
+Total PnL: $-65.43
+Overall Sharpe Ratio (Annualized): -0.0126
+Overall Calmar Ratio (Annualized): -0.0023
+Maximum Dollar Drawdown (MDD): $1,529.63
+
+--- Execution Time ---
+Total Elapsed Time: 61.70 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMD_MU_010120_15m_0.1_20251105_162454.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 384
+--- Final Performance Metrics ---
+Total PnL: $574.07
+Overall Sharpe Ratio (Annualized): 0.0822
+Overall Calmar Ratio (Annualized): 0.0194
+Maximum Dollar Drawdown (MDD): $1,529.63
+
+--- Execution Time ---
+Total Elapsed Time: 67.57 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMD_MU_010120_1h_0.05_20251105_162136.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 61
+--- Final Performance Metrics ---
+Total PnL: $882.81
+Overall Sharpe Ratio (Annualized): 0.1880
+Overall Calmar Ratio (Annualized): 0.0412
+Maximum Dollar Drawdown (MDD): $938.83
+
+--- Execution Time ---
+Total Elapsed Time: 55.74 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMD_MU_010120_1h_0.1_20251105_162238.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 118
+--- Final Performance Metrics ---
+Total PnL: $-244.28
+Overall Sharpe Ratio (Annualized): -0.0343
+Overall Calmar Ratio (Annualized): -0.0045
+Maximum Dollar Drawdown (MDD): $2,488.21
+
+--- Execution Time ---
+Total Elapsed Time: 59.19 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMD_MU_010120_1m_0.05_20251105_162607.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 3044
+--- Final Performance Metrics ---
+Total PnL: $1,941.01
+Overall Sharpe Ratio (Annualized): 0.2760
+Overall Calmar Ratio (Annualized): 0.0977
+Maximum Dollar Drawdown (MDD): $831.24
+
+--- Execution Time ---
+Total Elapsed Time: 197.65 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMD_MU_010120_1m_0.1_20251105_162932.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 5549
+--- Final Performance Metrics ---
+Total PnL: $2,013.74
+Overall Sharpe Ratio (Annualized): 0.2083
+Overall Calmar Ratio (Annualized): 0.0461
+Maximum Dollar Drawdown (MDD): $1,649.81
+
+--- Execution Time ---
+Total Elapsed Time: 178.54 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMD_MU_080120_1m_0.05_20251105_163240.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 5250
+--- Final Performance Metrics ---
+Total PnL: $1,172.65
+Overall Sharpe Ratio (Annualized): 0.1163
+Overall Calmar Ratio (Annualized): 0.0286
+Maximum Dollar Drawdown (MDD): $1,637.71
+
+--- Execution Time ---
+Total Elapsed Time: 179.85 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMD_MU_150120_1m_0.05_20251105_163546.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 4502
+--- Final Performance Metrics ---
+Total PnL: $-2,455.95
+Overall Sharpe Ratio (Annualized): -0.2846
+Overall Calmar Ratio (Annualized): -0.0380
+Maximum Dollar Drawdown (MDD): $3,469.26
+
+--- Execution Time ---
+Total Elapsed Time: 177.60 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMD_MU_220120_1m_0.05_20251105_163853.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 3049
+--- Final Performance Metrics ---
+Total PnL: $1,197.40
+Overall Sharpe Ratio (Annualized): 0.1638
+Overall Calmar Ratio (Annualized): 0.0596
+Maximum Dollar Drawdown (MDD): $877.09
+
+--- Execution Time ---
+Total Elapsed Time: 190.62 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: compiled_#AMD MU.txt
+============================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

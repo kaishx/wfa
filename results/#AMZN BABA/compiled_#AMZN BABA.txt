@@ -1,0 +1,188 @@
+============================================================
+FILE: AMZN_BABA_010120_15m_0.05_20251105_175051.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 292
+--- Final Performance Metrics ---
+Total PnL: $-124.22
+Overall Sharpe Ratio (Annualized): -0.0407
+Overall Calmar Ratio (Annualized): -0.0125
+Maximum Dollar Drawdown (MDD): $590.33
+
+--- Execution Time ---
+Total Elapsed Time: 65.78 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMZN_BABA_010120_15m_0.1_20251105_175203.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 368
+--- Final Performance Metrics ---
+Total PnL: $-169.14
+Overall Sharpe Ratio (Annualized): -0.0376
+Overall Calmar Ratio (Annualized): -0.0102
+Maximum Dollar Drawdown (MDD): $724.63
+
+--- Execution Time ---
+Total Elapsed Time: 68.44 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMZN_BABA_010120_1h_0.05_20251105_174842.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 46
+--- Final Performance Metrics ---
+Total PnL: $43.21
+Overall Sharpe Ratio (Annualized): 0.0208
+Overall Calmar Ratio (Annualized): 0.0060
+Maximum Dollar Drawdown (MDD): $566.52
+
+--- Execution Time ---
+Total Elapsed Time: 54.88 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMZN_BABA_010120_1h_0.1_20251105_174946.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 71
+--- Final Performance Metrics ---
+Total PnL: $1,407.40
+Overall Sharpe Ratio (Annualized): 0.2563
+Overall Calmar Ratio (Annualized): 0.1014
+Maximum Dollar Drawdown (MDD): $641.54
+
+--- Execution Time ---
+Total Elapsed Time: 58.90 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMZN_BABA_010120_1m_0.05_20251105_175319.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 4228
+--- Final Performance Metrics ---
+Total PnL: $95.85
+Overall Sharpe Ratio (Annualized): 0.0191
+Overall Calmar Ratio (Annualized): 0.0031
+Maximum Dollar Drawdown (MDD): $1,487.27
+
+--- Execution Time ---
+Total Elapsed Time: 195.16 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMZN_BABA_010120_1m_0.1_20251105_175642.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 80
+Total Trades Executed: 4236
+--- Final Performance Metrics ---
+Total PnL: $948.50
+Overall Sharpe Ratio (Annualized): 0.1624
+Overall Calmar Ratio (Annualized): 0.0342
+Maximum Dollar Drawdown (MDD): $1,277.71
+
+--- Execution Time ---
+Total Elapsed Time: 183.47 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMZN_BABA_080120_1m_0.05_20251105_175955.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 6000
+--- Final Performance Metrics ---
+Total PnL: $-1,393.76
+Overall Sharpe Ratio (Annualized): -0.2565
+Overall Calmar Ratio (Annualized): -0.0342
+Maximum Dollar Drawdown (MDD): $1,854.29
+
+--- Execution Time ---
+Total Elapsed Time: 197.97 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMZN_BABA_150120_1m_0.05_20251105_180323.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 2799
+--- Final Performance Metrics ---
+Total PnL: $371.64
+Overall Sharpe Ratio (Annualized): 0.2032
+Overall Calmar Ratio (Annualized): 0.0688
+Maximum Dollar Drawdown (MDD): $343.19
+
+--- Execution Time ---
+Total Elapsed Time: 182.79 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AMZN_BABA_220120_1m_0.05_20251105_180632.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 2172
+--- Final Performance Metrics ---
+Total PnL: $-1,130.60
+Overall Sharpe Ratio (Annualized): -0.2979
+Overall Calmar Ratio (Annualized): -0.0476
+Maximum Dollar Drawdown (MDD): $1,998.67
+
+--- Execution Time ---
+Total Elapsed Time: 188.66 seconds
+############################################################
+[0m
+
+

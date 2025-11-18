@@ -1,0 +1,188 @@
+============================================================
+FILE: AVGO_NVDA_010120_15m_0.05_20251105_150923.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 532
+--- Final Performance Metrics ---
+Total PnL: $-5.64
+Overall Sharpe Ratio (Annualized): -0.0007
+Overall Calmar Ratio (Annualized): -0.0001
+Maximum Dollar Drawdown (MDD): $2,125.40
+
+--- Execution Time ---
+Total Elapsed Time: 49.15 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AVGO_NVDA_010120_15m_0.1_20251105_151015.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 634
+--- Final Performance Metrics ---
+Total PnL: $504.49
+Overall Sharpe Ratio (Annualized): 0.0536
+Overall Calmar Ratio (Annualized): 0.0092
+Maximum Dollar Drawdown (MDD): $2,255.07
+
+--- Execution Time ---
+Total Elapsed Time: 55.94 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AVGO_NVDA_010120_1h_0.05_20251105_150736.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 152
+--- Final Performance Metrics ---
+Total PnL: $907.66
+Overall Sharpe Ratio (Annualized): 0.1487
+Overall Calmar Ratio (Annualized): 0.0380
+Maximum Dollar Drawdown (MDD): $967.51
+
+--- Execution Time ---
+Total Elapsed Time: 50.72 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AVGO_NVDA_010120_1h_0.1_20251105_150832.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 202
+--- Final Performance Metrics ---
+Total PnL: $2,031.29
+Overall Sharpe Ratio (Annualized): 0.2669
+Overall Calmar Ratio (Annualized): 0.0791
+Maximum Dollar Drawdown (MDD): $993.08
+
+--- Execution Time ---
+Total Elapsed Time: 47.60 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AVGO_NVDA_010120_1m_0.05_20251105_151113.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 79
+Total Trades Executed: 3603
+--- Final Performance Metrics ---
+Total PnL: $586.70
+Overall Sharpe Ratio (Annualized): 0.0766
+Overall Calmar Ratio (Annualized): 0.0109
+Maximum Dollar Drawdown (MDD): $2,200.75
+
+--- Execution Time ---
+Total Elapsed Time: 134.33 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AVGO_NVDA_010120_1m_0.1_20251105_151332.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 79
+Total Trades Executed: 6178
+--- Final Performance Metrics ---
+Total PnL: $736.46
+Overall Sharpe Ratio (Annualized): 0.0824
+Overall Calmar Ratio (Annualized): 0.0136
+Maximum Dollar Drawdown (MDD): $2,203.01
+
+--- Execution Time ---
+Total Elapsed Time: 125.41 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AVGO_NVDA_080120_1m_0.05_20251105_151541.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 79
+Total Trades Executed: 8679
+--- Final Performance Metrics ---
+Total PnL: $2,387.53
+Overall Sharpe Ratio (Annualized): 0.2909
+Overall Calmar Ratio (Annualized): 0.1128
+Maximum Dollar Drawdown (MDD): $774.61
+
+--- Execution Time ---
+Total Elapsed Time: 142.05 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AVGO_NVDA_150120_1m_0.05_20251105_151805.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 79
+Total Trades Executed: 6260
+--- Final Performance Metrics ---
+Total PnL: $2,086.66
+Overall Sharpe Ratio (Annualized): 0.3151
+Overall Calmar Ratio (Annualized): 0.0823
+Maximum Dollar Drawdown (MDD): $988.10
+
+--- Execution Time ---
+Total Elapsed Time: 140.43 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: AVGO_NVDA_220120_1m_0.05_20251105_152031.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 79
+Total Trades Executed: 8679
+--- Final Performance Metrics ---
+Total PnL: $-1,583.60
+Overall Sharpe Ratio (Annualized): -0.2495
+Overall Calmar Ratio (Annualized): -0.0264
+Maximum Dollar Drawdown (MDD): $2,766.70
+
+--- Execution Time ---
+Total Elapsed Time: 126.10 seconds
+############################################################
+[0m
+
+

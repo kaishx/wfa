@@ -1,0 +1,619 @@
+--- Dynamic Timeframe Configuration ---
+TimeFrame Selected: 1Min, Value: 15
+Bars per Trading Day: 26
+Annualization Factor (Bars/Year): 6552
+Statistical Lookback Bars: 145
+Optimization Lookback Bars: 1268
+---------------------------------------
+--- Diagnostic Check ---
+API Key ID Length: 26
+API Secret Key Length: 44
+StockHistoricalDataClient initialized successfully. Starting data fetch...
+--------------------------
+Pre-compiling Numba function for first run optimization...
+Numba pre-compilation complete.
+Fetching data from 2020-01-01 to 2024-12-30...
+Fetching 15Min data for ALLY...
+Fetching 15Min data for NYCB...
+Data acquired successfully. Total 1Min RTH bars: 31356
+Skipping full pre-calculation. Metrics will be calculated inside the WFA loop.
+
+============================================================
+📈 Starting Rolling Backtest: IS Optimization Window=1268 bars, Shift=15 days
+   Data already processed with Statistical Rolling Window: 145 bars
+   ADF Cointegration Filter: p-value < 0.1
+============================================================
+
+--- Window 1 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-01-17 15:00:00+00:00 | End: 2020-03-12 18:45:00+00:00
+OOS Start Bar Index: 1268 | Time: 2020-03-12 19:00:00+00:00
+ADF Test Result: p-value=0.6969 (Required < 0.10) | OLS Beta: 1.8284
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 2 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-02-10 15:00:00+00:00 | End: 2020-04-02 19:00:00+00:00
+OOS Start Bar Index: 1658 | Time: 2020-04-02 19:15:00+00:00
+ADF Test Result: p-value=0.1349 (Required < 0.10) | OLS Beta: 3.2150
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 3 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-03-03 15:00:00+00:00 | End: 2020-04-24 19:00:00+00:00
+OOS Start Bar Index: 2048 | Time: 2020-04-24 19:15:00+00:00
+ADF Test Result: p-value=0.3503 (Required < 0.10) | OLS Beta: 2.0172
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 4 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-03-24 14:45:00+00:00 | End: 2020-05-15 19:00:00+00:00
+OOS Start Bar Index: 2438 | Time: 2020-05-15 19:15:00+00:00
+ADF Test Result: p-value=0.1462 (Required < 0.10) | OLS Beta: 0.8688
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 5 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-04-15 14:45:00+00:00 | End: 2020-06-08 19:00:00+00:00
+OOS Start Bar Index: 2828 | Time: 2020-06-08 19:15:00+00:00
+ADF Test Result: p-value=0.8064 (Required < 0.10) | OLS Beta: 1.4578
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 6 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-05-06 14:45:00+00:00 | End: 2020-06-29 19:00:00+00:00
+OOS Start Bar Index: 3218 | Time: 2020-06-29 19:15:00+00:00
+ADF Test Result: p-value=0.0133 (Required < 0.10) | OLS Beta: 1.9275
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=4.2223, Calmar=43.7594): Z_E=3.1, Z_X=1.5, Z_SL=3.3
+📊 Persistence: Saved 0 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2020-06-29 19:15:00+00:00 to 2020-07-21 19:00:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+--- Window 7 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-05-28 14:45:00+00:00 | End: 2020-07-21 19:00:00+00:00
+OOS Start Bar Index: 3608 | Time: 2020-07-21 19:15:00+00:00
+ADF Test Result: p-value=0.2622 (Required < 0.10) | OLS Beta: 0.8506
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 8 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-06-18 14:45:00+00:00 | End: 2020-08-11 19:00:00+00:00
+OOS Start Bar Index: 3998 | Time: 2020-08-11 19:15:00+00:00
+ADF Test Result: p-value=0.5096 (Required < 0.10) | OLS Beta: 0.6322
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 9 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-07-10 14:45:00+00:00 | End: 2020-09-01 19:00:00+00:00
+OOS Start Bar Index: 4388 | Time: 2020-09-01 19:15:00+00:00
+ADF Test Result: p-value=0.0078 (Required < 0.10) | OLS Beta: -0.3560
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.02 seconds.
+Optimal Params (Sharpe=5.7059, Calmar=72.4272): Z_E=1.9, Z_X=1.1, Z_SL=3.3
+📊 Persistence: Saved 44 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2020-09-01 19:15:00+00:00 to 2020-09-23 19:00:00+00:00): PnL: $-55.49 | Sharpe: -0.3695 | Calmar: -1.9679 | Trades: 44
+
+--- Window 10 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-07-31 14:45:00+00:00 | End: 2020-09-23 19:00:00+00:00
+OOS Start Bar Index: 4778 | Time: 2020-09-23 19:15:00+00:00
+ADF Test Result: p-value=0.1112 (Required < 0.10) | OLS Beta: -0.7454
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 11 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-08-21 14:45:00+00:00 | End: 2020-10-14 19:00:00+00:00
+OOS Start Bar Index: 5168 | Time: 2020-10-14 19:15:00+00:00
+ADF Test Result: p-value=0.1699 (Required < 0.10) | OLS Beta: -0.9146
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 12 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-09-14 14:45:00+00:00 | End: 2020-11-04 20:00:00+00:00
+OOS Start Bar Index: 5558 | Time: 2020-11-04 20:15:00+00:00
+ADF Test Result: p-value=0.4741 (Required < 0.10) | OLS Beta: -0.2589
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 13 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-10-05 14:45:00+00:00 | End: 2020-11-25 20:00:00+00:00
+OOS Start Bar Index: 5948 | Time: 2020-11-25 20:15:00+00:00
+ADF Test Result: p-value=0.0432 (Required < 0.10) | OLS Beta: 0.6314
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.2216, Calmar=0.0000): Z_E=2.7, Z_X=0.3, Z_SL=3.3
+📊 Persistence: Saved 45 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2020-11-25 20:15:00+00:00 to 2020-12-18 16:15:00+00:00): PnL: $223.81 | Sharpe: 4.1040 | Calmar: 0.0000 | Trades: 1
+
+--- Window 14 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-10-26 14:45:00+00:00 | End: 2020-12-18 16:15:00+00:00
+OOS Start Bar Index: 6338 | Time: 2020-12-18 16:30:00+00:00
+ADF Test Result: p-value=0.2767 (Required < 0.10) | OLS Beta: 0.7274
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 15 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-11-16 15:45:00+00:00 | End: 2021-01-12 19:00:00+00:00
+OOS Start Bar Index: 6728 | Time: 2021-01-12 19:15:00+00:00
+ADF Test Result: p-value=0.2824 (Required < 0.10) | OLS Beta: 1.1472
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 16 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-12-08 18:30:00+00:00 | End: 2021-02-03 19:00:00+00:00
+OOS Start Bar Index: 7118 | Time: 2021-02-03 19:15:00+00:00
+ADF Test Result: p-value=0.2736 (Required < 0.10) | OLS Beta: 1.7859
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 17 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2020-12-31 14:45:00+00:00 | End: 2021-02-25 19:00:00+00:00
+OOS Start Bar Index: 7508 | Time: 2021-02-25 19:15:00+00:00
+ADF Test Result: p-value=0.2962 (Required < 0.10) | OLS Beta: 0.5241
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 18 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-01-25 14:45:00+00:00 | End: 2021-03-18 18:00:00+00:00
+OOS Start Bar Index: 7898 | Time: 2021-03-18 18:15:00+00:00
+ADF Test Result: p-value=0.3193 (Required < 0.10) | OLS Beta: 0.5731
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 19 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-02-16 14:45:00+00:00 | End: 2021-04-09 18:00:00+00:00
+OOS Start Bar Index: 8288 | Time: 2021-04-09 18:15:00+00:00
+ADF Test Result: p-value=0.6100 (Required < 0.10) | OLS Beta: 0.5116
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 20 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-03-09 14:45:00+00:00 | End: 2021-05-03 17:45:00+00:00
+OOS Start Bar Index: 8678 | Time: 2021-05-03 18:00:00+00:00
+ADF Test Result: p-value=0.9361 (Required < 0.10) | OLS Beta: 0.0396
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 21 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-03-30 13:45:00+00:00 | End: 2021-05-24 17:45:00+00:00
+OOS Start Bar Index: 9068 | Time: 2021-05-24 18:00:00+00:00
+ADF Test Result: p-value=0.0694 (Required < 0.10) | OLS Beta: -1.3187
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=6.4003, Calmar=0.0000): Z_E=2.7, Z_X=1.5, Z_SL=3.6
+📊 Persistence: Saved 46 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2021-05-24 18:00:00+00:00 to 2021-06-15 17:45:00+00:00): PnL: $-40.83 | Sharpe: -4.1040 | Calmar: -16.0806 | Trades: 1
+
+--- Window 22 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-04-22 13:30:00+00:00 | End: 2021-06-15 17:45:00+00:00
+OOS Start Bar Index: 9458 | Time: 2021-06-15 18:00:00+00:00
+ADF Test Result: p-value=0.0618 (Required < 0.10) | OLS Beta: 0.0696
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=6.1984, Calmar=0.0000): Z_E=2.7, Z_X=1.1, Z_SL=3.9
+📊 Persistence: Saved 46 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2021-06-15 18:00:00+00:00 to 2021-07-07 17:45:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+--- Window 23 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-05-13 13:30:00+00:00 | End: 2021-07-07 17:45:00+00:00
+OOS Start Bar Index: 9848 | Time: 2021-07-07 18:00:00+00:00
+ADF Test Result: p-value=0.0045 (Required < 0.10) | OLS Beta: 1.1426
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.4533, Calmar=0.0000): Z_E=1.9, Z_X=0.3, Z_SL=3.6
+📊 Persistence: Saved 84 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2021-07-07 18:00:00+00:00 to 2021-07-28 17:45:00+00:00): PnL: $868.88 | Sharpe: 6.6094 | Calmar: 542.4553 | Trades: 38
+
+--- Window 24 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-06-04 13:30:00+00:00 | End: 2021-07-28 17:45:00+00:00
+OOS Start Bar Index: 10238 | Time: 2021-07-28 18:00:00+00:00
+ADF Test Result: p-value=0.1877 (Required < 0.10) | OLS Beta: 1.0049
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 25 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-06-25 13:30:00+00:00 | End: 2021-08-18 17:45:00+00:00
+OOS Start Bar Index: 10628 | Time: 2021-08-18 18:00:00+00:00
+ADF Test Result: p-value=0.0397 (Required < 0.10) | OLS Beta: 0.4198
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=6.6420, Calmar=396.2912): Z_E=1.9, Z_X=0.3, Z_SL=3.3
+📊 Persistence: Saved 90 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2021-08-18 18:00:00+00:00 to 2021-09-09 17:45:00+00:00): PnL: $183.53 | Sharpe: 2.2104 | Calmar: 16.0196 | Trades: 6
+
+--- Window 26 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-07-19 13:30:00+00:00 | End: 2021-09-09 17:45:00+00:00
+OOS Start Bar Index: 11018 | Time: 2021-09-09 18:00:00+00:00
+ADF Test Result: p-value=0.0281 (Required < 0.10) | OLS Beta: 0.2768
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=4.7509, Calmar=68.0198): Z_E=1.9, Z_X=1.3, Z_SL=3.3
+📊 Persistence: Saved 90 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2021-09-09 18:00:00+00:00 to 2021-09-30 17:45:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+--- Window 27 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-08-09 13:30:00+00:00 | End: 2021-09-30 17:45:00+00:00
+OOS Start Bar Index: 11408 | Time: 2021-09-30 18:00:00+00:00
+ADF Test Result: p-value=0.2506 (Required < 0.10) | OLS Beta: 0.3838
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 28 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-08-30 13:30:00+00:00 | End: 2021-10-21 17:45:00+00:00
+OOS Start Bar Index: 11798 | Time: 2021-10-21 18:00:00+00:00
+ADF Test Result: p-value=0.0331 (Required < 0.10) | OLS Beta: 0.4155
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=0.7172, Calmar=2.8490): Z_E=1.9, Z_X=1.3, Z_SL=3.3
+📊 Persistence: Saved 165 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2021-10-21 18:00:00+00:00 to 2021-11-12 18:30:00+00:00): PnL: $163.22 | Sharpe: 1.6108 | Calmar: 12.0549 | Trades: 75
+
+--- Window 29 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-09-21 13:30:00+00:00 | End: 2021-11-12 18:30:00+00:00
+OOS Start Bar Index: 12188 | Time: 2021-11-12 18:45:00+00:00
+ADF Test Result: p-value=0.1866 (Required < 0.10) | OLS Beta: 0.6536
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 30 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-10-12 13:30:00+00:00 | End: 2021-12-07 14:45:00+00:00
+OOS Start Bar Index: 12578 | Time: 2021-12-07 15:00:00+00:00
+ADF Test Result: p-value=0.0446 (Required < 0.10) | OLS Beta: 0.8756
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=3.2023, Calmar=34.6158): Z_E=1.9, Z_X=0.7, Z_SL=4.2
+📊 Persistence: Saved 165 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2021-12-07 15:00:00+00:00 to 2021-12-29 14:45:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+--- Window 31 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-11-02 19:45:00+00:00 | End: 2021-12-29 14:45:00+00:00
+OOS Start Bar Index: 12968 | Time: 2021-12-29 15:00:00+00:00
+ADF Test Result: p-value=0.0091 (Required < 0.10) | OLS Beta: 1.0505
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=4.5621, Calmar=36.5448): Z_E=1.9, Z_X=0.9, Z_SL=3.6
+📊 Persistence: Saved 166 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2021-12-29 15:00:00+00:00 to 2022-01-20 14:45:00+00:00): PnL: $144.50 | Sharpe: 4.1040 | Calmar: 0.0000 | Trades: 1
+
+--- Window 32 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-11-23 20:45:00+00:00 | End: 2022-01-20 14:45:00+00:00
+OOS Start Bar Index: 13358 | Time: 2022-01-20 15:00:00+00:00
+ADF Test Result: p-value=0.0144 (Required < 0.10) | OLS Beta: 0.8703
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=4.3567, Calmar=78.8779): Z_E=2.5, Z_X=1.1, Z_SL=3.9
+📊 Persistence: Saved 264 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2022-01-20 15:00:00+00:00 to 2022-02-10 20:00:00+00:00): PnL: $51.83 | Sharpe: 0.9393 | Calmar: 5.9751 | Trades: 98
+
+--- Window 33 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2021-12-16 17:00:00+00:00 | End: 2022-02-10 20:00:00+00:00
+OOS Start Bar Index: 13748 | Time: 2022-02-10 20:15:00+00:00
+ADF Test Result: p-value=0.3337 (Required < 0.10) | OLS Beta: 0.5316
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 34 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-01-07 17:00:00+00:00 | End: 2022-03-04 20:00:00+00:00
+OOS Start Bar Index: 14138 | Time: 2022-03-04 20:15:00+00:00
+ADF Test Result: p-value=0.4443 (Required < 0.10) | OLS Beta: 0.4429
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 35 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-02-01 15:45:00+00:00 | End: 2022-03-28 18:45:00+00:00
+OOS Start Bar Index: 14528 | Time: 2022-03-28 19:00:00+00:00
+ADF Test Result: p-value=0.3442 (Required < 0.10) | OLS Beta: 1.9588
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 36 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-02-23 15:45:00+00:00 | End: 2022-04-19 18:45:00+00:00
+OOS Start Bar Index: 14918 | Time: 2022-04-19 19:00:00+00:00
+ADF Test Result: p-value=0.3139 (Required < 0.10) | OLS Beta: 0.5320
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 37 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-03-17 14:30:00+00:00 | End: 2022-05-10 18:45:00+00:00
+OOS Start Bar Index: 15308 | Time: 2022-05-10 19:00:00+00:00
+ADF Test Result: p-value=0.0198 (Required < 0.10) | OLS Beta: 0.4628
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=4.6576, Calmar=0.0000): Z_E=3.1, Z_X=1.5, Z_SL=3.3
+📊 Persistence: Saved 308 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2022-05-10 19:00:00+00:00 to 2022-06-01 18:45:00+00:00): PnL: $1,126.46 | Sharpe: 7.5178 | Calmar: 480.7816 | Trades: 44
+
+--- Window 38 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-04-07 14:30:00+00:00 | End: 2022-06-01 18:45:00+00:00
+OOS Start Bar Index: 15698 | Time: 2022-06-01 19:00:00+00:00
+ADF Test Result: p-value=0.1099 (Required < 0.10) | OLS Beta: 0.6696
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 39 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-04-29 14:30:00+00:00 | End: 2022-06-23 18:45:00+00:00
+OOS Start Bar Index: 16088 | Time: 2022-06-23 19:00:00+00:00
+ADF Test Result: p-value=0.4408 (Required < 0.10) | OLS Beta: 1.6479
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 40 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-05-20 14:30:00+00:00 | End: 2022-07-15 18:45:00+00:00
+OOS Start Bar Index: 16478 | Time: 2022-07-15 19:00:00+00:00
+ADF Test Result: p-value=0.3561 (Required < 0.10) | OLS Beta: 2.1952
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 41 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-06-13 14:30:00+00:00 | End: 2022-08-05 18:45:00+00:00
+OOS Start Bar Index: 16868 | Time: 2022-08-05 19:00:00+00:00
+ADF Test Result: p-value=0.0022 (Required < 0.10) | OLS Beta: -0.0995
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.2499, Calmar=0.0000): Z_E=2.9, Z_X=1.5, Z_SL=4.8
+📊 Persistence: Saved 313 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2022-08-05 19:00:00+00:00 to 2022-08-26 18:45:00+00:00): PnL: $595.53 | Sharpe: 3.3127 | Calmar: 47.6846 | Trades: 5
+
+--- Window 42 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-07-06 14:30:00+00:00 | End: 2022-08-26 18:45:00+00:00
+OOS Start Bar Index: 17258 | Time: 2022-08-26 19:00:00+00:00
+ADF Test Result: p-value=0.1681 (Required < 0.10) | OLS Beta: 0.2750
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 43 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-07-27 14:30:00+00:00 | End: 2022-09-19 18:45:00+00:00
+OOS Start Bar Index: 17648 | Time: 2022-09-19 19:00:00+00:00
+ADF Test Result: p-value=0.0964 (Required < 0.10) | OLS Beta: 0.7558
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=4.9515, Calmar=0.0000): Z_E=2.9, Z_X=1.5, Z_SL=3.6
+📊 Persistence: Saved 313 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2022-09-19 19:00:00+00:00 to 2022-10-10 18:45:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+--- Window 44 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-08-17 14:30:00+00:00 | End: 2022-10-10 18:45:00+00:00
+OOS Start Bar Index: 18038 | Time: 2022-10-10 19:00:00+00:00
+ADF Test Result: p-value=0.0310 (Required < 0.10) | OLS Beta: 0.9859
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.5444, Calmar=0.0000): Z_E=2.9, Z_X=1.5, Z_SL=3.6
+📊 Persistence: Saved 427 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2022-10-10 19:00:00+00:00 to 2022-10-31 18:45:00+00:00): PnL: $-326.11 | Sharpe: -2.7737 | Calmar: -8.9536 | Trades: 114
+
+--- Window 45 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-09-08 14:30:00+00:00 | End: 2022-10-31 18:45:00+00:00
+OOS Start Bar Index: 18428 | Time: 2022-10-31 19:00:00+00:00
+ADF Test Result: p-value=0.8302 (Required < 0.10) | OLS Beta: 1.1172
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 46 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-09-29 14:30:00+00:00 | End: 2022-11-21 19:45:00+00:00
+OOS Start Bar Index: 18818 | Time: 2022-11-21 20:00:00+00:00
+ADF Test Result: p-value=0.2892 (Required < 0.10) | OLS Beta: -0.0516
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 47 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-10-20 14:30:00+00:00 | End: 2022-12-14 16:00:00+00:00
+OOS Start Bar Index: 19208 | Time: 2022-12-14 16:15:00+00:00
+ADF Test Result: p-value=0.0967 (Required < 0.10) | OLS Beta: 0.5380
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.4414, Calmar=122.0071): Z_E=2.7, Z_X=0.9, Z_SL=3.9
+📊 Persistence: Saved 428 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2022-12-14 16:15:00+00:00 to 2023-01-06 16:00:00+00:00): PnL: $388.78 | Sharpe: 4.1040 | Calmar: 0.0000 | Trades: 1
+
+--- Window 48 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-11-10 15:30:00+00:00 | End: 2023-01-06 16:00:00+00:00
+OOS Start Bar Index: 19598 | Time: 2023-01-06 16:15:00+00:00
+ADF Test Result: p-value=0.0292 (Required < 0.10) | OLS Beta: 1.0085
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=6.3341, Calmar=2485.5156): Z_E=2.7, Z_X=0.9, Z_SL=3.3
+📊 Persistence: Saved 508 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2023-01-06 16:15:00+00:00 to 2023-01-30 16:00:00+00:00): PnL: $-305.83 | Sharpe: -5.2108 | Calmar: -9.1216 | Trades: 80
+
+--- Window 49 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-12-02 18:15:00+00:00 | End: 2023-01-30 16:00:00+00:00
+OOS Start Bar Index: 19988 | Time: 2023-01-30 16:15:00+00:00
+ADF Test Result: p-value=0.2474 (Required < 0.10) | OLS Beta: 1.8068
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 50 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2022-12-23 18:15:00+00:00 | End: 2023-02-21 16:00:00+00:00
+OOS Start Bar Index: 20378 | Time: 2023-02-21 16:15:00+00:00
+ADF Test Result: p-value=0.2811 (Required < 0.10) | OLS Beta: 2.2718
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 51 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-01-18 18:15:00+00:00 | End: 2023-03-14 15:00:00+00:00
+OOS Start Bar Index: 20768 | Time: 2023-03-14 15:15:00+00:00
+ADF Test Result: p-value=0.0009 (Required < 0.10) | OLS Beta: 0.7935
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=3.4009, Calmar=222.5170): Z_E=2.5, Z_X=0.3, Z_SL=3.9
+📊 Persistence: Saved 647 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2023-03-14 15:15:00+00:00 to 2023-04-04 15:00:00+00:00): PnL: $132.41 | Sharpe: 1.3605 | Calmar: 9.9355 | Trades: 139
+
+--- Window 52 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-02-08 18:15:00+00:00 | End: 2023-04-04 15:00:00+00:00
+OOS Start Bar Index: 21158 | Time: 2023-04-04 15:15:00+00:00
+ADF Test Result: p-value=0.6924 (Required < 0.10) | OLS Beta: 0.7001
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 53 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-03-02 18:15:00+00:00 | End: 2023-04-26 15:00:00+00:00
+OOS Start Bar Index: 21548 | Time: 2023-04-26 15:15:00+00:00
+ADF Test Result: p-value=0.1610 (Required < 0.10) | OLS Beta: 0.3173
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 54 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-03-23 17:15:00+00:00 | End: 2023-05-17 15:00:00+00:00
+OOS Start Bar Index: 21938 | Time: 2023-05-17 15:15:00+00:00
+ADF Test Result: p-value=0.0536 (Required < 0.10) | OLS Beta: 0.0198
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.4653, Calmar=0.0000): Z_E=2.5, Z_X=1.3, Z_SL=4.5
+📊 Persistence: Saved 649 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2023-05-17 15:15:00+00:00 to 2023-06-08 15:00:00+00:00): PnL: $-179.72 | Sharpe: -2.7473 | Calmar: -10.1172 | Trades: 2
+
+--- Window 55 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-04-14 17:15:00+00:00 | End: 2023-06-08 15:00:00+00:00
+OOS Start Bar Index: 22328 | Time: 2023-06-08 15:15:00+00:00
+ADF Test Result: p-value=0.5296 (Required < 0.10) | OLS Beta: 0.2341
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 56 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-05-05 17:15:00+00:00 | End: 2023-06-30 15:00:00+00:00
+OOS Start Bar Index: 22718 | Time: 2023-06-30 15:15:00+00:00
+ADF Test Result: p-value=0.5960 (Required < 0.10) | OLS Beta: 0.8533
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 57 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-05-26 17:15:00+00:00 | End: 2023-07-24 17:45:00+00:00
+OOS Start Bar Index: 23108 | Time: 2023-07-24 18:00:00+00:00
+ADF Test Result: p-value=0.3199 (Required < 0.10) | OLS Beta: 0.2990
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 58 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-06-20 17:15:00+00:00 | End: 2023-08-14 17:45:00+00:00
+OOS Start Bar Index: 23498 | Time: 2023-08-14 18:00:00+00:00
+ADF Test Result: p-value=0.0110 (Required < 0.10) | OLS Beta: 0.4855
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=2.5857, Calmar=0.0000): Z_E=3.3, Z_X=1.3, Z_SL=3.6
+📊 Persistence: Saved 669 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2023-08-14 18:00:00+00:00 to 2023-09-05 17:45:00+00:00): PnL: $286.24 | Sharpe: 3.5885 | Calmar: 71.8787 | Trades: 20
+
+--- Window 59 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-07-13 13:30:00+00:00 | End: 2023-09-05 17:45:00+00:00
+OOS Start Bar Index: 23888 | Time: 2023-09-05 18:00:00+00:00
+ADF Test Result: p-value=0.3271 (Required < 0.10) | OLS Beta: 0.5965
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 60 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-08-03 13:30:00+00:00 | End: 2023-09-26 17:45:00+00:00
+OOS Start Bar Index: 24278 | Time: 2023-09-26 18:00:00+00:00
+ADF Test Result: p-value=0.4997 (Required < 0.10) | OLS Beta: 0.4198
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 61 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-08-24 13:30:00+00:00 | End: 2023-10-17 17:45:00+00:00
+OOS Start Bar Index: 24668 | Time: 2023-10-17 18:00:00+00:00
+ADF Test Result: p-value=0.1608 (Required < 0.10) | OLS Beta: 0.9223
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 62 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-09-15 13:30:00+00:00 | End: 2023-11-07 18:45:00+00:00
+OOS Start Bar Index: 25058 | Time: 2023-11-07 19:00:00+00:00
+ADF Test Result: p-value=0.7348 (Required < 0.10) | OLS Beta: 0.5978
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 63 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-10-06 13:30:00+00:00 | End: 2023-11-30 14:45:00+00:00
+OOS Start Bar Index: 25448 | Time: 2023-11-30 15:00:00+00:00
+ADF Test Result: p-value=0.8135 (Required < 0.10) | OLS Beta: -0.4177
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 64 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-10-27 13:30:00+00:00 | End: 2023-12-21 14:45:00+00:00
+OOS Start Bar Index: 25838 | Time: 2023-12-21 15:00:00+00:00
+ADF Test Result: p-value=0.0432 (Required < 0.10) | OLS Beta: 1.6549
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=3.2731, Calmar=0.0000): Z_E=3.3, Z_X=1.3, Z_SL=4.5
+📊 Persistence: Saved 669 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2023-12-21 15:00:00+00:00 to 2024-01-16 14:45:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+--- Window 65 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-11-17 14:30:00+00:00 | End: 2024-01-16 14:45:00+00:00
+OOS Start Bar Index: 26228 | Time: 2024-01-16 15:00:00+00:00
+ADF Test Result: p-value=0.2250 (Required < 0.10) | OLS Beta: 1.6135
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 66 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2023-12-11 17:00:00+00:00 | End: 2024-02-06 14:45:00+00:00
+OOS Start Bar Index: 26618 | Time: 2024-02-06 15:00:00+00:00
+ADF Test Result: p-value=0.0758 (Required < 0.10) | OLS Beta: -0.0946
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=1.7382, Calmar=4.4556): Z_E=2.7, Z_X=1.3, Z_SL=4.8
+📊 Persistence: Saved 669 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2024-02-06 15:00:00+00:00 to 2024-02-28 14:45:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+--- Window 67 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-01-03 17:00:00+00:00 | End: 2024-02-28 14:45:00+00:00
+OOS Start Bar Index: 27008 | Time: 2024-02-28 15:00:00+00:00
+ADF Test Result: p-value=0.2409 (Required < 0.10) | OLS Beta: -0.0498
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 68 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-01-25 17:00:00+00:00 | End: 2024-03-20 15:30:00+00:00
+OOS Start Bar Index: 27398 | Time: 2024-03-20 15:45:00+00:00
+ADF Test Result: p-value=0.1343 (Required < 0.10) | OLS Beta: -0.0070
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 69 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-02-15 17:00:00+00:00 | End: 2024-04-11 15:30:00+00:00
+OOS Start Bar Index: 27788 | Time: 2024-04-11 15:45:00+00:00
+ADF Test Result: p-value=0.1480 (Required < 0.10) | OLS Beta: -0.1241
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 70 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-03-08 18:45:00+00:00 | End: 2024-05-02 15:30:00+00:00
+OOS Start Bar Index: 28178 | Time: 2024-05-02 15:45:00+00:00
+ADF Test Result: p-value=0.1221 (Required < 0.10) | OLS Beta: 0.0545
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 71 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-04-01 17:45:00+00:00 | End: 2024-05-23 15:30:00+00:00
+OOS Start Bar Index: 28568 | Time: 2024-05-23 15:45:00+00:00
+ADF Test Result: p-value=0.0298 (Required < 0.10) | OLS Beta: 0.2383
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.7356, Calmar=94.7202): Z_E=2.1, Z_X=0.5, Z_SL=4.2
+📊 Persistence: Saved 669 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2024-05-23 15:45:00+00:00 to 2024-06-14 15:30:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+--- Window 72 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-04-22 17:45:00+00:00 | End: 2024-06-14 15:30:00+00:00
+OOS Start Bar Index: 28958 | Time: 2024-06-14 15:45:00+00:00
+ADF Test Result: p-value=0.0116 (Required < 0.10) | OLS Beta: 0.1662
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.7941, Calmar=164.0976): Z_E=1.9, Z_X=0.3, Z_SL=3.3
+📊 Persistence: Saved 684 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2024-06-14 15:45:00+00:00 to 2024-07-09 18:15:00+00:00): PnL: $452.52 | Sharpe: 3.8101 | Calmar: 58.3171 | Trades: 15
+
+--- Window 73 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-05-13 17:45:00+00:00 | End: 2024-07-09 18:15:00+00:00
+OOS Start Bar Index: 29348 | Time: 2024-07-09 18:30:00+00:00
+ADF Test Result: p-value=0.3728 (Required < 0.10) | OLS Beta: 0.1471
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 74 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-06-04 17:45:00+00:00 | End: 2024-07-30 18:15:00+00:00
+OOS Start Bar Index: 29738 | Time: 2024-07-30 18:30:00+00:00
+ADF Test Result: p-value=0.1240 (Required < 0.10) | OLS Beta: 0.4659
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 75 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-06-26 17:45:00+00:00 | End: 2024-08-20 18:15:00+00:00
+OOS Start Bar Index: 30128 | Time: 2024-08-20 18:30:00+00:00
+ADF Test Result: p-value=0.0970 (Required < 0.10) | OLS Beta: 0.3856
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=1.9030, Calmar=9.3741): Z_E=3.3, Z_X=0.3, Z_SL=3.6
+📊 Persistence: Saved 706 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2024-08-20 18:30:00+00:00 to 2024-09-11 18:15:00+00:00): PnL: $-93.20 | Sharpe: -1.5133 | Calmar: -5.5934 | Trades: 22
+
+--- Window 76 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-07-19 14:00:00+00:00 | End: 2024-09-11 18:15:00+00:00
+OOS Start Bar Index: 30518 | Time: 2024-09-11 18:30:00+00:00
+ADF Test Result: p-value=0.9831 (Required < 0.10) | OLS Beta: 0.5194
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 77 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-08-09 14:00:00+00:00 | End: 2024-10-02 18:15:00+00:00
+OOS Start Bar Index: 30908 | Time: 2024-10-02 18:30:00+00:00
+ADF Test Result: p-value=0.6843 (Required < 0.10) | OLS Beta: -0.4275
+Filter ON: Spread not stationary (p-value too high). Skipping optimization and OOS test.
+
+--- Window 78 Boundary Check ---
+IS Period RTH Bars: 980. Start: 2024-08-30 14:00:00+00:00 | End: 2024-10-23 18:15:00+00:00
+OOS Start Bar Index: 31298 | Time: 2024-10-23 18:30:00+00:00
+ADF Test Result: p-value=0.0754 (Required < 0.10) | OLS Beta: -0.1545
+Filter OFF: Spread is stationary. Proceeding with optimization.
+IS Optimization Time: 0.03 seconds.
+Optimal Params (Sharpe=5.0257, Calmar=29.5365): Z_E=2.7, Z_X=0.7, Z_SL=3.3
+📊 Persistence: Saved 706 PnL points to wfa_outputs\oos_equity_curve_ALLY_NYCB_15m_20251107_013340_0.1.csv
+OOS Period (2024-10-23 18:30:00+00:00 to 2024-10-25 19:45:00+00:00): PnL: $0.00 | Sharpe: 0.0000 | Calmar: 0.0000 | Trades: 0
+
+############################################################
+📈 OVERALL SIMULATION PERFORMANCE (Walk-Forward Test)
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 78
+Total Trades Executed: 706
+--- Final Performance Metrics ---
+Total PnL: $3,616.54
+Overall Sharpe Ratio (Annualized): 0.4450
+Overall Calmar Ratio (Annualized): 0.2826
+Maximum Dollar Drawdown (MDD): $511.53
+
+--- Execution Time ---
+Total Elapsed Time: 75.67 seconds
+############################################################
+[0m
