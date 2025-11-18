@@ -6,8 +6,6 @@
 
 **Batch Tester**: Allows batches of WFAs to be done with different configurations, allowing me to test overnight.
 
-**Utilities**: To replace words, basically
-
 ---
 
 **Small Informal Write Up that is hosted on HackMD:**
