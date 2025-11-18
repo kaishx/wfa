@@ -1,0 +1,188 @@
+============================================================
+FILE: SPGI_MSCI_010120_15m_0.05_20251108_104620.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 80
+Total Trades Executed: 938
+--- Final Performance Metrics ---
+Total PnL: $-803.41
+Overall Sharpe Ratio (Annualized): -0.1824
+Overall Calmar Ratio (Annualized): -0.0218
+Maximum Dollar Drawdown (MDD): $1,575.24
+
+--- Execution Time ---
+Total Elapsed Time: 34.17 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SPGI_MSCI_010120_15m_0.1_20251108_104658.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 15
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 80
+Total Trades Executed: 1402
+--- Final Performance Metrics ---
+Total PnL: $-872.19
+Overall Sharpe Ratio (Annualized): -0.1684
+Overall Calmar Ratio (Annualized): -0.0227
+Maximum Dollar Drawdown (MDD): $1,644.03
+
+--- Execution Time ---
+Total Elapsed Time: 35.48 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SPGI_MSCI_010120_1h_0.05_20251108_104512.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 81
+Total Trades Executed: 191
+--- Final Performance Metrics ---
+Total PnL: $-58.12
+Overall Sharpe Ratio (Annualized): -0.0147
+Overall Calmar Ratio (Annualized): -0.0033
+Maximum Dollar Drawdown (MDD): $748.59
+
+--- Execution Time ---
+Total Elapsed Time: 30.25 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SPGI_MSCI_010120_1h_0.1_20251108_104546.log
+============================================================
+############################################################
+Timeframe Used: 1Hour, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 81
+Total Trades Executed: 330
+--- Final Performance Metrics ---
+Total PnL: $-502.55
+Overall Sharpe Ratio (Annualized): -0.1055
+Overall Calmar Ratio (Annualized): -0.0177
+Maximum Dollar Drawdown (MDD): $1,216.25
+
+--- Execution Time ---
+Total Elapsed Time: 30.97 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SPGI_MSCI_010120_1m_0.05_20251108_104737.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 53
+Total Trades Executed: 8810
+--- Final Performance Metrics ---
+Total PnL: $248.55
+Overall Sharpe Ratio (Annualized): 0.0584
+Overall Calmar Ratio (Annualized): 0.0100
+Maximum Dollar Drawdown (MDD): $1,131.29
+
+--- Execution Time ---
+Total Elapsed Time: 102.85 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SPGI_MSCI_010120_1m_0.1_20251108_104923.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.1
+Total OOS Windows Tested: 53
+Total Trades Executed: 9272
+--- Final Performance Metrics ---
+Total PnL: $-129.32
+Overall Sharpe Ratio (Annualized): -0.0247
+Overall Calmar Ratio (Annualized): -0.0035
+Maximum Dollar Drawdown (MDD): $1,715.11
+
+--- Execution Time ---
+Total Elapsed Time: 103.15 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SPGI_MSCI_080120_1m_0.05_20251108_105111.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 53
+Total Trades Executed: 4981
+--- Final Performance Metrics ---
+Total PnL: $-453.79
+Overall Sharpe Ratio (Annualized): -0.1691
+Overall Calmar Ratio (Annualized): -0.0349
+Maximum Dollar Drawdown (MDD): $792.51
+
+--- Execution Time ---
+Total Elapsed Time: 101.80 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SPGI_MSCI_150120_1m_0.05_20251108_105256.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 52
+Total Trades Executed: 3142
+--- Final Performance Metrics ---
+Total PnL: $-87.94
+Overall Sharpe Ratio (Annualized): -0.0266
+Overall Calmar Ratio (Annualized): -0.0063
+Maximum Dollar Drawdown (MDD): $699.00
+
+--- Execution Time ---
+Total Elapsed Time: 104.17 seconds
+############################################################
+[0m
+
+
+
+============================================================
+FILE: SPGI_MSCI_220120_1m_0.05_20251108_105444.log
+============================================================
+############################################################
+Timeframe Used: 1Min, Value: 1
+ADF Cointegration Filter Threshold: 0.05
+Total OOS Windows Tested: 52
+Total Trades Executed: 4032
+--- Final Performance Metrics ---
+Total PnL: $-813.26
+Overall Sharpe Ratio (Annualized): -0.2493
+Overall Calmar Ratio (Annualized): -0.0394
+Maximum Dollar Drawdown (MDD): $1,006.46
+
+--- Execution Time ---
+Total Elapsed Time: 101.53 seconds
+############################################################
+[0m
+
+
