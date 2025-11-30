@@ -14,4 +14,4 @@
 
 ---
 
-> **Note:** Code was written by me with assistance from AI. All mathematical logic has been manually reviewed and verified. This project is a proof of concept and DEFINITELY CONTAINS bugs and heuristic parameter choices.
+> **Note:** All mathematical logic has been manually reviewed. This project is for educational purposes only and is a proof of concept. It DEFINITELY CONTAINS bugs, mistakes and heuristic parameter choices.
