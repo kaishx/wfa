@@ -3,7 +3,7 @@ annotated-types==0.7.0
 certifi==2025.11.12
 charset-normalizer==3.4.4
 colorama==0.4.6
-cpp_accelerator @ file:///C:/Users/chuka/PycharmProjects/wfa_cpp
+cpp_accelerator
 idna==3.11
 llvmlite==0.45.1
 msgpack==1.1.2
