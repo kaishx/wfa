@@ -26,7 +26,7 @@ Unlike basic strategies that rely on fixed averages, I implemented an adaptive s
 ### The Logic Core
 
 * **Kalman Filter (Dynamic Hedge Ratio):** Implemented a Kalman Filter to dynamically calculate the hedge ratio ($\beta$) between two assets, allowing the model to adapt instantly to new price information, avoiding the lag of simple moving averages.
-* **Z-Score:** Measures the spread's deviation from its mean, which acted as the primary trade signal. it would enter if ($Z_{entry} > $Z_{current}$)
+* **Z-Score:** Measures the spread's deviation from its mean, which acted as the primary trade signal. it would enter if $Z_{entry}$ > $Z_{current}$
 * **Hurst Exponent (The Trend Killer):** Acts as a "Circuit Breaker." If the Hurst value exceeds **0.6**, the system detects a regime shift (trending vs. reverting) and blocks all trades.
 * **Dollar-Based Stop Loss:** Calculated stops based on **Gross PnL** (real dollars lost before fees), making the optimization more path-dependent and realistic than simple percentage stops.
 
