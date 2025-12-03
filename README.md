@@ -10,7 +10,7 @@ Pairs trading is often presented as the "hello world" of quantitative finance: f
 
 Hence, I started this project to get my answers to a specific, practical question: **Can a retail algorithm effectively capture alpha on a 15-minute timeframe after accounting for real-world trading costs?**
 
-To answer this, I couldn't just run a simple backtest. I needed a rigorous "stress test" machine—something that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is called **Walk-Forward Analysis (WFA)**.
+To answer this, I couldn't just run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous "stress test" machine—something that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is called **Walk-Forward Analysis (WFA)**.
 
 WFA is computationally expensive. Running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a **Dual-Engine Architecture**:
 
@@ -26,7 +26,7 @@ Unlike basic strategies that rely on fixed averages, I implemented an adaptive s
 ### The Logic Core
 
 * **Kalman Filter (Dynamic Hedge Ratio):** Implemented a Kalman Filter to dynamically calculate the hedge ratio ($\beta$) between two assets, allowing the model to adapt instantly to new price information, avoiding the lag of simple moving averages.
-* **Z-Score:** Measures the spread's deviation from its mean, acting as the primary trade signal.
+* **Z-Score:** Measures the spread's deviation from its mean, which acted as the primary trade signal. it would enter if ($Z_{entry} > $Z_{current}$)
 * **Hurst Exponent (The Trend Killer):** Acts as a "Circuit Breaker." If the Hurst value exceeds **0.6**, the system detects a regime shift (trending vs. reverting) and blocks all trades.
 * **Dollar-Based Stop Loss:** Calculated stops based on **Gross PnL** (real dollars lost before fees), making the optimization more path-dependent and realistic than simple percentage stops.
 
