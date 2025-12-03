@@ -88,7 +88,7 @@ The analysis runs in three simple steps:
     ```bash
     python batch_runner.py
     ```
-3.  **Analyze & Visualize:** Process the log files to generate a master report and plots.
+3.  **Analyze & Visualize:** Process the log files (P.S: remember to point to the right directories!) to generate a master report and plots.
     ```bash
     python all_in_one.py
     python plotter.py
