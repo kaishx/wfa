@@ -2,9 +2,11 @@
 
 ## 1. Introduction & Thesis
 
+In 2024, I was introduced to a form of pseudo-gambling on the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL and SOXS, which were incredibly volatile in that period, and could see massive downs and ups then. While watching them on my stock app, I noticed that the tracking within them was not perfect - in essence, one could have moved by 3% while the other, 2.95%. I thought I found a hack which would exploit this difference, and I came up with my own trading strategy to arbitrage my market position (make it delta neutral) while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first good Google search, and that was when I found out my "exploitation" had already been done for many decades - Pairs Trading.
+
 Pairs trading is often presented as the "hello world" of quantitative finance: find two stocks that move together, and when they drift apart, bet on them snapping back. In theory, it's **market-neutral** and robust. In practice, it's a minefield of regime shifts (correlations breaking) and execution friction (slippage eating profits).
 
-I initiated this project to answer a specific, practical question: **Can a retail algorithm effectively capture alpha on a 15-minute timeframe after accounting for real-world trading costs?**
+Hence, I started this project to get my answers to a specific, practical question: **Can a retail algorithm effectively capture alpha on a 15-minute timeframe after accounting for real-world trading costs?**
 
 To answer this, I couldn't just run a simple backtest. I needed a rigorous "stress test" machine—something that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is called **Walk-Forward Analysis (WFA)**.
 
@@ -149,3 +151,13 @@ The Plotly visualization charts **Risk (Max Drawdown)** against the **Reward (Sh
 This project successfully established a professional-grade quantitative research platform. It demonstrated that while **Walk-Forward Analysis** confirms robust trading relationships, the **"Cost Barrier"** remains a primary hurdle for retail profitability.
 
 The benchmark proved that while Numba is excellent for research, **C++ remains the king of predictable production performance**. The development of this hybrid architecture provides a portable, high-performance foundation capable of bridging the gap between research prototypes and live execution systems.
+
+## Timeline of my project
+
+- Started running my first backtests on Google Colab, which could run 1 backtest per night with its timeouts
+- Moved on to my computer to utilize my computer's strong hardware, bumping up my backtests to 10 per night
+- Realized my backtests were so overfitted and realized that I had unrealistic results, so I made my first WFA
+- I could only expect to see the WFA for one pair done every 10 minutes
+- Improved the WFA with Numba, seeing it drop to over 60 runs per hour
+- Realized I was downloading the same data everytime, and implemented caching of data, allowing me to make one WFA run in under 30 seconds by avoiding downloading.
+- Wanted to optimize improvements, and hence added C++ modules to expensive calculation functions, allowing me to run one WFA in under 10 seconds.
