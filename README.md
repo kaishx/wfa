@@ -1,5 +1,9 @@
 # Algorithmic Pairs Trading: A Dual-Engine Architecture Study
 
+*This is written informally and is intended to be more blog-like so I never make formal references.*
+
+*Link back to my [Portfolio (github)](https://kaishx.github.io/#projects)*
+
 ## 1. Introduction & Thesis
 
 In 2024, I was introduced to a form of pseudo-gambling on the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL and SOXS, which were incredibly volatile in that period, and could see massive downs and ups then. While watching them on my stock app, I noticed that the tracking within them was not perfect - in essence, one could have moved by 3% while the other, 2.95%. 
@@ -27,7 +31,8 @@ Unlike basic strategies that rely on fixed averages, I implemented an adaptive s
 
 * **Kalman Filter (Dynamic Hedge Ratio):** Implemented a Kalman Filter to dynamically calculate the hedge ratio ($\beta$) between two assets, allowing the model to adapt instantly to new price information, avoiding the lag of simple moving averages.
 * **Z-Score:** Measures the spread's deviation from its mean, which acted as the primary trade signal. it would enter if $Z_{entry}$ > $Z_{current}$
-* **Hurst Exponent (The Trend Killer):** Acts as a "Circuit Breaker." If the Hurst value exceeds **0.6**, the system detects a regime shift (trending vs. reverting) and blocks all trades.
+* **Augmented Dickey-Fuller Test (ADF):** Acts as guard #1. If the ADF exceeds a certain number (I will elaborate more on this later), the system detects a regime shift (trending vs not stationary) and blocks all trades for the incoming OOS window.
+* **Hurst Exponent:** Acts as guard #2. If the Hurst Value exceeds a certain number (I will elaborate more on this later), the system detects a regime shift (trending vs. reverting) and blocks all trades.
 * **Dollar-Based Stop Loss:** Calculated stops based on **Gross PnL** (real dollars lost before fees), making the optimization more path-dependent and realistic than simple percentage stops.
 
 ### Walk-Forward Analysis (The Stress Test)
