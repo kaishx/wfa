@@ -10,30 +10,33 @@ In 2024, I was introduced to a form of pseudo-gambling on the stock market by a 
 
 I thought I found a hack which would exploit this difference, and I came up with my own trading strategy to arbitrage my market position (make it delta neutral) while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first good Google search, and that was when I found out my "exploitation" had already been done for many decades - Pairs Trading.
 
-Pairs trading is often presented as the "hello world" of quantitative finance: find two stocks that move together, and when they drift apart, bet on them snapping back. In theory, it's **market-neutral** and robust. In practice, it's a minefield of regime shifts (correlations breaking) and execution friction (slippage eating profits).
+Pairs trading is often presented as the "hello world" of quantitative finance: find two stocks that move together, and when they drift apart, bet on them snapping back. In theory, it's **market-neutral** and robust. But realistically, there are slippage, transactions costs, and correlation breakdowns.
 
 Hence, I started this project to get my answers to a specific, practical question: **Can a retail algorithm effectively capture alpha on a 15-minute timeframe after accounting for real-world trading costs?**
 
 To answer this, I couldn't just run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous "stress test" machine—something that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is called **Walk-Forward Analysis (WFA)**.
 
-WFA is computationally expensive. Running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a **Dual-Engine Architecture**:
+WFA is computationally expensive. Running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a WFA Engine with two different styles: 
 
-1.  **Engine A (The Researcher):** A pure Python version optimized with **Numba**, designed for rapid prototyping and zero-overhead iteration.
-2.  **Engine B (The Production System):** A high-performance **C++** version linked to Python, designed to simulate a low-latency production environment.
+1. A Python-only, **Numba**-optimized Engine to reduce overhead and without the complexities of setting up a **C++** Module
+2. A **C++** Module which is integrated into the Python Engine for maximum computational speed and high performance.
 
 ---
 
 ## 2. Strategy & Methodology (WFA)
 
-Unlike basic strategies that rely on fixed averages, I implemented an adaptive system designed to handle changing market conditions.
+Unlike basic strategies that rely on fixed averages, I utilized many statistical tests to adapt to volatile market conditions
 
 ### The Logic Core
 
-* **Kalman Filter (Dynamic Hedge Ratio):** Implemented a Kalman Filter to dynamically calculate the hedge ratio ($\beta$) between two assets, allowing the model to adapt instantly to new price information, avoiding the lag of simple moving averages.
-* **Z-Score:** Measures the spread's deviation from its mean, which acted as the primary trade signal. it would enter if $Z_{entry}$ > $Z_{current}$
-* **Augmented Dickey-Fuller Test (ADF):** Acts as guard #1. If the ADF exceeds a certain number (I will elaborate more on this later), the system detects a regime shift (trending vs not stationary) and blocks all trades for the incoming OOS window.
-* **Hurst Exponent:** Acts as guard #2. If the Hurst Value exceeds a certain number (I will elaborate more on this later), the system detects a regime shift (trending vs. reverting) and blocks all trades.
+* **Kalman Filter (Dynamic Hedge Ratio):** Implemented a Kalman Filter to dynamically calculate the hedge ratio ($\beta$) between two assets, allowing the model to adapt instantly to new price information, thus avoiding the lag inherent in simple moving averages.
+* **Z-Score:** Measures the spread's deviation from its mean, which acts as the primary trade signal. The system enters a trade if the magnitude of the current Z-score, $|\mathbf{Z_{current}}|$, exceeds the entry threshold, $\mathbf{Z_{entry}}$.
+* **Augmented Dickey-Fuller Test (ADF):** **1st Guard** The test is calculated on the preceding In-Sample (IS) window to confirm **stationarity** (cointegration). If the **P-value** of the test exceeds a predefined threshold (e.g., $P$-value $> 0.20$), the IS window is deemed non-stationary, and the subsequent Out-of-Sample (OOS) window will not be traded.
+* **Hurst Exponent:** **2nd Guard** Measures the degree of **mean reversion** versus **trending behavior** behaviour in the spread. If the Hurst Value exceeds a threshold (e.g., $H > 0.75$), the system detects persistent, trending behavior and blocks the trade at that specific moment.
 * **Dollar-Based Stop Loss:** Calculated stops based on **Gross PnL** (real dollars lost before fees), making the optimization more path-dependent and realistic than simple percentage stops.
+
+**Note:** With the last three components, we heavily reduce trading risk by ensuring that market positions are only initiated when both **statistical confidence (ADF)** and **current behavior (Hurst)** strongly favor mean reversion.
+
 
 ### Walk-Forward Analysis (The Stress Test)
 
