@@ -2,7 +2,9 @@
 
 ## 1. Introduction & Thesis
 
-In 2024, I was introduced to a form of pseudo-gambling on the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL and SOXS, which were incredibly volatile in that period, and could see massive downs and ups then. While watching them on my stock app, I noticed that the tracking within them was not perfect - in essence, one could have moved by 3% while the other, 2.95%. I thought I found a hack which would exploit this difference, and I came up with my own trading strategy to arbitrage my market position (make it delta neutral) while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first good Google search, and that was when I found out my "exploitation" had already been done for many decades - Pairs Trading.
+In 2024, I was introduced to a form of pseudo-gambling on the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL and SOXS, which were incredibly volatile in that period, and could see massive downs and ups then. While watching them on my stock app, I noticed that the tracking within them was not perfect - in essence, one could have moved by 3% while the other, 2.95%. 
+
+I thought I found a hack which would exploit this difference, and I came up with my own trading strategy to arbitrage my market position (make it delta neutral) while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first good Google search, and that was when I found out my "exploitation" had already been done for many decades - Pairs Trading.
 
 Pairs trading is often presented as the "hello world" of quantitative finance: find two stocks that move together, and when they drift apart, bet on them snapping back. In theory, it's **market-neutral** and robust. In practice, it's a minefield of regime shifts (correlations breaking) and execution friction (slippage eating profits).
 
