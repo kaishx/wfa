@@ -36,9 +36,9 @@ Z_EXIT = 0.5
 Z_STOP = 3.0
 
 # mock grid for stress test. more grid = C++ gets more advantage on numba.
-Z_ENTRY_GRID = np.linspace(1.5, 3.0, 3)
-Z_EXIT_GRID = np.linspace(0.0, 1.0, 3)
-Z_STOP_GRID = np.linspace(3.5, 5.0, 3)
+Z_ENTRY_GRID = np.linspace(1.5, 3.0, 5)
+Z_EXIT_GRID = np.linspace(0.0, 1.0, 5)
+Z_STOP_GRID = np.linspace(3.5, 5.0, 5)
 
 
 # numba part, kindaaa copied straight over from numba_wfa and changed sum stuff
