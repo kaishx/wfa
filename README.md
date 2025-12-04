@@ -175,7 +175,7 @@ Then I added two boundary configurations:
 
 These two extremes help reveal how the strategy collapses when the filters are too loose or too strict.
 
-The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, measured as Sharpe ratio (x-axis) vs Max Drawdown (y-axis). Each dot represents a full WFA run over four years of 15-minute bars.
+The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, measured as Max Drawdown (x-axis) vs Sharpe Ratio (y-axis). Each dot represents a full WFA run over four years of 15-minute bars.
 
 ```
 [Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs] (!!! todo: wait for 0.9/0.2 and 0.7/0.2 and talk about them as bounds analysis, then merge all the 6 graphs together and label them to show one big image !!!)
@@ -194,7 +194,7 @@ Across all pairs, several consistent patterns emerge:
 The two boundary regimes highlight the extremes:
 
 * (0.9, 0.2) floods the system with non-stationary spreads.
-    * Result: MDD balloons and Sharpe collapses — confirming that insufficient filtering converts the strategy into pseudo-random betting.
+    * Result: MDD balloons and Sharpe collapses — confirming that insufficient filtering degrades the strategy toward pure market risk/uncontrolled exposure..
 
 * (0.7, 0.2) is excessively strict.
     *Result: trade volume collapses, often to near-zero — matching real observations where many spreads hover around Hurst 0.75–0.9, failing the threshold.
@@ -206,6 +206,13 @@ Moving on from the Hurst and ADF thresholds however, we can analyse each graph t
 
 ```
 (!!! todo: wait for 0.9/0.2 and 0.7/0.2 and then analyse the different regions. maybe take 1 graph as example and then draw the regions on it !!!)
+
+| Region | Meaning | Suggested Label |
+| :--- | :--- | :--- |
+| **Top-Left** (Low MDD, High Sharpe) | **Optimal Strategy Zone** | **I. The Alpha Cluster** |
+| **Top-Right** (High MDD, High Sharpe) | **High Risk, High Return/Skew** | **II. High Volatility/Risk Zone** |
+| **Bottom-Left** (Low MDD, Low Sharpe) | **Conservative/Neutral** | **III. Conservative/Neutral** |
+| **Bottom-Right** (High MDD, Low Sharpe) | **Strategy Failure** | **IV. The Collapse/Failure Zone** |
 ```
 
 These regions help explain why certain pairs remain robust across thresholds, while others only perform under specific filtering regimes.
