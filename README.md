@@ -23,7 +23,7 @@ WFA is computationally expensive. Running thousands of optimization loops takes 
 
 ---
 
-## 2. Methodology (WFA)
+## 2. Methodology (WFA) (`cpp_wfa.py` and `numba_wfa.py`)
 
 Unlike basic strategies that rely on fixed averages, I utilized many statistical tests to adapt to volatile market conditions.
 
@@ -38,7 +38,7 @@ Unlike basic strategies that rely on fixed averages, I utilized many statistical
 **Note:** With these components, we heavily reduce trading risk by ensuring that market positions are only initiated when both **statistical confidence (ADF)** and **current behavior (Hurst)** strongly favor mean reversion. The **Dollar-Based Stop Loss** acts as an absolute risk ceiling, protecting capital during black-swan events or rapid mean reversion failures.
 
 
-### WFA Process
+### WFA Process 
 
 I implemented a rolling-window approach to eliminate lookahead bias, and the WFA process follows as such:
 
@@ -48,7 +48,7 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 
 ---
 
-## 3. Methodology (C++/Numba Comparison)
+## 3. Methodology (C++/Numba Comparison) (`stress.py`)
 
 Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function, which significantly improved performance by removing much of Python’s overhead.
 
