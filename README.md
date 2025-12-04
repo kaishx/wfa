@@ -27,7 +27,7 @@ WFA is computationally expensive. Running thousands of optimization loops takes 
 
 Unlike basic strategies that rely on fixed averages, I utilized many statistical tests to adapt to volatile market conditions
 
-### The Logic Core
+### Logic
 
 * **Kalman Filter (Dynamic Hedge Ratio):** Implemented a Kalman Filter to dynamically calculate the hedge ratio ($\beta$) between two assets, allowing the model to adapt instantly to new price information, thus avoiding the lag inherent in simple moving averages.
 * **Z-Score:** Measures the spread's deviation from its mean, which acts as the primary trade signal. The system enters a trade if the magnitude of the current Z-score, $|\mathbf{Z_{current}}|$, exceeds the entry threshold, $\mathbf{Z_{entry}}$.
@@ -38,12 +38,12 @@ Unlike basic strategies that rely on fixed averages, I utilized many statistical
 **Note:** With the last three components, we heavily reduce trading risk by ensuring that market positions are only initiated when both **statistical confidence (ADF)** and **current behavior (Hurst)** strongly favor mean reversion.
 
 
-### Walk-Forward Analysis (The Stress Test)
+### The WFA
 
-To eliminate look-ahead bias, the system uses a rolling window approach:
+I implemented a rolling-window approach to eliminate lookahead bias, and the WFA process follows as such:
 
-1.  **In-Sample (Train):** The model trains on **120 days** of data to find the optimal Z-Score thresholds ($Z_{entry}, Z_{exit}, Z_{stop}$).
-2.  **Out-of-Sample (Test):** These parameters are frozen and tested on the next **15 days** of unseen data.
+1.  **In-Sample (Train):** The model trains on **60 days** of data to find the optimal Z-Score thresholds ($Z_{entry}, Z_{exit}, Z_{stop}$). The window is blocked if it exceeds the above mentioned ADF threshold.
+2.  **Out-of-Sample (Test):** These parameters are frozen and tested on the next **15 days** of unseen data. Any trades during the OOS are blocked if its Hurst Exponent exceeds the above mentioned Hurst threshold.
 3.  **Repeat:** The window slides forward, and the process repeats, mimicking real-world constraints.
 
 ---
