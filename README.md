@@ -4,6 +4,10 @@
 
 *Link back to my [Portfolio (github)](https://kaishx.github.io/#projects)*
 
+## Overview
+
+The project implements a Walk-Forward Analysis (WFA) for pairs trading with two acceleration paths: a Numba-optimized Python engine and a native C++ module. It performs rolling-window optimization, runs stationarity and mean-reversion checks, and executes millions of backtest iterations. I also built stress tests to compare Numba vs. native C++ performance under realistic loads.
+
 ## 1. Introduction & Thesis
 
 In 2024, I was introduced to a form of pseudo-gambling on the direction of the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL & SOXS, which were extremely volatile products that could swing aggressively in either direction. 
@@ -18,7 +22,7 @@ Hence, I started this project to get my answers to a specific, practical questio
 
 To answer this, I couldn't just run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous test that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is known as **Walk-Forward Analysis (WFA)**.
 
-WFA is computationally expensive. Running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a WFA Engine with two different optimization methods: 
+However, WFA is computationally expensive and running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a WFA Engine with two different optimization methods: 
 
 1. A Python-only, **Numba**-optimized Engine to reduce overhead and without the complexities of setting up a **C++** Module
 2. A **C++** Module which is integrated into the Python Engine for maximum computational speed and high performance.
@@ -34,7 +38,7 @@ At its core, the system measures how a pair behaves historically and reacts when
 
 * **Kalman Filter (Dynamic Hedge Ratio):** Implemented a Kalman Filter to dynamically calculate the hedge ratio ($\beta$) between two assets, allowing the model to adapt instantly to new price information, thus avoiding the lag inherent in simple moving averages.
 * **Z-Score:** Measures a spread's deviation from its mean, and this measurement acts as the primary trade signal. The system enters a trade if the magnitude of the current Z-score, $|\mathbf{Z_{current}}|$, exceeds the entry threshold, $\mathbf{Z_{entry}}$.
-* **Augmented Dickey-Fuller Test (ADF):** **Stat Test #1** The test is calculated on the preceding In-Sample (IS) window to confirm **stationarity** (a.k.a cointegration). If the **P-value** of the test exceeds a predefined threshold (e.g., $P$-value $> 0.10$), the IS window is deemed non-stationary and the OOS window is skipped entirely.
+* **Augmented Dickey-Fuller Test (ADF):** **Stat Test #1** The test is calculated on the preceding In-Sample (IS) window to confirm **stationarity** (a.k.a cointegration). If the **P-value** of the test exceeds a predefined threshold (e.g., $P$-value $> 0.10$), the IS window is deemed non-stationary and the corresponding OOS window is skipped entirely.
 * **Hurst Exponent:** **Stat Test #2** Measures the degree of **mean reversion behavior** vs **trending behavior** in the spread. If the Hurst Value exceeds a threshold (e.g., $H > 0.75$), the system detects persistent, trending behavior and blocks the trade at that specific moment.
 * **Dollar-Based Stop Loss:** Calculated stops based on **Gross PnL** (real dollars lost before fees), making the optimization more path-dependent and realistic than simple percentage stops.
 
@@ -58,9 +62,9 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 ## 3. Methodology (C++/Numba Comparison) 
 Related Code: (`stress.py`)
 
-Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function which improved speeds massively, however, while Numba was a major speedup, but it still struggled once the project required millions of backtest iterations.
+Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function which improved speeds massively. However, while Numba was a major speedup, it still struggled once the project required millions of backtest iterations.
 
-That's when I decided to implement a C++ module to replace run_opt and numba_bt in `cpp_wfa` to improve speeds even further.
+That's when I decided to implement a C++ module to replace run_opt and numba_bt in `numba_wfa` to improve speeds even further.
 
 Hence, the latter part of this project therefore focuses on comparing these two acceleration strategies—Numba JIT vs. the C++ module—for the core optimization loop inside the Walk-Forward Analysis (WFA) engine.
 
