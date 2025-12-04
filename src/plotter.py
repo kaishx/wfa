@@ -80,14 +80,14 @@ def parse_masterlog(log_path):
                     current_entry['PnL'] = float(line.split('$')[1].strip().replace(',', ''))
                 except:
                     pass
-            elif line.startswith("Overall Sharpe Ratio (Annualized):"):
+            elif line.startswith("annaulized sharpe:"):
                 try:
                     val = line.split(':')[1].strip()
                     current_entry['Sharpe'] = -999.0 if val.lower() in ['inf', '-inf', 'nan'] else float(
                         val.replace(',', ''))
                 except:
                     pass
-            elif line.startswith("Maximum Dollar Drawdown (MDD):"):
+            elif line.startswith("MDD:"):
                 try:
                     current_entry['MDD'] = float(line.split('$')[1].strip().replace(',', ''))
                 except:
@@ -256,5 +256,6 @@ if __name__ == "__main__":
             print(f"\nProcessing: {base_name}")
             df = parse_masterlog(log_file)
             create_plot(df, html_name)
+
 
         print(f"\nall plots generated in '{output_dir}'")
