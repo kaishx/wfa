@@ -206,14 +206,13 @@ Moving on from the Hurst and ADF thresholds however, we can analyse each graph t
 
 ```
 (!!! todo: wait for 0.9/0.2 and 0.7/0.2 and then analyse the different regions. maybe take 1 graph as example and then draw the regions on it !!!)
-
+```
 | Region | Meaning | Suggested Label |
 | :--- | :--- | :--- |
 | **Top-Left** (Low MDD, High Sharpe) | **Optimal Strategy Zone** | **I. The Alpha Cluster** |
 | **Top-Right** (High MDD, High Sharpe) | **High Risk, High Return/Skew** | **II. High Volatility/Risk Zone** |
 | **Bottom-Left** (Low MDD, Low Sharpe) | **Conservative/Neutral** | **III. Conservative/Neutral** |
 | **Bottom-Right** (High MDD, Low Sharpe) | **Strategy Failure** | **IV. The Collapse/Failure Zone** |
-```
 
 These regions help explain why certain pairs remain robust across thresholds, while others only perform under specific filtering regimes.
 
