@@ -16,7 +16,7 @@ Hence, I started this project to get my answers to a specific, practical questio
 
 To answer this, I couldn't just run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous "stress test" machine—something that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is called **Walk-Forward Analysis (WFA)**.
 
-WFA is computationally expensive. Running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a WFA Engine with two different styles: 
+WFA is computationally expensive. Running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a WFA Engine with two different optimization methods: 
 
 1. A Python-only, **Numba**-optimized Engine to reduce overhead and without the complexities of setting up a **C++** Module
 2. A **C++** Module which is integrated into the Python Engine for maximum computational speed and high performance.
@@ -25,7 +25,7 @@ WFA is computationally expensive. Running thousands of optimization loops takes 
 
 ## 2. Strategy & Methodology (WFA)
 
-Unlike basic strategies that rely on fixed averages, I utilized many statistical tests to adapt to volatile market conditions
+Unlike basic strategies that rely on fixed averages, I utilized many statistical tests to adapt to volatile market conditions.
 
 ### Logic
 
@@ -48,14 +48,21 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 
 ---
 
-## 3. Engineering: Dual-Engine Build
+## 3. Strategy & Methodology (C++/Numba Comparison)
 
-This project focused on comparing the two dominant paradigms in quantitative development: **Just-In-Time (JIT) compilation** (Numba) vs. **Ahead-Of-Time (AOT) compilation** (C++).
+The latter part of this project focused on comparing two distinct optimization methods for the core backtesting algorithm within the Walk-Forward Analysis (WFA) engine: the Numba JIT Engine and the external C++ Accelerator.
 
-### Engine B: C++ + Pybind11 (The Core Accelerator)
+The core computational bottleneck in Walk-Forward Analysis lies in the optimization loop where the backtesting logic is executed thousands of times on the in-sample data. To prove the efficacy of the C++ module, a stress test was designed to compare the performance distribution of both implementations.
 
-* **The Zero-Copy Optimization:** I rewrote the data interface using **Zero-Copy Memory Mapping** (`py::array_t`). This allows the C++ core to read directly from Python's NumPy arrays in RAM **without copying data**, which eliminates a major source of latency.
-* **The "DLL Hell" Solution (Windows Integration):** Solved complex Windows dependency issues (MSVC vs. GCC conflict) by building a custom `setup.py` that automatically detects the correct MSVC compiler and links the necessary runtime libraries (`vcruntime140_1.dll`), resulting in a **portable, pip-installable Python package**.
+### 
+
+The comparison methodology was implemented in the stress.py script:
+
+* **Data Generation**: Mock time-series data (e.g., prices, Z-scores, Hurst exponents) was created with approximately 10,000 bars, simulating the typical size of an in-sample window.
+* **Test Scope**: The test focused exclusively on the fastest segment of the entire WFA workflow: the Optimization Loop. This loop involves iterating through hundreds of parameter combinations (the Z-score grids) and running the backtest logic for each one.
+* **Controlled Execution**: The optimization run was performed 1,000 times against the same mock data for both the Numba engine and the C++ accelerator to build a statistically valid sample of execution times.
+* **C++ Test**: The C++ side utilizes the exposed run_optimization_core function, which handles iterating through the Z-score grids and calculating the Sharpe Ratio within its native C++ environment for maximum speed.
+* **Numba Test**: The Numba side runs the iteration process directly in Python using itertools.product and calls the @njit decorated numba_bt function for the backtesting logic.
 
 ---
 
@@ -145,6 +152,10 @@ WFA results showed that while pairs like `GOOG`/`GOOGL` are highly stable, the a
 The Plotly visualization charts **Risk (Max Drawdown)** against the **Reward (Sharpe Ratio)** for all tested pairs.
 
 * **Observations:** The clustering of data points revealed that stricter filtering (e.g., lower ADF p-value thresholds) generally improves the Sharpe Ratio but reduces the total number of trades, highlighting the trade-off between signal quality and opportunity frequency.
+
+
+* **The Zero-Copy Optimization:** I rewrote the data interface using **Zero-Copy Memory Mapping** (`py::array_t`). This allows the C++ core to read directly from Python's NumPy arrays in RAM **without copying data**, which eliminates a major source of latency.
+* **The "DLL Hell" Solution (Windows Integration):** Solved complex Windows dependency issues (MSVC vs. GCC conflict) by building a custom `setup.py` that automatically detects the correct MSVC compiler and links the necessary runtime libraries (`vcruntime140_1.dll`), resulting in a **portable, pip-installable Python package**.
 
 ---
 
