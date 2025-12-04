@@ -50,8 +50,10 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 3.  **Repeat:** The window slides forward, and the process repeats, mimicking real-world constraints.
 
 ---
+
 ![System Architecture](assets/wfa_archi.png)
 *Figure 1: High-level architecture of the C++ Accelerated Walk-Forward Analysis system.*
+
 ---
 
 ## 3. Methodology (C++/Numba Comparison) 
