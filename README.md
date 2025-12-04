@@ -141,17 +141,94 @@ To run either the C++-accelerated WFA or the Python/Numba version, follow three 
     python plotter.py
     ```
 
-Once the engine is built, the full workflow below lets you run your own walk-forward tests exactly as described earlier.
+Once the WFA is built and ready to go, the full workflow below lets you run your own walk-forward tests exactly as described in section 2 and figure 1 earlier.
 
 ### Fallback Option
 
 If you encounter any issues compiling the C++ module, you can switch to the Python-only Numba engine (slightly slower but still fast):
 
 * Set `wfa_script = "numba_wfa"` in `batch_runner.py`.
+* Without the C++ module, you will also not be able to benchmark C++ against Numba in `stress.py`.
 
 ---
 
-## 6. Benchmark: C++ vs. Numba Performance
+## 6. Results + Discussion of the Walk-Forward Analysis
+
+### ADF and Hurst
+ADF and Hurst Threshold Sensitivity
+
+To evaluate how sensitive the strategy is to stationarity constraints, I ran four main WFA configurations:
+
+* (Hurst 0.8, ADF 0.1)
+
+* (Hurst 0.8, ADF 0.2)
+
+* (Hurst 0.75, ADF 0.1)
+
+* (Hurst 0.75, ADF 0.2)
+
+Then I added two boundary configurations:
+
+* (Hurst 0.9, ADF 0.2) — nearly no mean-reversion filtering
+
+*  (Hurst 0.7, ADF 0.2) — significantly stricter on trending behavior
+
+These two extremes help reveal how the strategy collapses when the filters are too loose or too strict.
+
+The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, measured as Sharpe ratio (x-axis) vs Max Drawdown (y-axis). Each dot represents a full WFA run over four years of 15-minute bars.
+
+```
+[Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs] (!!! todo: wait for 0.9/0.2 and 0.7/0.2 and talk about them as bounds analysis, then merge all the 6 graphs together and label them to show one big image !!!)
+```
+
+Across all pairs, several consistent patterns emerge:
+
+* Stricter Hurst/ADF filters (e.g., 0.75 / 0.1)
+    * fewer tradable windows, but noticeably higher median Sharpe.
+
+* Looser filters (e.g., 0.8 / 0.2)
+    * more trades pass through, but Sharpe clusters lower and MDD increases.
+
+* No parameter set eliminates drawdowns — failures of mean reversion remain an unavoidable structural risk.
+
+The two boundary regimes highlight the extremes:
+
+* (0.9, 0.2) floods the system with non-stationary spreads.
+    * Result: MDD balloons and Sharpe collapses — confirming that insufficient filtering converts the strategy into pseudo-random betting.
+
+* (0.7, 0.2) is excessively strict.
+    *Result: trade volume collapses, often to near-zero — matching real observations where many spreads hover around Hurst 0.75–0.9, failing the threshold.
+
+These patterns confirm that mean-reversion quality and trade frequency are tightly coupled: improving one often harms the other.
+
+### Intra-graph Structure
+Moving on from the Hurst and ADF thresholds however, we can analyse each graph to find 4 distinct regions:
+
+```
+(!!! todo: wait for 0.9/0.2 and 0.7/0.2 and then analyse the different regions. maybe take 1 graph as example and then draw the regions on it !!!)
+```
+
+These regions help explain why certain pairs remain robust across thresholds, while others only perform under specific filtering regimes.
+
+Across all configurations, the most favorable balance appears in Hurst ≤ 0.8 and ADF ≤ 0.1, which provides:
+
+* a meaningful number of valid windows,
+* relatively stable out-of-sample Sharpes,
+* and reasonable drawdown profiles.
+
+This makes (0.8, 0.1) the most practical compromise for real retail execution on 15-minute bars.
+
+The top 25 pairs discovered under this regime are:
+
+(These pairs are paper-tested on my [trading algorithm](https://github.com/kaishx))
+
+```
+!!! TODO: FIND THE PAIRS!!!!
+```
+
+---
+
+## 7. Results + Discussion of C++ vs. Numba Performance Benchmark
 
 ### Benchmark Results (1,000 runs @ 10,000 bars)
 
@@ -170,7 +247,7 @@ If you encounter any issues compiling the C++ module, you can switch to the Pyth
 
 ---
 
-## 7. Discussion & Financial Reality
+## 8. Discussion & Financial Reality
 
 ### The Friction Barrier
 
@@ -195,7 +272,7 @@ The Plotly visualization charts **Risk (Max Drawdown)** against the **Reward (Sh
 
 ---
 
-## 8. Limitations & Future Work
+## 9. Limitations & Future Work
 
 * **Execution Lag:** The backtest assumes execution at the exact candle close, which neglects live market execution delays.
 * **Single-Core Speed:** The system currently runs on a single thread. Scaling analysis to larger universes requires a multi-threaded C++ implementation.
@@ -203,7 +280,7 @@ The Plotly visualization charts **Risk (Max Drawdown)** against the **Reward (Sh
 
 ---
 
-## 9. Conclusion
+## 10. Conclusion
 
 This project successfully established a professional-grade quantitative research platform. It demonstrated that while **Walk-Forward Analysis** confirms robust trading relationships, the **"Cost Barrier"** remains a primary hurdle for retail profitability.
 
