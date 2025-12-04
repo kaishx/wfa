@@ -6,13 +6,13 @@
 
 ## 1. Introduction & Thesis
 
-In 2024, I was introduced to a form of pseudo-gambling on the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL and SOXS, which were incredibly volatile in that period, and could see massive downs and ups then. While watching them on my stock app, I noticed that the tracking within them was not perfect - in essence, one could have moved by 3% while the other, 2.95%. 
+In 2024, I was introduced to a form of pseudo-gambling on the direction of the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL & SOXS, which were extremely volatile products that could swing aggressively in either direction. While watching them on my stock app, I noticed something interesting: the tracking between the bullish and bearish versions wasn't perfectly aligned. One might move 3% while the other moved 2.95%.
 
-I thought I found a hack which would exploit this difference, and I came up with my own trading strategy to arbitrage my market position (make it delta neutral) while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first good Google search, and that was when I found out my "exploitation" had already been done for many decades - Pairs Trading.
+I thought I found a hack that would exploit this difference, and I came up with my own trading strategy to hedge my market position while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first *good* Google search, and that was when I found out my "hack" already had a name - Pairs Trading.
 
 Pairs trading is often presented as the "hello world" of quantitative finance: find two stocks that move together, and when they drift apart, bet on them snapping back. In theory, it's **market-neutral** and robust. But realistically, there are slippage, transactions costs, and correlation breakdowns.
 
-Hence, I started this project to get my answers to a specific, practical question: **Can a retail algorithm effectively capture alpha on a 15-minute timeframe after accounting for real-world trading costs?**
+Hence, I started this project to get my answers to a specific, practical question: **Can a retail algorithm effectively capture alpha on a 15-minute timeframe after accounting for real-world trading costs in 2025?**
 
 To answer this, I couldn't just run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous "stress test" machine—something that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is called **Walk-Forward Analysis (WFA)**.
 
@@ -23,7 +23,7 @@ WFA is computationally expensive. Running thousands of optimization loops takes 
 
 ---
 
-## 2. Strategy & Methodology (WFA)
+## 2. Methodology (WFA)
 
 Unlike basic strategies that rely on fixed averages, I utilized many statistical tests to adapt to volatile market conditions.
 
@@ -31,14 +31,14 @@ Unlike basic strategies that rely on fixed averages, I utilized many statistical
 
 * **Kalman Filter (Dynamic Hedge Ratio):** Implemented a Kalman Filter to dynamically calculate the hedge ratio ($\beta$) between two assets, allowing the model to adapt instantly to new price information, thus avoiding the lag inherent in simple moving averages.
 * **Z-Score:** Measures the spread's deviation from its mean, which acts as the primary trade signal. The system enters a trade if the magnitude of the current Z-score, $|\mathbf{Z_{current}}|$, exceeds the entry threshold, $\mathbf{Z_{entry}}$.
-* **Augmented Dickey-Fuller Test (ADF):** **1st Guard** The test is calculated on the preceding In-Sample (IS) window to confirm **stationarity** (cointegration). If the **P-value** of the test exceeds a predefined threshold (e.g., $P$-value $> 0.20$), the IS window is deemed non-stationary, and the subsequent Out-of-Sample (OOS) window will not be traded.
-* **Hurst Exponent:** **2nd Guard** Measures the degree of **mean reversion** versus **trending behavior** behaviour in the spread. If the Hurst Value exceeds a threshold (e.g., $H > 0.75$), the system detects persistent, trending behavior and blocks the trade at that specific moment.
+* **Augmented Dickey-Fuller Test (ADF):** **1st Guard** The test is calculated on the preceding In-Sample (IS) window to confirm **stationarity** (cointegration). If the **P-value** of the test exceeds a predefined threshold (e.g., $P$-value $> 0.20$), the IS window is deemed non-stationary and the OOS window is skipped entirely.
+* **Hurst Exponent:** **2nd Guard** Measures the degree of **mean reversion behavior** versus **trending behavior** in the spread. If the Hurst Value exceeds a threshold (e.g., $H > 0.75$), the system detects persistent, trending behavior and blocks the trade at that specific moment.
 * **Dollar-Based Stop Loss:** Calculated stops based on **Gross PnL** (real dollars lost before fees), making the optimization more path-dependent and realistic than simple percentage stops.
 
-**Note:** With the last three components, we heavily reduce trading risk by ensuring that market positions are only initiated when both **statistical confidence (ADF)** and **current behavior (Hurst)** strongly favor mean reversion.
+**Note:** With these components, we heavily reduce trading risk by ensuring that market positions are only initiated when both **statistical confidence (ADF)** and **current behavior (Hurst)** strongly favor mean reversion. The **Dollar-Based Stop Loss** acts as an absolute risk ceiling, protecting capital during black-swan events or rapid mean reversion failures.
 
 
-### The WFA
+### WFA Process
 
 I implemented a rolling-window approach to eliminate lookahead bias, and the WFA process follows as such:
 
@@ -48,18 +48,20 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 
 ---
 
-## 3. Strategy & Methodology (C++/Numba Comparison)
+## 3. Methodology (C++/Numba Comparison)
 
-The latter part of this project focused on comparing two distinct optimization methods for the core backtesting algorithm within the Walk-Forward Analysis (WFA) engine: the Numba JIT Engine and the external C++ Accelerator.
+Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function, which significantly improved performance by removing much of Python’s overhead.
 
-The core computational bottleneck in Walk-Forward Analysis lies in the optimization loop where the backtesting logic is executed thousands of times on the in-sample data. To prove the efficacy of the C++ module, a stress test was designed to compare the performance distribution of both implementations.
+However, after seeing the complexity and scale of the project grow, I wanted even more speed and consistency. This led me to develop a separate C++ module, integrated back into Python, to push the optimization performance further.
 
-### 
+Hence, the latter part of this project therefore focuses on comparing these two acceleration strategies—Numba JIT vs. the C++ module—for the core optimization loop inside the Walk-Forward Analysis (WFA) engine.
 
-The comparison methodology was implemented in the stress.py script:
+The main computational bottleneck of WFA occurs in the optimization and backtest loops. For each in-sample window, the engine iterates through hundreds of parameter combinations and executes the backtest logic thousands of times. To evaluate the performance benefit of the C++ module, I designed a controlled stress test to compare both implementations.
 
-* **Data Generation**: Mock time-series data (e.g., prices, Z-scores, Hurst exponents) was created with approximately 10,000 bars, simulating the typical size of an in-sample window.
-* **Test Scope**: The test focused exclusively on the fastest segment of the entire WFA workflow: the Optimization Loop. This loop involves iterating through hundreds of parameter combinations (the Z-score grids) and running the backtest logic for each one.
+### Stress Test Process
+
+* **Data Generation**: Generated ~10,000 bars of mock time-series data (e.g prices, Z-scores, Hurst exponents) to mimic data that the WFA code would have worked on.
+* **Test Scope**: The test focused exclusively on the slowest segment of the entire WFA workflow: the Optimization and Backtest Loops. The loop involves iterating through hundreds of parameter combinations (the Z-score grids) and running the backtest logic for each one.
 * **Controlled Execution**: The optimization run was performed 1,000 times against the same mock data for both the Numba engine and the C++ accelerator to build a statistically valid sample of execution times.
 * **C++ Test**: The C++ side utilizes the exposed run_optimization_core function, which handles iterating through the Z-score grids and calculating the Sharpe Ratio within its native C++ environment for maximum speed.
 * **Numba Test**: The Numba side runs the iteration process directly in Python using itertools.product and calls the @njit decorated numba_bt function for the backtesting logic.
