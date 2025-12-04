@@ -2,21 +2,18 @@ import re
 import pandas as pd
 import numpy as np
 import os
-import glob
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# this takes precedence before the target_dir variable above. it scans for ALL master compiled files inside this directory. put None if u want more controlled targeting
 scan_root = os.path.join(os.getcwd(), 'wfa_logs')
 scan_dir = scan_root
 
 target_dir = [
-    # example below ONLY, please edit depending on where all the txt files is stored based on where you decided to send your files to from batch runner
-    # this is for specific file targeting only.
-        r'C:\Users\username\PycharmProjects\walk_forward_analysis\.venv\wfa_logs\! DATA !\logs_hurst_x.xx_adf_x.xx',
+    # placeholder for specific file targeting
 ]
 
 output_dir = "wfa_plots"
+
 
 def parse_masterlog(log_path):
     if not os.path.exists(log_path):
@@ -98,6 +95,7 @@ def parse_masterlog(log_path):
         data_rows.append(current_entry)
     return pd.DataFrame(data_rows)
 
+
 # adding table so i dont have to interpret the best performers manually
 def top25_table(df_subset):
     if df_subset.empty:
@@ -105,6 +103,7 @@ def top25_table(df_subset):
     grouped = df_subset.groupby('Pair')['Sharpe'].median().reset_index()
     grouped = grouped.sort_values('Sharpe', ascending=False).head(25)
     return [grouped['Pair'].tolist(), grouped['Sharpe'].round(3).tolist()]
+
 
 def build_slider(steps):
     slider = [{
@@ -130,6 +129,7 @@ def build_slider(steps):
 
     return slider
 
+
 def apply_layout(fig, df_plot, outname, sliders):
     # figure out the hurst label (default if messy)
     hurst_val = "N/A"
@@ -137,6 +137,10 @@ def apply_layout(fig, df_plot, outname, sliders):
         vals = [v for v in df_plot["Hurst_Threshold"].unique() if str(v) != "N/A"]
         if vals:
             hurst_val = vals[0]
+            try:
+                hurst_val = f"{float(hurst_val):.2f}"
+            except:
+                pass
 
     fig.update_layout(
         title=f"<b>WFA Analysis: Hurst {hurst_val}</b><br><i>{outname}</i>",
@@ -153,6 +157,7 @@ def apply_layout(fig, df_plot, outname, sliders):
         line={"color": "red", "width": 1, "dash": "dash"},
         row=1, col=1
     )
+
 
 def create_plot(df, outputfile):
     if df.empty:
@@ -224,8 +229,6 @@ def create_plot(df, outputfile):
         frames.append(go.Frame(data=[frame_trace_scatter, frame_trace_table], name=str(min_t), traces=[0, 1]))
 
     fig.frames = frames
-
-    # --- newly modularized ---
     sliders = build_slider(sliderStep)
     apply_layout(fig, df_plot, outputfile, sliders)
 
@@ -236,26 +239,14 @@ def create_plot(df, outputfile):
 
 if __name__ == "__main__":
     os.makedirs(output_dir, exist_ok=True)
-    target_files = []
 
-    if scan_dir and os.path.exists(scan_dir):
-        print(f"scanning directory: {scan_dir}")
-        target_files = glob.glob(os.path.join(scan_dir, "**", "master_compiled*.txt"), recursive=True)
-    else:
-        target_files = target_dir
+    log_file = "master_compiled_analysis.txt"
+    html_name = "plot_full_analysis.html"
 
-    if not target_files:
-        print("no log files found.")
-    else:
-        print(f"found {len(target_files)} files to process.")
-        for log_file in target_files:
-            base_name = os.path.splitext(os.path.basename(log_file))[0]
-            parent_folder = os.path.basename(os.path.dirname(log_file))
-            html_name = f"plot_{parent_folder}_{base_name}.html".replace(" ", "_")
+    print(f"\nProcessing: {log_file}")
+    df = parse_masterlog(log_file)
 
-            print(f"\nProcessing: {base_name}")
-            df = parse_masterlog(log_file)
-            create_plot(df, html_name)
+    if df is not None:
+        create_plot(df, html_name)
 
-
-        print(f"\nall plots generated in '{output_dir}'")
+    print(f"\nall plots generated in '{output_dir}'")
