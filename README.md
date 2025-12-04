@@ -77,6 +77,7 @@ The main computational bottleneck of WFA occurs in the optimization and backtest
 * **Python 3.11**
 * **C++ Compiler:** MSVC (Windows), or GCC/Clang (Linux/macOS).
 * **Dependencies:** Install all Python packages using the provided file:
+
     ```bash
     pip install -r requirements.txt
     ```
@@ -87,6 +88,7 @@ The high-performance core must be compiled for your system:
 
 1.  Navigate to the root directory containing `setup.py`.
 2.  Run the build command:
+
     ```bash
     pip install . --no-build-isolation --force-reinstall
     ```
@@ -96,6 +98,7 @@ This will compile and install the C++ extension module on your system.
 ### Configuration and Security
 
 * Create a file named **`.env`** in the root directory to securely store your Alpaca API credentials.
+
     ```env
     ALPACA_KEY_ID="YOUR_API_KEY_HERE"
     ALPACA_SECRET_KEY="YOUR_SECRET_KEY_HERE"
