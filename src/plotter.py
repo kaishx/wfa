@@ -4,6 +4,7 @@ import numpy as np
 import os
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import glob
 
 scan_root = os.path.join(os.getcwd(), 'wfa_logs')
 scan_dir = scan_root
@@ -239,14 +240,27 @@ def create_plot(df, outputfile):
 
 if __name__ == "__main__":
     os.makedirs(output_dir, exist_ok=True)
+    target_files = []
 
-    log_file = "master_compiled_analysis.txt"
-    html_name = "plot_full_analysis.html"
+    if scan_dir and os.path.exists(scan_dir):
+        print(f"scanning directory: {scan_dir}")
+        target_files = glob.glob(os.path.join(scan_dir, "**", "master_compiled*.txt"), recursive=True)
+    else:
+        target_files = target_dir
 
-    print(f"\nProcessing: {log_file}")
-    df = parse_masterlog(log_file)
+    if not target_files:
+        print("no log files found.")
+    else:
+        print(f"found {len(target_files)} files to process.")
+        for log_file in target_files:
+            base_name = os.path.splitext(os.path.basename(log_file))[0]
+            parent_folder = os.path.basename(os.path.dirname(log_file)).replace("!", "").strip()
+            html_name = f"plot_{parent_folder}_{base_name}.html".replace(" ", "_")
 
-    if df is not None:
-        create_plot(df, html_name)
+            print(f"\nProcessing: {base_name}")
+            df = parse_masterlog(log_file)
 
-    print(f"\nall plots generated in '{output_dir}'")
+            if df is not None:
+                create_plot(df, html_name)
+
+        print(f"\nall plots generated in '{output_dir}'")
