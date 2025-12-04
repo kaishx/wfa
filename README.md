@@ -16,6 +16,7 @@ Pairs trading is often presented as the "hello world" of quantitative finance: f
 
 Hence, I started this project to get my answers to a specific, practical question: **Can a retail algorithm effectively capture alpha on a 15-minute timeframe after accounting for real-world trading costs in 2025?**
 
+
 To answer this, I couldn't just run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous "stress test" machine—something that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is called **Walk-Forward Analysis (WFA)**.
 
 WFA is computationally expensive. Running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a WFA Engine with two different optimization methods: 
@@ -28,7 +29,7 @@ WFA is computationally expensive. Running thousands of optimization loops takes 
 ## 2. Methodology (WFA) 
 Related Code: (`cpp_wfa.py` and `numba_wfa.py`)
 
-Unlike basic strategies that rely on fixed averages, I utilized many statistical tests to adapt to volatile market conditions.
+At its core, the system measures how a pair behaves historically and reacts when the spread becomes statistically abnormal. To do this, I used a combination of statistical tests and guards.
 
 ### Logic
 
@@ -40,7 +41,6 @@ Unlike basic strategies that rely on fixed averages, I utilized many statistical
 
 **Note:** With these components, we heavily reduce trading risk by ensuring that market positions are only initiated when both **statistical confidence (ADF)** and **current behavior (Hurst)** strongly favor mean reversion. The **Dollar-Based Stop Loss** acts as an absolute risk ceiling, protecting capital during black-swan events or rapid mean reversion failures.
 
-
 ### WFA Process 
 
 I implemented a rolling-window approach to eliminate lookahead bias, and the WFA process follows as such:
@@ -50,17 +50,20 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 3.  **Repeat:** The window slides forward, and the process repeats, mimicking real-world constraints.
 
 ---
+![System Architecture](assets/wfa_archi.png)
+*Figure 1: High-level architecture of the C++ Accelerated Walk-Forward Analysis system.*
+---
 
 ## 3. Methodology (C++/Numba Comparison) 
 Related Code: (`stress.py`)
 
-Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function, which significantly improved performance by removing much of Python’s overhead.
+Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function which improved speeds massively, however, while Numba was a major speedup, but it still struggled once the project required millions of backtest iterations.
 
-However, after seeing the complexity and scale of the project grow, I wanted even more speed and consistency. This led me to develop a separate C++ module, integrated back into Python, to push the optimization performance further.
+That's when I decided to implement a C++ module to replace run_opt and numba_bt in `cpp_wfa` to improve speeds even further.
 
 Hence, the latter part of this project therefore focuses on comparing these two acceleration strategies—Numba JIT vs. the C++ module—for the core optimization loop inside the Walk-Forward Analysis (WFA) engine.
 
-The main computational bottleneck of WFA occurs in the optimization and backtest loops. For each in-sample window, the engine iterates through hundreds of parameter combinations and executes the backtest logic thousands of times. To evaluate the performance benefit of the C++ module, I designed a controlled stress test to compare both implementations.
+The main computational bottleneck of WFA occurs in the optimization and backtest loops. For each in-sample window, the engine iterates through hundreds of parameter combinations and executes the backtest logic thousands of times. To evaluate the performance benefit of the C++ module, I made a stress test to compare both implementations.
 
 ### Stress Test Process
 
@@ -132,7 +135,9 @@ To run either the C++-accelerated WFA or the Python/Numba version, follow three 
     python all_in_one.py
     python plotter.py
     ```
-    
+
+Once the engine is built, the full workflow below lets you run your own walk-forward tests exactly as described earlier.
+
 ### Fallback Option
 
 If you encounter any issues compiling the C++ module, you can switch to the Python-only Numba engine (slightly slower but still fast):
