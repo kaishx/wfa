@@ -111,21 +111,21 @@ To run either the C++-accelerated WFA or the Python/Numba version, follow three 
 
 1. Configure Your Run
 
-* Set parameters such as hurstMax inside the WFA script.
+    * Set parameters such as hurstMax inside the WFA script.
 
-* Open batch_runner.py and update the wfa_script variable to point to either:
+    * Open batch_runner.py and update the wfa_script variable to point to either:
+        * `"cpp_wfa"` for the C++ engine
+        * `"numba_wfa"` for the Numba engine
 
-    * `"cpp_wfa"` for the C++ engine
-
-    * `"numba_wfa"` for the Numba engine
-
-* Add your desired stock pairs and configurations using the template provided inside batch_runner.py.
+    * Add your desired stock pairs and configurations using the template provided inside batch_runner.py.
 
 2.  **Run WFA:** Execute the batch runner to initiate all backtests (uses the C++ core).
+
     ```bash
     python batch_runner.py
     ```
 3.  **Analyze & Visualize:** Process the log files (P.S: remember to point to the right directories!) to generate a master report and plots.
+
     ```bash
     python all_in_one.py
     python plotter.py
