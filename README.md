@@ -131,7 +131,11 @@ To run either the C++-accelerated WFA or the Python/Numba version, follow three 
     python plotter.py
     ```
     
-If you have trouble with the C++ for whatever reason, you may opt to use the python-only Numba engine which is only very slightly slower. Simply ensure the `wfa_script` in `batch_runner.py` points to `numba_wfa` instead.
+### Fallback Option
+
+If you encounter any issues compiling the C++ module, you can switch to the Python-only Numba engine (slightly slower but still fast):
+
+* Set `wfa_script = "numba_wfa"` in `batch_runner.py`.
 
 ---
 
