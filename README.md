@@ -23,7 +23,8 @@ WFA is computationally expensive. Running thousands of optimization loops takes 
 
 ---
 
-## 2. Methodology (WFA) (`cpp_wfa.py` and `numba_wfa.py`)
+## 2. Methodology (WFA) 
+Related Code: (`cpp_wfa.py` and `numba_wfa.py`)
 
 Unlike basic strategies that rely on fixed averages, I utilized many statistical tests to adapt to volatile market conditions.
 
@@ -48,7 +49,8 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 
 ---
 
-## 3. Methodology (C++/Numba Comparison) (`stress.py`)
+## 3. Methodology (C++/Numba Comparison) 
+Related Code: (`stress.py`)
 
 Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function, which significantly improved performance by removing much of Python’s overhead.
 
@@ -72,7 +74,7 @@ The main computational bottleneck of WFA occurs in the optimization and backtest
 
 ### Prerequisites
 
-* **Python 3.10+**
+* **Python 3.11**
 * **C++ Compiler:** MSVC (Windows), or GCC/Clang (Linux/macOS).
 * **Dependencies:** Install all Python packages using the provided file:
     ```bash
@@ -86,25 +88,36 @@ The high-performance core must be compiled for your system:
 1.  Navigate to the root directory containing `setup.py`.
 2.  Run the build command:
     ```bash
-    pip install . --force-reinstall
+    pip install . --no-build-isolation --force-reinstall
     ```
+
+This will compile and install the C++ extension module on your system.
 
 ### Configuration and Security
 
 * Create a file named **`.env`** in the root directory to securely store your Alpaca API credentials.
     ```env
-    # .env file content (Add this file to .gitignore)
     ALPACA_KEY_ID="YOUR_API_KEY_HERE"
     ALPACA_SECRET_KEY="YOUR_SECRET_KEY_HERE"
     ```
-
 ---
 
 ## 5. Usage & Workflow
 
-The analysis runs in three simple steps:
+To run either the C++-accelerated WFA or the Python/Numba version, follow three steps:
 
-1.  **Define Parameters:** Customize the asset pairs and parameters in **`pairs_configs.json`**.
+1. Configure Your Run
+
+* Set parameters such as hurstMax inside the WFA script.
+
+* Open batch_runner.py and update the wfa_script variable to point to either:
+
+    * `"cpp_wfa"` for the C++ engine
+
+    * `"numba_wfa"` for the Numba engine
+
+* Add your desired stock pairs and configurations using the template provided inside batch_runner.py.
+
 2.  **Run WFA:** Execute the batch runner to initiate all backtests (uses the C++ core).
     ```bash
     python batch_runner.py
@@ -114,6 +127,8 @@ The analysis runs in three simple steps:
     python all_in_one.py
     python plotter.py
     ```
+    
+If you have trouble with the C++ for whatever reason, you may opt to use the python-only Numba engine which is only very slightly slower. Simply ensure the `wfa_script` in `batch_runner.py` points to `numba_wfa` instead.
 
 ---
 
