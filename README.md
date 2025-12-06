@@ -191,10 +191,10 @@ Across all pairs, several patterns show up consistently:
 The boundary configs highlight the extremes:
 
 * **(0.9, 0.2)** essentially floods the system with non-stationary spreads.  
-  *Result: MDD increases while offering zero upside. The filters are simply too loose.
+  * Result: MDD increases while offering zero upside. The filters are simply too loose.
 
 * **(0.7, 0.2)** is overly strict.  
-  *Result: Trade volume collapses, often to near zero — which matches real paper-trading observations where many spreads sit around Hurst 0.75–0.9. Only extremely tight pairs like QQQ/QQQM survive.
+  * Result: Trade volume collapses, often to near zero — which matches real paper-trading observations where many spreads sit around Hurst 0.75–0.9. Only extremely tight pairs like QQQ/QQQM survive.
 
 Overall, these patterns reinforce why threshold testing matters and why the chosen filters should reflect actual market behavior rather than purely statistical aesthetics. In empirical finance, a Hurst value around 0.7 typically indicates trending (not mean-reverting), and an ADF p-value of 0.2 is far from statistically significant.
 
