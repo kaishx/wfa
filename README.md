@@ -155,77 +155,78 @@ If you encounter any issues compiling the C++ module, you can switch to the Pyth
 ## 6. Results + Discussion of the Walk-Forward Analysis
 
 ### ADF and Hurst
-ADF and Hurst Threshold Sensitivity
 
-To evaluate how sensitive the strategy is to stationarity constraints, I ran four main WFA configurations:
+To get a sense of how sensitive the strategy is to stationarity constraints, I ran four core WFA configurations:
 
 * (Hurst 0.8, ADF 0.1)
-
 * (Hurst 0.8, ADF 0.2)
-
 * (Hurst 0.75, ADF 0.1)
-
 * (Hurst 0.75, ADF 0.2)
 
 Then I added two boundary configurations:
 
-* (Hurst 0.9, ADF 0.2) — nearly no mean-reversion filtering
+* **(Hurst 0.9, ADF 0.2)** — effectively removes most mean-reversion filtering  
+* **(Hurst 0.7, ADF 0.2)** — very strict, strongly penalizes trending behavior
 
-*  (Hurst 0.7, ADF 0.2) — significantly stricter on trending behavior
+These two extremes reveal how the strategy breaks when the filters are either too loose or too restrictive.
 
-These two extremes help reveal how the strategy collapses when the filters are too loose or too strict.
+The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, with Max Drawdown on the x-axis and Sharpe Ratio on the y-axis. Each dot is one full WFA run over four years of 15-minute bars.
 
-The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, measured as Max Drawdown (x-axis) vs Sharpe Ratio (y-axis). Each dot represents a full WFA run over four years of 15-minute bars.
+![Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)  
+*Figure 2: Compilation of 6 graphs showing Pair Performance in Sharpe against Max Drawdown. (Click for a higher-res view.)*
 
-![Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)
-*Figure 2: Compilation of 6 graphs showing Pair Performance in Sharpe against Max Drawdown.*
-*The quality is poor in the README but clicking on the image will pull up a higher resolution version.*
+Across all pairs, several patterns show up consistently:
 
-Across all pairs, we can observe several consistent patterns emerging:
+* **Stricter filters (e.g., 0.75 / 0.1)**  
+  * Fewer tradable windows, but a clearly higher median Sharpe.
 
-* Stricter Hurst/ADF filters (e.g., 0.75 / 0.1)
-    * Fewer tradable windows, but noticeably higher median Sharpe.
+* **Looser filters (e.g., 0.80 / 0.2)**  
+  * More trades, but with inflated MDD and no real improvement in Sharpe.
 
-* Looser filters (e.g., 0.80 / 0.2)
-    * Many more trades pass through, but MDD increases without any significant benefits.
+* **A “Goldilocks Zone” emerges (0.75 / 0.2 and 0.80 / 0.1)**  
+  * A good middle ground: still decent volume, controlled drawdowns, and stable median Sharpe per pair.
 
-* And we can infer the "Goldilocks Zone" where to be between these filters (e.g., 0.75 / 0.2 and 0.80 / 0.1)
-    * A good middle-ground between MDD and Volume, while maintaining the performance per pair.
+The boundary configs highlight the extremes:
 
-The two boundary regimes highlight the extremes:
+* **(0.9, 0.2)** essentially floods the system with non-stationary spreads.  
+  *Result: MDD balloons while offering zero upside. The filters are simply too loose.*
 
-* (0.9, 0.2) floods the system with non-stationary spreads.
-    * Result: The right side of the main body hovering about the Sharpe = 0 line is pulled even further right, showing that the main body has MDD increase for no benefit at all (volume or MDD), showing that loosening the filters simply lets junk trades in.
+* **(0.7, 0.2)** is overly strict.  
+  *Result: Trade volume collapses, often to near zero — which matches real paper-trading observations where many spreads sit around Hurst 0.75–0.9. Only extremely tight pairs like QQQ/QQQM survive.*
 
-* (0.7, 0.2) is excessively strict.
-    *Result: Trade volume collapses, often to near-zero — matching my paper trader's real observations where many spreads hover around Hurst 0.75–0.9, failing the threshold. The only pairs that have trades are very tightly-linked assets such as QQQ/QQQM, which we will discuss shortly.
+Overall, these patterns reinforce why threshold testing matters and why the chosen filters should reflect empirical market behavior, not just statistical aesthetics.
 
-These patterns confirm the importance of thorougly testing the thresholds for our filters and comparing them to real world, empirical observations.
+---
 
 ### Intra-graph Structure
-Moving on from the Hurst and ADF thresholds however, we can analyse an example graph to find 4 distinct regions:
 
-![Regions of Pair Performance on 0.8/0.1 Graph](assets/regions.png)
-*Figure 3: 4 Distinict Regions (I - IV) on the 0.80 / 0.1 Pair Performance Graph*
+If we zoom in on a typical graph, we can identify four distinct behavioral regions:
+
+![Regions of Pair Performance on 0.8/0.1 Graph](assets/regions.png)  
+*Figure 3: Four Distinct Regions (I–IV) on the 0.80 / 0.1 WFA Graph.*
 
 | Region | Observations |
-| :--- | :--- | 
-| **I** (Low MDD, +ve Sharpe) | The region where the pairs with positive performance (& alpha) are found. | 
-| **II** (High MDD, ~0 Sharpe) | The the region where the losses and wins are large, creating a large MDD and a low absolute sharpe due to its high standard deviation of returns  | 
-| **III** (Low MDD, -ve Sharpe) | The region where the pairs fail the WFA simply because the pairs aren't actually cointegrated and mean reversion oppurtunities are usually fake. | 
-| **IV** (High MDD, -ve Sharpe) |  | 
+| :--- | :--- |
+| **I** (Low MDD, +Sharpe) | Where the genuinely good, alpha-producing pairs reside. |
+| **II** (High MDD, ~0 Sharpe) | Wild swings (wins and losses). High volatility kills Sharpe. |
+| **III** (Low MDD, −Sharpe) | Pairs that aren’t actually cointegrated. “Mean-reversion” signals are just noise. |
+| **IV** (High MDD, −Sharpe) | Hyper-efficient pairs creating high-volume *losing* micro-trades → MDD spikes. |
 
-These regions can be found in all of the graphs with a decent enough trade volume.
+These regions appear consistently across all graphs with enough trade volume.
 
-Across all configurations, the most favorable balance appears in Hurst ≤ 0.8 and ADF ≤ 0.1, which provides:
+---
 
-* a meaningful number of valid windows,
-* relatively stable out-of-sample Sharpes,
-* and reasonable drawdown profiles.
+### Top Pairs Found
 
-This makes (0.8, 0.1) the most practical compromise for real retail execution on 15-minute bars.
+Across all configurations, the strongest balance appears around **Hurst ≤ 0.8 and ADF ≤ 0.1**, offering:
 
-The top 25 pairs discovered under this regime are (These pairs are paper-tested on my [trading algorithm](https://github.com/kaishx)!):
+* a meaningful number of viable trading windows,
+* stable out-of-sample Sharpes,
+* manageable drawdowns.
+
+This makes **(0.8, 0.1)** the most practical choice for retail execution on 15-minute bars.
+
+The top 25 pairs discovered under this regime (all of which were paper-tested on my [trading algorithm](https://github.com/kaishx)):
 
 | Pairs | Median Sharpe |
 | :--- | :--- |
@@ -257,27 +258,28 @@ The top 25 pairs discovered under this regime are (These pairs are paper-tested 
 
 *Figure 4: Top 25 Pairs of the 0.8 / 0.1 Configuration*
 
-While the individual Median Sharpe of each pair is low (<0.5 Sharpe), it is the combination of different pairs in different sectors that greatly improves the **portfolio** sharpe.
+---
 
-We use the formula:
+### Portfolio Sharpe
+
+While individual pair Sharpes are modest (<0.5), diversification across sectors and correlation clusters dramatically boosts the **portfolio-level** Sharpe.
+
+We estimate an upper-bound portfolio Sharpe using:
 
 $$\mathbf{S_{p, \text{upper bound}}} = \frac{\sum_{i=1}^{N} \mathbf{S_i}}{\sqrt{N}}$$
 
-Where $S_i$ is the individual pair's Sharpe ratio, and $N$ is the number of pairs. This calculation assumes equal risk ($\sigma_i$) and zero correlation ($\rho_{i,j}=0$) across all pairs.
+assuming equal volatility across pairs and zero cross-correlation.
 
----
-
-### Upper Bound Portfolio Sharpe Result
-
-| Metric | Value |
-| :--- | :--- |
-| **Number of Pairs ($N$)** | 25 |
+| Metric | Value | 
+| :--- | :--- | 
+| **Number of Pairs ($N$)** | 25 | 
 | **Sum of Individual Sharpe Ratios ($\sum S_i$)** | 7.375 |
-| **Portfolio Sharpe (Upper Bound, $S_p$)** | **1.475** |
+| **Portfolio Sharpe (Upper Bound, $S_p$)** | **1.475** | 
 
-*Note: I am only using a simplified calculation which assumes all 25 pairs are uncorrelated which is 100% not true, and hence the realistic portfolio sharpe is lower.*
+*Note: The 25 pairs are definitely correlated, and hence the realistic portfolio sharpe is lower.*
 
 ---
+
 
 ## 7. Results + Discussion of C++ vs. Numba Performance Benchmark
 
