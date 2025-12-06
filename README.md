@@ -177,7 +177,7 @@ These two extremes help reveal how the strategy collapses when the filters are t
 
 The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, measured as Max Drawdown (x-axis) vs Sharpe Ratio (y-axis). Each dot represents a full WFA run over four years of 15-minute bars.
 
-[Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)
+![Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)
 
 Across all pairs, several consistent patterns emerge:
 
