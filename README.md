@@ -1,4 +1,4 @@
-# An Exploration into Pairs Trading 4 Decades after its Popularization
+# An Exploration into Pairs Trading, 40 Years Later...
 
 *This is written informally and is intended to be more blog-like so I never make formal references.*
 
@@ -170,7 +170,9 @@ Then I added two boundary configurations:
 
 These two extremes reveal how the strategy breaks when the filters are either too loose or too restrictive.
 
-The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, with Max Drawdown on the x-axis and Sharpe Ratio on the y-axis. Each dot is one full WFA run over four years of 15-minute bars.
+The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, with Max Drawdown on the x-axis and Sharpe Ratio on the y-axis. 
+
+Each dot is one full WFA run over four years of 15-minute bars. The size of each dot represents its trade volume, and the colors are arbitrary (alphabetically sorted) and not representative of performance.
 
 ![Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)  
 *Figure 2: Compilation of 6 graphs showing Pair Performance in Sharpe against Max Drawdown. (Click for a higher-res view.)*
@@ -178,7 +180,7 @@ The scatter plot below shows each pair’s Walk-Forward out-of-sample performanc
 Across all pairs, several patterns show up consistently:
 
 * **Stricter filters (e.g., 0.75 / 0.1)**  
-  * Fewer tradable windows, but a clearly higher median Sharpe.
+  * Fewer tradable windows, and while some pairs do improve, it is not a universal effect.
 
 * **Looser filters (e.g., 0.80 / 0.2)**  
   * More trades, but with inflated MDD and no real improvement in Sharpe.
@@ -189,13 +191,12 @@ Across all pairs, several patterns show up consistently:
 The boundary configs highlight the extremes:
 
 * **(0.9, 0.2)** essentially floods the system with non-stationary spreads.  
-  *Result: MDD balloons while offering zero upside. The filters are simply too loose.*
+  *Result: MDD increases while offering zero upside. The filters are simply too loose.
 
 * **(0.7, 0.2)** is overly strict.  
-  *Result: Trade volume collapses, often to near zero — which matches real paper-trading observations where many spreads sit around Hurst 0.75–0.9. Only extremely tight pairs like QQQ/QQQM survive.*
+  *Result: Trade volume collapses, often to near zero — which matches real paper-trading observations where many spreads sit around Hurst 0.75–0.9. Only extremely tight pairs like QQQ/QQQM survive.
 
-Overall, these patterns reinforce why threshold testing matters and why the chosen filters should reflect empirical market behavior, not just statistical aesthetics.
-
+Overall, these patterns reinforce why threshold testing matters and why the chosen filters should reflect actual market behavior rather than purely statistical aesthetics. In empirical finance, a Hurst value around 0.7 typically indicates trending (not mean-reverting), and an ADF p-value of 0.2 is far from statistically significant.
 ---
 
 ### Intra-graph Structure
@@ -208,9 +209,9 @@ If we zoom in on a typical graph, we can identify four distinct behavioral regio
 | Region | Observations |
 | :--- | :--- |
 | **I** (Low MDD, +Sharpe) | Where the genuinely good, alpha-producing pairs reside. |
-| **II** (High MDD, ~0 Sharpe) | Wild swings (wins and losses). High volatility kills Sharpe. |
-| **III** (Low MDD, −Sharpe) | Pairs that aren’t actually cointegrated. “Mean-reversion” signals are just noise. |
-| **IV** (High MDD, −Sharpe) | Hyper-efficient pairs creating high-volume *losing* micro-trades → MDD spikes. |
+| **II** (High MDD, ~0 Sharpe) | Wild swings with big wins and losses. This high volatility kills Sharpe. |
+| **III** (Low MDD, −Sharpe) | Pairs that aren’t actually cointegrated or very weak. “Mean-reversion” signals are just noise. |
+| **IV** (High MDD, −Sharpe) | Hyper-efficient pairs creating high-volume *losing* micro-trades which results in MDD spikes. |
 
 These regions appear consistently across all graphs with enough trade volume.
 
@@ -256,7 +257,7 @@ The top 25 pairs discovered under this regime (all of which were paper-tested on
 | DOCS TDOC | 0.211 |
 | ALL PGR | 0.208 |
 
-*Figure 4: Top 25 Pairs of the 0.8 / 0.1 Configuration*
+*Figure 4: Top 25 Pairs of the 0.8 / 0.1 Configuration. The Sharpe Values are the Pair's Median Sharpe across 4 WFAs with different starting times.*
 
 ---
 
@@ -276,7 +277,11 @@ assuming equal volatility across pairs and zero cross-correlation.
 | **Sum of Individual Sharpe Ratios ($\sum S_i$)** | 7.375 |
 | **Portfolio Sharpe (Upper Bound, $S_p$)** | **1.475** | 
 
-*Note: The 25 pairs are definitely correlated, and hence the realistic portfolio sharpe is lower.*
+*Note: The 25 pairs are definitely correlated, and hence the realistic portfolio Sharpe is lower.*
+
+### Final Thoughts
+
+I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, which actually matches up with my observations of pairs on my paper trader. It provides a good balance between stability, performance and robustness in the 15m timeframe.
 
 ---
 
