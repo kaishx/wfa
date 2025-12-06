@@ -178,33 +178,37 @@ These two extremes help reveal how the strategy collapses when the filters are t
 The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, measured as Max Drawdown (x-axis) vs Sharpe Ratio (y-axis). Each dot represents a full WFA run over four years of 15-minute bars.
 
 ![Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)
+*Figure 2: Compilation of 6 graphs showing Pair Performance in Sharpe against Max Drawdown.*
+*The quality is poor in the README but clicking on the image will pull up a higher resolution version.*
 
 Across all pairs, several consistent patterns emerge:
 
 * Stricter Hurst/ADF filters (e.g., 0.75 / 0.1)
-    * fewer tradable windows, but noticeably higher median Sharpe.
+    * Fewer tradable windows, but noticeably higher median Sharpe.
 
-* Looser filters (e.g., 0.8 / 0.2)
-    * more trades pass through, but Sharpe clusters lower and MDD increases.
+* Looser filters (e.g., 0.80 / 0.2)
+    * Many more trades pass through, but MDD increases without any significant benefits.
 
-* No parameter set eliminates drawdowns — failures of mean reversion remain an unavoidable structural risk.
+* And we can infer the "Goldilocks Zone" where to be between these filters (e.g., 0.75 / 0.2 and 0.80 / 0.1)
+    * A good middle-ground between MDD and Volume, while maintaining the performance per pair.
+
+* Additionally, we must note that no parameter set eliminates drawdowns — failures of mean reversion remain an unavoidable structural risk.
 
 The two boundary regimes highlight the extremes:
 
 * (0.9, 0.2) floods the system with non-stationary spreads.
-    * Result: MDD balloons and Sharpe collapses — confirming that insufficient filtering degrades the strategy toward pure market risk/uncontrolled exposure..
+    * Result: The right side of the main body hovering about the Sharpe = 0 line is pulled even further right, showing that the main body has MDD increase for no benefit at all (volume or MDD), showing that loosening the filters simply lets junk trades in.
 
 * (0.7, 0.2) is excessively strict.
-    *Result: trade volume collapses, often to near-zero — matching real observations where many spreads hover around Hurst 0.75–0.9, failing the threshold.
+    *Result: Trade volume collapses, often to near-zero — matching my paper trader's real observations where many spreads hover around Hurst 0.75–0.9, failing the threshold. The only pairs that have trades are very tightly-linked assets such as QQQ/QQQM, which we will discuss shortly.
 
 These patterns confirm that mean-reversion quality and trade frequency are tightly coupled: improving one often harms the other.
 
 ### Intra-graph Structure
 Moving on from the Hurst and ADF thresholds however, we can analyse each graph to find 4 distinct regions:
 
-```
-(!!! todo: wait for 0.9/0.2 and 0.7/0.2 and then analyse the different regions. maybe take 1 graph as example and then draw the regions on it !!!)
-```
+![Regions of Pair Performance on 0.8/0.1 Graph](assets/regions.png)
+
 | Region | Meaning | Suggested Label |
 | :--- | :--- | :--- |
 | **Top-Left** (Low MDD, High Sharpe) | **Optimal Strategy Zone** | **I. The Alpha Cluster** |
