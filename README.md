@@ -1,4 +1,4 @@
-# Algorithmic Pairs Trading: A Dual-Engine Architecture Study
+# A Pairs Trading Study in 2025 (??)
 
 *This is written informally and is intended to be more blog-like so I never make formal references.*
 
@@ -177,9 +177,7 @@ These two extremes help reveal how the strategy collapses when the filters are t
 
 The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, measured as Max Drawdown (x-axis) vs Sharpe Ratio (y-axis). Each dot represents a full WFA run over four years of 15-minute bars.
 
-```
-[Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs] (!!! todo: wait for 0.9/0.2 and 0.7/0.2 and talk about them as bounds analysis, then merge all the 6 graphs together and label them to show one big image !!!)
-```
+[Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)
 
 Across all pairs, several consistent patterns emerge:
 
