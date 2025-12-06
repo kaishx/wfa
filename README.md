@@ -181,7 +181,7 @@ The scatter plot below shows each pair’s Walk-Forward out-of-sample performanc
 *Figure 2: Compilation of 6 graphs showing Pair Performance in Sharpe against Max Drawdown.*
 *The quality is poor in the README but clicking on the image will pull up a higher resolution version.*
 
-Across all pairs, several consistent patterns emerge:
+Across all pairs, we can observe several consistent patterns emerging:
 
 * Stricter Hurst/ADF filters (e.g., 0.75 / 0.1)
     * Fewer tradable windows, but noticeably higher median Sharpe.
@@ -192,8 +192,6 @@ Across all pairs, several consistent patterns emerge:
 * And we can infer the "Goldilocks Zone" where to be between these filters (e.g., 0.75 / 0.2 and 0.80 / 0.1)
     * A good middle-ground between MDD and Volume, while maintaining the performance per pair.
 
-* Additionally, we must note that no parameter set eliminates drawdowns — failures of mean reversion remain an unavoidable structural risk.
-
 The two boundary regimes highlight the extremes:
 
 * (0.9, 0.2) floods the system with non-stationary spreads.
@@ -202,21 +200,22 @@ The two boundary regimes highlight the extremes:
 * (0.7, 0.2) is excessively strict.
     *Result: Trade volume collapses, often to near-zero — matching my paper trader's real observations where many spreads hover around Hurst 0.75–0.9, failing the threshold. The only pairs that have trades are very tightly-linked assets such as QQQ/QQQM, which we will discuss shortly.
 
-These patterns confirm that mean-reversion quality and trade frequency are tightly coupled: improving one often harms the other.
+These patterns confirm the importance of thorougly testing the thresholds for our filters and comparing them to real world, empirical observations.
 
 ### Intra-graph Structure
-Moving on from the Hurst and ADF thresholds however, we can analyse each graph to find 4 distinct regions:
+Moving on from the Hurst and ADF thresholds however, we can analyse an example graph to find 4 distinct regions:
 
 ![Regions of Pair Performance on 0.8/0.1 Graph](assets/regions.png)
+*Figure 3: 4 Distinict Regions (I - IV) on the 0.80 / 0.1 Pair Performance Graph*
 
-| Region | Meaning | Suggested Label |
-| :--- | :--- | :--- |
-| **Top-Left** (Low MDD, High Sharpe) | **Optimal Strategy Zone** | **I. The Alpha Cluster** |
-| **Top-Right** (High MDD, High Sharpe) | **High Risk, High Return/Skew** | **II. High Volatility/Risk Zone** |
-| **Bottom-Left** (Low MDD, Low Sharpe) | **Conservative/Neutral** | **III. Conservative/Neutral** |
-| **Bottom-Right** (High MDD, Low Sharpe) | **Strategy Failure** | **IV. The Collapse/Failure Zone** |
+| Region | Observations |
+| :--- | :--- | 
+| **I** (Low MDD, +ve Sharpe) | The region where the pairs with positive performance (& alpha) are found. | 
+| **II** (High MDD, ~0 Sharpe) | The the region where the losses and wins are large, creating a large MDD and a low absolute sharpe due to its high standard deviation of returns  | 
+| **III** (Low MDD, -ve Sharpe) | The region where the pairs fail the WFA simply because the pairs aren't actually cointegrated and mean reversion oppurtunities are usually fake. | 
+| **IV** (High MDD, -ve Sharpe) |  | 
 
-These regions help explain why certain pairs remain robust across thresholds, while others only perform under specific filtering regimes.
+These regions can be found in all of the graphs with a decent enough trade volume.
 
 Across all configurations, the most favorable balance appears in Hurst ≤ 0.8 and ADF ≤ 0.1, which provides:
 
@@ -226,13 +225,57 @@ Across all configurations, the most favorable balance appears in Hurst ≤ 0.8 a
 
 This makes (0.8, 0.1) the most practical compromise for real retail execution on 15-minute bars.
 
-The top 25 pairs discovered under this regime are:
+The top 25 pairs discovered under this regime are (These pairs are paper-tested on my [trading algorithm](https://github.com/kaishx)!):
 
-(These pairs are paper-tested on my [trading algorithm](https://github.com/kaishx))
+| Pairs | Median Sharpe |
+| :--- | :--- |
+| HD LOW | 0.494 |
+| ALL TRV | 0.467 |
+| AMAT KLAC | 0.455 |
+| SQM ALB | 0.420 |
+| ETN PH | 0.415 |
+| CBOE CME | 0.344 |
+| GEN CHKP | 0.333 |
+| AJG ON | 0.309 |
+| BX KKR | 0.300 |
+| VMC MLM | 0.293 |
+| BJ COST | 0.276 |
+| BLK TROW | 0.269 |
+| DDOG MDB | 0.257 |
+| DT DDOG | 0.256 |
+| RSG VMC | 0.244 |
+| MCD QSR | 0.243 |
+| CFG RF | 0.235 |
+| MS ORCL | 0.231 |
+| NUE STLD | 0.231 |
+| ITW MMM | 0.228 |
+| DXCM PODD | 0.228 |
+| AVGO NVDA | 0.227 |
+| CRL IQV | 0.212 |
+| DOCS TDOC | 0.211 |
+| ALL PGR | 0.208 |
 
-```
-!!! TODO: FIND THE PAIRS!!!!
-```
+*Figure 4: Top 25 Pairs of the 0.8 / 0.1 Configuration*
+
+While the individual Median Sharpe of each pair is low (<0.5 Sharpe), it is the combination of different pairs in different sectors that greatly improves the **portfolio** sharpe.
+
+We use the formula:
+
+$$\mathbf{S_{p, \text{upper bound}}} = \frac{\sum_{i=1}^{N} \mathbf{S_i}}{\sqrt{N}}$$
+
+Where $S_i$ is the individual pair's Sharpe ratio, and $N$ is the number of pairs. This calculation assumes equal risk ($\sigma_i$) and zero correlation ($\rho_{i,j}=0$) across all pairs.
+
+---
+
+### Upper Bound Portfolio Sharpe Result
+
+| Metric | Value |
+| :--- | :--- |
+| **Number of Pairs ($N$)** | 25 |
+| **Sum of Individual Sharpe Ratios ($\sum S_i$)** | 7.375 |
+| **Portfolio Sharpe (Upper Bound, $S_p$)** | **1.475** |
+
+*Note: I am only using a simplified calculation which assumes all 25 pairs are uncorrelated which is 100% not true, and hence the realistic portfolio sharpe is lower.*
 
 ---
 
