@@ -1,4 +1,4 @@
-# An exploration into Pairs Trading 4 decades after its popularization
+# An Exploration into Pairs Trading 4 Decades after its Popularization
 
 *This is written informally and is intended to be more blog-like so I never make formal references.*
 
