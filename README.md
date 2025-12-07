@@ -298,6 +298,8 @@ I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, w
 
 ![Image of Benchmark Distribution Graph](assets/benchmark.png)
 
+*Figure 5: Probability Distribution Graphs of C++ (orange) and Numba (blue) across 1000 runs @ 10,000 Bars.*
+
 The benefit of C++ over Numba can be seen and interpreted in two ways:
 * **Raw Speed:** C++ eliminated Python overhead during the heavy grid-search loops, leveraging the Zero-Copy technique for superior execution speed. Hence, the C++ module was **~1.30x faster** than the Numba version.
 * **Consistency:** The C++ performance distribution is much tighter than the Numba curve. In production, **predictable latency** is crucial, which the C++ engine delivers by being immune to Python's Garbage Collection overhead.
