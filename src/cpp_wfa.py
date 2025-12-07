@@ -70,7 +70,7 @@ else:
 
 # costs
 slippage = 0.01 # per share in cnets
-txfee = 0.0001 # this is in a percentage btw
+txfee = 0.0001 # this is whole number, *100 for percentage
 
 ROLLING_SHIFT_DAYS = 15 # 15 day out of sample, the config for in-sample is down there somewhere
 BASE_RTH_MINUTES = 390
@@ -606,5 +606,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n!!! an error occurred during execution: {e}!!!")
         import traceback
+
 
         traceback.print_exc()
