@@ -66,7 +66,7 @@ Initially, my WFA engine was extremely slow—Python for loops were simply not c
 
 That's when I decided to implement a C++ module to replace run_opt and numba_bt in `numba_wfa` to improve speeds even further.
 
-Hence, the latter part of this project therefore focuses on comparing these two acceleration strategies—Numba JIT vs. the C++ module—for the core optimization loop inside the Walk-Forward Analysis (WFA) engine.
+Hence, the latter part of this project therefore focuses on comparing these two acceleration strategies for the core optimization loop inside the Walk-Forward Analysis (WFA) engine: Numba JIT vs. the C++ module
 
 The main computational bottleneck of WFA occurs in the optimization and backtest loops. For each in-sample window, the engine iterates through hundreds of parameter combinations and executes the backtest logic thousands of times. To evaluate the performance benefit of the C++ module, I made a stress test to compare both implementations.
 
@@ -294,15 +294,13 @@ I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, w
 * **C++ (Engine B):** $\mu \approx 0.0071s$
 * **Numba (Engine A):** $\mu \approx 0.0167s$
 
-
-
 [Image of Benchmark Distribution Graph]
 
 
 **Analysis:** The C++ engine was **~2.35x faster** than the optimized Numba version.
 
 * **Raw Speed:** C++ eliminated Python overhead during the heavy grid-search loops, leveraging the Zero-Copy technique for superior execution speed.
-* **Consistency (The Hidden Winner):** The C++ performance distribution is much tighter than the Numba curve. In production, **predictable latency** is crucial, which the C++ engine delivers by being immune to Python's Garbage Collection overhead.
+* **Consistency:** The C++ performance distribution is much tighter than the Numba curve. In production, **predictable latency** is crucial, which the C++ engine delivers by being immune to Python's Garbage Collection overhead.
 
 ---
 
