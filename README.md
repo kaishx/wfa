@@ -280,7 +280,7 @@ assuming equal volatility across pairs and zero cross-correlation.
 
 *Note: The 25 pairs are definitely correlated, and hence the realistic portfolio Sharpe is lower.*
 
-### Summary
+### Summary of Section 6
 
 I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, which actually matches up with my observations of pairs on my paper trader. It provides a good balance between stability, performance and robustness in the 15m timeframe. I found the portfolio Sharpe to have an upper bound of 1.475, which is quite decent for Pairs Trading.
 
@@ -291,16 +291,22 @@ I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, w
 
 ### Benchmark Results (1,000 runs @ 10,000 bars)
 
-* **C++ (Engine B):** $\mu \approx 0.0071s$
-* **Numba (Engine A):** $\mu \approx 0.0167s$
+| Module | Mean | Std. Dev | 
+| :--- | :--- | :--- |
+| Numba | 0.007220s | 0.000734s |
+| C++ | 0.005572s | 0.000265s | 
 
 ![Image of Benchmark Distribution Graph](assets/benchmark.png)
 
-
-**Analysis:** The C++ engine was **~2.35x faster** than the optimized Numba version.
-
-* **Raw Speed:** C++ eliminated Python overhead during the heavy grid-search loops, leveraging the Zero-Copy technique for superior execution speed.
+The benefit of C++ over Numba can be seen and interpreted in two ways:
+* **Raw Speed:** C++ eliminated Python overhead during the heavy grid-search loops, leveraging the Zero-Copy technique for superior execution speed. Hence, the C++ module was **~1.30x faster** than the Numba version.
 * **Consistency:** The C++ performance distribution is much tighter than the Numba curve. In production, **predictable latency** is crucial, which the C++ engine delivers by being immune to Python's Garbage Collection overhead.
+
+However, we must be aware this benchmark is not perfect and across different batches of 1,000 runs can give a result of C++ being 1.2x - 1.9x faster than Numba. Nevertheless, all batches agree that C++ always has a lower mean and standard deviation compred to Numba.
+
+### Summary of Section 7
+
+We can see that while both are fast, C++ is much more optimized and much better suited for high performance calculations in comparison to Numba, resulting in a 1.30x speedup. It shows why implementing C++ is paramount to improving the overall efficiency of the WFA and workflow.
 
 ---
 
