@@ -6,23 +6,21 @@
 
 ## Overview
 
-The project implements a Walk-Forward Analysis (WFA) for pairs trading with two acceleration paths: a Numba-optimized Python engine and a native C++ module. It performs rolling-window optimization, runs stationarity and mean-reversion checks, and executes millions of backtest iterations. I also built stress tests to compare Numba vs. native C++ performance under realistic loads.
+The project implements a Walk-Forward Analysis (WFA) for Pairs Trading with two acceleration paths: a Numba-optimized Python engine and a native C++ module. It performs rolling-window optimization, runs stationarity and mean-reversion checks, and executes millions of backtest iterations. I also built stress tests to compare Numba vs. native C++ performance under realistic loads.
 
 ## 1. Introduction & Thesis
 
-In 2024, I was introduced to a form of pseudo-gambling on the direction of the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL & SOXS, which were extremely volatile products that could swing aggressively in either direction. 
+Back in 2024, I was introduced to a form of pseudo-gambling on the direction of the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL & SOXS, which were extremely volatile products that could swing aggressively in either direction. 
 
 While watching them on my stock app, I noticed something interesting: the tracking between the bullish and bearish versions wasn't perfectly aligned. One might move 3% while the other moved 2.95%.
 
-I thought I found a hack that would exploit this difference, and I came up with my own trading strategy to hedge my market position while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first *good* Google search, and that was when I found out my "hack" already had a name - Pairs Trading.
+I thought I found a hack that would exploit this difference, and I came up with my own trading strategy to hedge my market position while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first good Google search, and that was when I found out my "hack" already had a name - Pairs Trading.
 
-Pairs trading is one of the most well-known and widely researched topics of quantitative finance: find two stocks that move together, and when they drift apart, bet on them snapping back. Theoretically, it's market-neutral and robust. But realistically, there are slippage, transactions costs, and correlation breakdowns.
+Pairs trading is one of the most well-known and widely researched topics of quantitative finance: find two stocks that move together, and when they drift apart, bet on them snapping back. Theoretically, it's market-neutral and robust, but realistically, there are slippage, transactions costs, and correlation breakdowns.
 
-Hence, I started this project to get my answers to a specific, practical question: **Can a retail algorithm effectively capture alpha on a 15-minute timeframe after accounting for real-world trading costs in 2025?**
+But I thought that was pretty interesting to study, still. So I sought out to answer: **Can a Pairs Trading retail algorithm effectively capture alpha after accounting for real-world trading costs in 2025?**
 
-To answer this, I couldn't just run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous test that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is known as **Walk-Forward Analysis (WFA)**.
-
-However, WFA is computationally expensive and running thousands of optimization loops takes hours. So, wanting to push my engineering skills, I built a WFA Engine with two different optimization methods: 
+I couldn't run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous test that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is known as **Walk-Forward Analysis (WFA)**. But... WFA is computationally expensive and running thousands of optimization loops takes hours. So I built a WFA Engine with two different optimization methods: 
 
 1. A Python-only, **Numba**-optimized Engine to reduce overhead and without the complexities of setting up a **C++** Module
 2. A **C++** Module which is integrated into the Python Engine for maximum computational speed and high performance.
@@ -32,7 +30,9 @@ However, WFA is computationally expensive and running thousands of optimization 
 ## 2. Methodology (WFA) 
 Related Code: (`cpp_wfa.py` and `numba_wfa.py`)
 
-At its core, the system measures how a pair behaves historically and reacts when the spread becomes statistically abnormal. To do this, I used a combination of statistical tests and guards.
+In Pairs Trading, the algorithm evaluates how a pair of assets behaves historically and reacts when their spread deviates significantly from expected behavior. The Z-score is used as the primary statistic to identify abnormal spreads, while additional statistical tests ensure that detected opportunities are meaningful and robust.
+
+Note: We use a 15-minute timeframe for data. One-minute bars were too noisy for reliable signal generation, while hourly or daily bars would miss many entry opportunities. The 15-minute interval provides a practical balance between these extremes.
 
 ### Logic
 
@@ -230,7 +230,7 @@ This makes **(0.8, 0.1)** the most practical choice for retail execution on 15-m
 
 The top 25 pairs discovered under this regime (all of which were paper-tested on my [trading algorithm](https://github.com/kaishx)):
 
-| Pairs | Median Sharpe |
+| Pairs | Median Sharpe (Annualized) |
 | :--- | :--- |
 | HD LOW | 0.494 |
 | ALL TRV | 0.467 |
@@ -264,7 +264,7 @@ The top 25 pairs discovered under this regime (all of which were paper-tested on
 
 ### Portfolio Sharpe
 
-While individual pair Sharpes are modest (<0.5), diversification across sectors and correlation clusters dramatically boosts the **portfolio-level** Sharpe.
+While individual pair's annualized Sharpes are modest (<0.5), diversification across sectors and correlation clusters dramatically boosts the **portfolio-level** Sharpe.
 
 We estimate an upper-bound portfolio Sharpe using:
 
@@ -280,7 +280,7 @@ assuming equal volatility across pairs and zero cross-correlation.
 
 *Note: The 25 pairs are definitely correlated, and hence the realistic portfolio Sharpe is lower.*
 
-### Summary of Section 6
+### Key Takeaways
 
 I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, which actually matches up with my observations of pairs on my paper trader. It provides a good balance between stability, performance and robustness in the 15m timeframe. I found the portfolio Sharpe to have an upper bound of 1.475, which is quite decent for Pairs Trading.
 
@@ -301,14 +301,14 @@ I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, w
 *Figure 5: Probability Distribution Graphs of C++ (orange) and Numba (blue) across 1000 runs @ 10,000 Bars.*
 
 The benefit of C++ over Numba can be seen and interpreted in two ways:
-* **Raw Speed:** C++ eliminated Python overhead during the heavy grid-search loops, leveraging the Zero-Copy technique for superior execution speed. Hence, the C++ module was **~1.30x faster** than the Numba version.
+* **Raw Speed:** C++ eliminated Python overhead during the heavy grid-search loops, leveraging the Zero-Copy (passed pointers directly from Python memory to C++ without serialization) technique for superior execution speed. Hence, the C++ module was **~1.30x faster** than the Numba version.
 * **Consistency:** The C++ performance distribution is much tighter than the Numba curve. In production, **predictable latency** is crucial, which the C++ engine delivers by being immune to Python's Garbage Collection overhead.
 
 However, we must be aware this benchmark is not perfect and across different batches of 1,000 runs can give a result of C++ being 1.2x - 1.9x faster than Numba. Nevertheless, all batches agree that C++ always has a lower mean and standard deviation compred to Numba.
 
-### Summary of Section 7
+### Key Takeaways
 
-We can see that while both are fast, C++ is much more optimized and much better suited for high performance calculations in comparison to Numba, resulting in a 1.30x speedup. It shows why implementing C++ is paramount to improving the overall efficiency of the WFA and workflow.
+We can see that while both are fast compared to plain Python loops, C++ is much more optimized and reliable for calculations in comparison to Numba, resulting in a 1.30x speedup and a smaller deviation in performance. It shows why implementing C++ is paramount to improving the overall efficiency of the WFA and workflow.
 
 ---
 
