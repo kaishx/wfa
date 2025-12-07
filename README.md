@@ -4,9 +4,11 @@
 
 *Link back to my [Portfolio (github)](https://kaishx.github.io/#projects)*
 
-## Overview
+*Tech Stack: Python, C++, Numba, Pandas, Numpy, Alpaca API*
 
-This project implements a Walk-Forward Analysis (WFA) for Pairs Trading with two acceleration paths: a Numba-optimized Python engine and a native C++ module. It performs rolling-window optimization, runs stationarity and mean-reversion checks, and executes millions of backtest iterations. I also built stress tests to compare Numba vs. native C++ performance under realistic loads.
+## Overview / TLDR
+
+Retail pairs trading still works in theory, but fees and slippage erode most alpha. I built a hybrid Python/Numba + C++ Walk-Forward Analysis engine to rigorously test pairs on 15-min bars using Z-score, Kalman filter, ADF, and Hurst thresholds. C++ acceleration gave ~1.3x speedup and tighter latency. The top 25 pairs had an upper-bound portfolio Sharpe of ~1.48, though friction lowers practical profitability.
 
 ## 1. Introduction & Thesis
 
