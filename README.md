@@ -50,7 +50,7 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 2.  **Out-of-Sample (Test):** These parameters are frozen and tested on the next **15 days** of unseen data. Any trades during the OOS are blocked if its Hurst Exponent exceeds the above mentioned Hurst threshold.
 3.  **Repeat:** The window slides forward, and the process repeats, mimicking real-world constraints.
 
-Additionally, in the WFA, I also add slippage and transaction fees to make it as realsitic as possible. While I don't actually know the real fees, I modelled slippage to be at $0.01 per share, and transaction fees to be at 0.01% per transaction. My universe of Pairs that I selected are also high volume (>1M Avg Daily Vol) in order to make my modelled slippage as realistic as possible.
+Additionally, in the WFA, I also add slippage and transaction fees to make it as realistic as possible. While I don't actually know the real fees, I modelled slippage to be at $0.01 per share, and transaction fees to be at 0.01% per transaction. My universe of Pairs that I selected are also high volume (>1M Avg Daily Vol) in order to make my modelled slippage as realistic as possible.
 
 ---
 
@@ -62,7 +62,7 @@ Additionally, in the WFA, I also add slippage and transaction fees to make it as
 ## 3. Methodology (C++/Numba Comparison) 
 Related Code: (`stress.py`)
 
-Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function which improved speeds massively. However, while Numba was a major speedup, it still struggled once the project required millions of backtest iterations.
+Initially, my WFA engine was extremely slow—Python for loops were simply not capable of handling the thousands of optimization cycles required for each rolling window. To address this, I first migrated the bottleneck logic into a Numba JIT-compiled function which improved speeds massively. However, while Numba was a major speedup and was sufficient for most use cases, it still struggled once the project required millions of backtest iterations, and this little lag compounded into a massive waste of time when it came to many sequential runs (talking like, 2000 back-to-back WFA runs).
 
 That's when I decided to implement a C++ module to replace run_opt and numba_bt in `numba_wfa` to improve speeds even further.
 
@@ -165,8 +165,8 @@ To get a sense of how sensitive the strategy is to stationarity constraints, I r
 
 Then I added two boundary configurations:
 
-* **(Hurst 0.9, ADF 0.2)** — effectively removes most mean-reversion filtering  
-* **(Hurst 0.7, ADF 0.2)** — very strict, strongly penalizes trending behavior
+* **(Hurst 0.9, ADF 0.2)** — very looaw, effectively removes most mean-reversion filtering (Lets lots of trades in)
+* **(Hurst 0.7, ADF 0.2)** — very strict, strongly penalizes trending behavior (Blocks lots of trades out)
 
 These two extremes reveal how the strategy breaks when the filters are either too loose or too restrictive.
 
@@ -304,59 +304,86 @@ The benefit of C++ over Numba can be seen and interpreted in two ways:
 * **Raw Speed:** C++ eliminated Python overhead during the heavy grid-search loops, leveraging the Zero-Copy (passed pointers directly from Python memory to C++ without serialization) technique for superior execution speed. Hence, the C++ module was **~1.30x faster** than the Numba version.
 * **Consistency:** The C++ performance distribution is much tighter than the Numba curve. In production, **predictable latency** is crucial, which the C++ engine delivers by being immune to Python's Garbage Collection overhead.
 
-However, we must be aware this benchmark is not perfect and across different batches of 1,000 runs can give a result of C++ being 1.2x - 1.9x faster than Numba. Nevertheless, all batches agree that C++ always has a lower mean and standard deviation compred to Numba.
+However, we must be aware this benchmark is not perfect and across different batches of 1,000 runs can give a result of C++ being 1.2x - 1.9x faster than Numba. Nevertheless, all batches agree that C++ always has a lower mean and standard deviation compared to Numba.
 
 ### Key Takeaways
 
-We can see that while both are fast compared to plain Python loops, C++ is much more optimized and reliable for calculations in comparison to Numba, resulting in a 1.30x speedup and a smaller deviation in performance. It shows why implementing C++ is paramount to improving the overall efficiency of the WFA and workflow.
+We can see that while both are fast compared to plain Python loops, C++ is much more optimized and reliable for calculations in comparison to Numba, resulting in a 1.30x speedup and a smaller deviation in performance. It shows why implementing C++ is paramount to improving the overall efficiency of the WFA workflow, especially for large batches of back-to-back WFA runs.
 
 ---
 
 ## 8. Discussion & Financial Reality
 
-### The Friction Barrier
+In this project, I found out a few problems with my thesis when delving deeper into my results.
 
-WFA results showed that while pairs like `GOOG`/`GOOGL` are highly stable, the average profit per trade was **~$2.00**, while modeled execution costs (slippage + fees) averaged **~$2.20**.
+### Financial Reality: The Friction Barrier
 
-* **Conclusion:** High-frequency mean reversion is mathematically sound but often **unprofitable for retail traders** due to high transaction friction.
+Even for the pairs that consistently fell in **Region I** of the Sharpe vs. MDD graphs (Figure 3), retail trading costs erode profitability and hence affect my alpha. For example:
+
+* A highly stable pair like HD/LOW (Figure 4) might generate an average gross profit of $\sim\$2$ per trade on a 15-minute bar.
+* Modelled fees and costs of $\$0.01$ slippage per share $+ 0.01\%$ transaction fees, can result in fees of $2.00 - $3.00 per trade depending on the number of shares. At 90 trades on average for each HD/LOW run, this results in close to 200 dollars in fees alone, which is about 20% of the would-be profit. This further impacts sharpe and one could expect portfolio sharpe to increase with more favourable costs.
+
+From this, we can see that while medium-frequency mean reversion may be statistically sound, but retail traders face a “friction wall” that consumes the small alpha we observed in the top pairs.
+
+### Sensitivity to Parameters
+
+Beyond friction, profitability is highly sensitive to the choice of Z-score thresholds, ADF, and Hurst parameters:
+
+* In naive backtests, small changes to the entry Z-score (e.g., $1.8 \to 1.9$) can reduce trade frequency and Sharpe ratio by $10–20\%$. 
+* Looser ADF or Hurst thresholds increase trade volume but expose the system to non-mean-reverting behavior, inflating drawdowns.
+
+This reinforces the need for a Walk-Forward Analysis, which ensures parameter choices remain robust across shifting market regimes. However, I must admit that even the WFA is not immune to parameter sensitivity, as can be seen in the fact that even small changes to the Hurst, ADF and Z-Scores can massively affect how the pairs perform.
 
 ### Risk Management Validation
 
-* The Hurst Exponent successfully identified and filtered out trending market regimes.
-* The ADF filter confirmed cointegration validity before optimization, ensuring the system traded only on statistically robust relationships.
+The statistical filters performed exactly as intended:
 
-### Visualizing Robustness (Risk vs. Reward)
+* **ADF Test:** Ensured we only optimized on stationary windows, preventing the system from chasing spurious correlations.
+* **Hurst Exponent:** Blocked trades during trending periods ($H>0.75$), protecting capital from breakdowns in mean-reversion behavior.
 
-The Plotly visualization charts **Risk (Max Drawdown)** against the **Reward (Sharpe Ratio)** for all tested pairs.
+This confirms that the methodology introduced in Section 2 is not just theoretical, and it has practical value when applied correctly to filter out junk signals.
 
-* **Observations:** The clustering of data points revealed that stricter filtering (e.g., lower ADF p-value thresholds) generally improves the Sharpe Ratio but reduces the total number of trades, highlighting the trade-off between signal quality and opportunity frequency.
+### High-Performance Engineering Successes
 
+From an engineering standpoint, the system achieved its secondary goal as well:
 
-* **The Zero-Copy Optimization:** I rewrote the data interface using **Zero-Copy Memory Mapping** (`py::array_t`). This allows the C++ core to read directly from Python's NumPy arrays in RAM **without copying data**, which eliminates a major source of latency.
-* **The "DLL Hell" Solution (Windows Integration):** Solved complex Windows dependency issues (MSVC vs. GCC conflict) by building a custom `setup.py` that automatically detects the correct MSVC compiler and links the necessary runtime libraries (`vcruntime140_1.dll`), resulting in a **portable, pip-installable Python package**.
+* **Zero-Copy Optimization:** As described in Section 7, the C++ engine reads Python’s NumPy arrays directly in RAM, eliminating the latency introduced by serialization and contributing to the **$\sim 1.30\times$ speedup** over Numba.
+* **Portability Solution:** The custom Windows build system ensures the hybrid Python/C++ engine can be installed and run reliably across different environments, paving the way for scalable research or even live trading.
 
 ---
 
 ## 9. Limitations & Future Work
 
-* **Execution Lag:** The backtest assumes execution at the exact candle close, which neglects live market execution delays.
-* **Single-Core Speed:** The system currently runs on a single thread. Scaling analysis to larger universes requires a multi-threaded C++ implementation.
-* **Platform Dependency:** Future work requires porting the custom Windows build system to a Linux/Docker environment for cloud deployment readiness.
+Despite these successes, the system is not without limitations — and these highlight opportunities for further refinement.
+
+### Limitations of the Current System
+
+* **Execution Lag:** The WFA assumes trades execute at the exact 15-minute candle close. Real market orders experience unpredictable delays, non-linear slippage and imperfect fills, which affects our execution.
+* **Single-Threaded C++ Core:** Currently, the C++ optimization loop runs on a single thread, limiting scalability for portfolios with hundreds of pairs.
+* **Parameter Fragility:** As noted above, minor changes to Z-score thresholds, ADF, or Hurst values can materially affect profitability. This highlights the risk of overfitting to historical windows.
+
+### Future Development Paths
+
+* **Multi-Threading / Parallelism:** Re-engineering the core to run pair optimizations concurrently (e.g., `std::thread` or OpenMP) would allow WFA to scale efficiently to larger universes.
+* **Adaptive Cost Modeling:** Incorporating dynamic slippage based on trade size, time of day, and liquidity could bring simulated profitability closer to reality.
+* **Parameter Robustness Testing:** Implementing automated sensitivity scans across Z-score, Hurst, and ADF thresholds would help quantify risk and avoid overfitting, ensuring alpha survives real market conditions.
+
+These improvements build naturally on the high-performance foundation established in Sections 3 and 7.
 
 ---
 
 ## 10. Conclusion
 
-This project successfully established a professional-grade quantitative research platform. It demonstrated that while **Walk-Forward Analysis** confirms robust trading relationships, the **"Cost Barrier"** remains a primary hurdle for retail profitability.
+This project successfully demonstrates a retail-grade quantitative research platform for evaluating modern Pairs Trading strategies.
 
-The benchmark proved that while Numba is excellent for research, **C++ remains the king of predictable production performance**. The development of this hybrid architecture provides a portable, high-performance foundation capable of bridging the gap between research prototypes and live execution systems.
+The Walk-Forward Analysis (Section 6) validated the statistical foundations: pairs in Region I (Figure 3) consistently exhibited alpha when filtered using **ADF $\leq 0.1$ and Hurst $\leq 0.8$**.
 
-## Timeline of my project
+However, the financial reality is stark: small, consistent alpha on 15-minute bars is often eliminated by realistic transaction costs and execution delays. Only specific pairs, like those in the top 25 (Figure 4), show practical promise.
 
-- Started running my first backtests on Google Colab, which could run 1 backtest per night with its timeouts
-- Moved on to my computer to utilize my computer's strong hardware, bumping up my backtests to 10 per night
-- Realized my backtests were so overfitted and realized that I had unrealistic results, so I made my first WFA
-- I could only expect to see the WFA for one pair done every 10 minutes
-- Improved the WFA with Numba, seeing it drop to over 60 runs per hour
-- Realized I was downloading the same data everytime, and implemented caching of data, allowing me to make one WFA run in under 30 seconds by avoiding downloading.
-- Wanted to optimize improvements, and hence added C++ modules to expensive calculation functions, allowing me to run one WFA in under 10 seconds.
+From a systems perspective, the hybrid Python/C++ WFA engine (Section 7) proved that Numba is excellent for research prototyping, but **C++ is essential for predictable, low-latency production performance**, thanks to Zero-Copy memory handling and tighter execution consistency.
+
+*Finally, I find that while Retail Pairs Trading still works in theory, friction and parameter sensitivity are the real gatekeepers of profitability.*
+
+## 11. My Personal Thoughts
+
+I had fun doing this for a few weeks. I'm surprised at how much I did during these few weeks and how much the code improved from the first day where I was naively doing backtesting with no costs and finding 100% returns in 2 years of backtesting and thought I was going to get rich. Overall, I learned quite a good bunch of math, Python and a little bit of C++ from this which I hopefully can apply somewhere else if the passion still burns strong. I might revisit pairs trading again some day with a thousand more pairs, who knows?
