@@ -280,9 +280,9 @@ assuming equal volatility across pairs and zero cross-correlation.
 
 *Note: The 25 pairs are definitely correlated, and hence the realistic portfolio Sharpe is lower.*
 
-### Final Thoughts
+### Summary
 
-I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, which actually matches up with my observations of pairs on my paper trader. It provides a good balance between stability, performance and robustness in the 15m timeframe.
+I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, which actually matches up with my observations of pairs on my paper trader. It provides a good balance between stability, performance and robustness in the 15m timeframe. I found the portfolio Sharpe to have an upper bound of 1.475, which is quite decent for Pairs Trading.
 
 ---
 
