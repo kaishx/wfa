@@ -294,7 +294,7 @@ I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, w
 * **C++ (Engine B):** $\mu \approx 0.0071s$
 * **Numba (Engine A):** $\mu \approx 0.0167s$
 
-[Image of Benchmark Distribution Graph]
+![Image of Benchmark Distribution Graph](assets/benchmark.png)
 
 
 **Analysis:** The C++ engine was **~2.35x faster** than the optimized Numba version.
