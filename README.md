@@ -6,19 +6,17 @@
 
 ## Overview
 
-The project implements a Walk-Forward Analysis (WFA) for Pairs Trading with two acceleration paths: a Numba-optimized Python engine and a native C++ module. It performs rolling-window optimization, runs stationarity and mean-reversion checks, and executes millions of backtest iterations. I also built stress tests to compare Numba vs. native C++ performance under realistic loads.
+This project implements a Walk-Forward Analysis (WFA) for Pairs Trading with two acceleration paths: a Numba-optimized Python engine and a native C++ module. It performs rolling-window optimization, runs stationarity and mean-reversion checks, and executes millions of backtest iterations. I also built stress tests to compare Numba vs. native C++ performance under realistic loads.
 
 ## 1. Introduction & Thesis
 
 Back in 2024, I was introduced to a form of pseudo-gambling on the direction of the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL & SOXS, which were extremely volatile products that could swing aggressively in either direction. 
 
-While watching them on my stock app, I noticed something interesting: the tracking between the bullish and bearish versions wasn't perfectly aligned. One might move 3% while the other moved 2.95%.
-
-I thought I found a hack that would exploit this difference, and I came up with my own trading strategy to hedge my market position while betting on the fact the absolute movements would meet each other again. Alas, 1 week in, I did my first good Google search, and that was when I found out my "hack" already had a name - Pairs Trading.
+While watching them on my stock app, I noticed something interesting: the tracking between the bullish and bearish versions wasn't perfectly aligned. One might move 3% while the other moved 2.95%. I thought I hit something big and got onto writing the code for a market-neutral strategy that could exploit this gap. But getting curious, I decided to google it one week in, and alas, I found out this "something" already had a name - Pairs Trading.
 
 Pairs trading is one of the most well-known and widely researched topics of quantitative finance: find two stocks that move together, and when they drift apart, bet on them snapping back. Theoretically, it's market-neutral and robust, but realistically, there are slippage, transactions costs, and correlation breakdowns.
 
-But I thought that was pretty interesting to study, still. So I sought out to answer: **Can a Pairs Trading retail algorithm effectively capture alpha after accounting for real-world trading costs in 2025?**
+But I thought that was pretty interesting to study, still. So I sought out to answer: **Can a Pairs Trading retail algorithm still effectively capture alpha after in 2025?**
 
 I couldn't run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous test that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is known as **Walk-Forward Analysis (WFA)**. But... WFA is computationally expensive and running thousands of optimization loops takes hours. So I built a WFA Engine with two different optimization methods: 
 
@@ -51,6 +49,8 @@ I implemented a rolling-window approach to eliminate lookahead bias, and the WFA
 1.  **In-Sample (Train):** The model trains on **60 days** of data to find the optimal Z-Score thresholds ($Z_{entry}, Z_{exit}, Z_{stop}$). The window is blocked if it exceeds the above mentioned ADF threshold.
 2.  **Out-of-Sample (Test):** These parameters are frozen and tested on the next **15 days** of unseen data. Any trades during the OOS are blocked if its Hurst Exponent exceeds the above mentioned Hurst threshold.
 3.  **Repeat:** The window slides forward, and the process repeats, mimicking real-world constraints.
+
+Additionally, in the WFA, I also add slippage and transaction fees to make it as realsitic as possible. While I don't actually know the real fees, I modelled slippage to be at $0.01 per share, and transaction fees to be at 0.01% per transaction. My universe of Pairs that I selected are also high volume (>1M Avg Daily Vol) in order to make my modelled slippage as realistic as possible.
 
 ---
 
