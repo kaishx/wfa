@@ -394,7 +394,7 @@ This project successfully demonstrates a retail-grade quantitative research plat
 
 The Walk-Forward Analysis (Section 6) validated the statistical foundations: pairs in Region I (Figure 3) consistently exhibited alpha when filtered using **ADF $\leq 0.1$ and Hurst $\leq 0.8$**.
 
-However, the financial reality is often dissapointing. Small, consistent alpha on 15-minute bars is often eliminated by realistic transaction costs and execution delays. Only specific pairs, like those in the top 25 (Figure 4), show practical promise.
+However, the financial reality is often disappointing. Small, consistent alpha on 15-minute bars is often eliminated by realistic transaction costs and execution delays. Only specific pairs, like those in the top 25 (Figure 4), show practical promise.
 
 From a systems perspective, the hybrid Python/C++ WFA engine (Section 7) proved that Numba is excellent for research prototyping, but **C++ is essential for predictable, low-latency production performance**, thanks to Zero-Copy memory handling and tighter execution consistency.
 
