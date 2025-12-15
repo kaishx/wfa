@@ -34,7 +34,7 @@ Pairs trading is one of the most well-known and widely researched topics of quan
 
 But I thought that was pretty interesting to study, still. So I sought out to answer: **Can a Pairs Trading retail algorithm still effectively capture alpha after in 2025?**
 
-I couldn't run a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous test that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is known as **Walk-Forward Analysis (WFA)**. But... WFA is computationally expensive and running thousands of optimization loops takes hours. So I built a WFA Engine with two different optimization methods: 
+However, I didn't want to do a simple backtest which would just be overfit and give me unrealistic results. I needed a rigorous test that could re-optimize itself hundreds of times over years of data without cheating (looking ahead). This is known as **Walk-Forward Analysis (WFA)**. But... WFA is computationally expensive and running thousands of optimization loops takes hours. So I built a WFA Engine with two different optimization methods: 
 
 1. A Python-only, **Numba**-optimized Engine to reduce overhead and without the complexities of setting up a **C++** Module
 2. A **C++** Module which is integrated into the Python Engine for maximum computational speed and high performance.
