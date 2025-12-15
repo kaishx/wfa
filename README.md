@@ -10,6 +10,20 @@
 
 Retail pairs trading still works in theory, but fees and slippage erode most alpha. I built a hybrid Python/Numba + C++ Walk-Forward Analysis engine to rigorously test pairs on 15-min bars using Z-score, Kalman filter, ADF, and Hurst thresholds. C++ acceleration gave ~1.3x speedup and tighter latency. The top 25 pairs had an upper-bound portfolio Sharpe of ~1.48, though friction lowers practical profitability.
 
+## Table of Contents
+
+1. [Introduction & Thesis](#1-introduction--thesis)
+2. [Methodology (WFA)](#2-methodology-wfa)
+3. [Methodology (C++/Numba Comparison)](#3-methodology-cnumba-comparison)
+4. [Installation & Build Guide](#4-installation--build-guide)
+5. [Usage & Workflow](#5-usage--workflow)
+6. [Results + Discussion of the Walk-Forward Analysis](#6-results--discussion-of-the-walk-forward-analysis)
+7. [Results + Discussion of C++ vs. Numba Performance Benchmark](#7-results--discussion-of-c-vs-numba-performance-benchmark)
+8. [Discussion & Financial Reality](#8-discussion--financial-reality)
+9. [Limitations & Future Work](#9-limitations--future-work)
+10. [Conclusion](#10-conclusion)
+11. [My Personal Thoughts](#11-my-personal-thoughts)
+
 ## 1. Introduction & Thesis
 
 Back in 2024, I was introduced to a form of pseudo-gambling on the direction of the stock market by a friend. It was the two 3x leveraged semiconductor ETFs, SOXL & SOXS, which were extremely volatile products that could swing aggressively in either direction. 
@@ -380,7 +394,7 @@ This project successfully demonstrates a retail-grade quantitative research plat
 
 The Walk-Forward Analysis (Section 6) validated the statistical foundations: pairs in Region I (Figure 3) consistently exhibited alpha when filtered using **ADF $\leq 0.1$ and Hurst $\leq 0.8$**.
 
-However, the financial reality is stark: small, consistent alpha on 15-minute bars is often eliminated by realistic transaction costs and execution delays. Only specific pairs, like those in the top 25 (Figure 4), show practical promise.
+However, reality often dissapoints us. Small, consistent alpha on 15-minute bars is often eliminated by realistic transaction costs and execution delays. Only specific pairs, like those in the top 25 (Figure 4), show practical promise.
 
 From a systems perspective, the hybrid Python/C++ WFA engine (Section 7) proved that Numba is excellent for research prototyping, but **C++ is essential for predictable, low-latency production performance**, thanks to Zero-Copy memory handling and tighter execution consistency.
 
