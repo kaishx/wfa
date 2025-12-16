@@ -8,7 +8,7 @@
 
 ## Overview / TLDR
 
-Retail pairs trading still works in theory, but fees and slippage erode most alpha. I built a hybrid Python/Numba + C++ Walk-Forward Analysis engine to rigorously test pairs on 15-min bars using Z-score, Kalman filter, ADF, and Hurst thresholds. C++ acceleration gave ~1.3x speedup and tighter latency. The top 25 pairs had an upper-bound portfolio Sharpe of ~1.48, though friction lowers practical profitability.
+Retail pairs trading still works in theory, but fees and slippage erode most alpha. I built a hybrid Python/Numba + C++ Walk-Forward Analysis engine to rigorously test pairs on 15-min bars using Z-score, Kalman filter, ADF, and Hurst thresholds. C++ acceleration gave ~1.3x speedup and tighter latency. The top 25 pairs had an upper-bound portfolio Sharpe of ~1.48 (with some caveats, please see chapter 6), though friction lowers practical profitability.
 
 ## Table of Contents
 
@@ -280,21 +280,15 @@ The top 25 pairs discovered under this regime (all of which were paper-tested on
 
 ### Portfolio Sharpe
 
-While individual pair's annualized Sharpes are modest (<0.5), diversification across sectors and correlation clusters dramatically boosts the **portfolio-level** Sharpe.
+While individual pair's annualized Sharpes are modest, diversification across sectors and correlation clusters dramatically boosts the **portfolio-level** Sharpe.
 
-We estimate an upper-bound portfolio Sharpe using:
+**For comparative estimation purposes only**, we estimate a theoretical upper bound by aggregating the average individual Sharpe Ratio of the 25 pairs:
 
-$$\mathbf{S_{p, \text{upper bound}}} = \frac{\sum_{i=1}^{N} \mathbf{S_i}}{\sqrt{N}}$$
+$$\mathbf{S_{p, \text{upper bound}}} = \text{Average } S_{i} \times \sqrt{N}$$
 
-assuming equal volatility across pairs and zero cross-correlation.
+assuming equal volatility across pairs and zero cross-correlation. This calculation yields a value of **1.475**.
 
-| Metric | Value | 
-| :--- | :--- | 
-| **Number of Pairs ($N$)** | 25 | 
-| **Sum of Individual Sharpe Ratios ($\sum S_i$)** | 7.375 |
-| **Portfolio Sharpe (Upper Bound, $S_p$)** | **1.475** | 
-
-*Note: The 25 pairs are definitely correlated, and hence the realistic portfolio Sharpe is lower.*
+**Crucially, this figure is a mathematical maximum derived under the highly unrealistic assumptions of zero cross-correlation and equal volatility across all 25 pairs.** The realistic, diversified portfolio Sharpe Ratio is lower due to asset correlation, but this upper bound demonstrates the high quality of the screened individual models.
 
 ### Key Takeaways
 
