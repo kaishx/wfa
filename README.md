@@ -8,7 +8,7 @@
 
 ## Overview / TLDR
 
-Retail pairs trading still works in theory, but fees and slippage erode most alpha. I built a hybrid Python/Numba + C++ Walk-Forward Analysis engine to rigorously test pairs on 15-min bars using Z-score, Kalman filter, ADF, and Hurst thresholds. C++ acceleration gave ~1.3x speedup and tighter latency. The top 25 pairs had an upper-bound portfolio Sharpe of ~1.48 (with some caveats, please see chapter 6), though friction lowers practical profitability.
+Retail pairs trading still works in theory, but fees and slippage erode most alpha. I built a hybrid Python/Numba + C++ Walk-Forward Analysis engine to rigorously test pairs on 15-min bars using Z-score, Kalman filter, ADF, and Hurst thresholds. C++ acceleration gave ~1.3x speedup and tighter latency. The top 25 pairs had an upper-bound portfolio Sharpe of ~1.48 **(with some caveats, please see chapter 6)**, though friction lowers practical profitability.
 
 ## Table of Contents
 
