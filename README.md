@@ -330,8 +330,8 @@ In this project, I found out a few problems with my thesis when delving deeper i
 
 Even for the pairs that consistently fell in **Region I** of the Sharpe vs. MDD graphs (Figure 3), retail trading costs erode profitability and hence affect my alpha. For example:
 
-* A highly stable pair like HD/LOW (Figure 4) might generate an average gross profit of $\sim\$2$ per trade on a 15-minute bar.
-* Modelled fees and costs of $\$0.01$ slippage per share $+ 0.01\%$ transaction fees, can result in fees of $2.00 - $3.00 per trade depending on the number of shares. At 90 trades on average for each HD/LOW run, this results in close to 200 dollars in fees alone, which is about 20% of the would-be profit. This further impacts sharpe and one could expect portfolio sharpe to increase with more favourable costs.
+* A highly stable pair like HD/LOW (Figure 4) might generate an average gross profit of $2 per trade on a 15-minute bar.
+* Modelled fees and costs of $0.01 slippage per share + 0.01% transaction fees, can result in fees of $2.00 - $3.00 per trade depending on the number of shares. At 90 trades on average for each HD/LOW run, this results in close to 200 dollars in fees alone, which is about 20% of the would-be profit. This further impacts sharpe and one could expect portfolio sharpe to increase with more favourable costs.
 
 From this, we can see that while medium-frequency mean reversion may be statistically sound, but retail traders face a “friction wall” that consumes the small alpha we observed in the top pairs.
 
@@ -339,7 +339,7 @@ From this, we can see that while medium-frequency mean reversion may be statisti
 
 Beyond friction, profitability is highly sensitive to the choice of Z-score thresholds, ADF, and Hurst parameters:
 
-* In naive backtests, small changes to the entry Z-score (e.g., $1.8 \to 1.9$) can reduce trade frequency and Sharpe ratio by $10–20\%$. 
+* In naive backtests, small changes to the entry Z-score (e.g., 1.8 to 1.9) can reduce trade frequency and Sharpe ratio by 10–20%. 
 * Looser ADF or Hurst thresholds increase trade volume but expose the system to non-mean-reverting behavior, inflating drawdowns.
 
 This reinforces the need for a Walk-Forward Analysis, which ensures parameter choices remain robust across shifting market regimes. However, I must admit that even the WFA is not immune to parameter sensitivity, as can be seen in the fact that even small changes to the Hurst, ADF and Z-Scores can massively affect how the pairs perform.
@@ -349,7 +349,7 @@ This reinforces the need for a Walk-Forward Analysis, which ensures parameter ch
 The statistical filters performed exactly as intended:
 
 * **ADF Test:** Ensured we only optimized on stationary windows, preventing the system from chasing spurious correlations.
-* **Hurst Exponent:** Blocked trades during trending periods ($H>0.75$), protecting capital from breakdowns in mean-reversion behavior.
+* **Hurst Exponent:** Blocked trades during trending periods (H>0.75), protecting capital from breakdowns in mean-reversion behavior.
 
 This confirms that the methodology introduced in Section 2 is not just theoretical, and it has practical value when applied correctly to filter out junk signals.
 
