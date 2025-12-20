@@ -115,7 +115,7 @@ Z_EXIT_GRID = [0.1, 0.3, 0.5, 0.7, 0.9, 1.1]
 Z_STOP_LOSS_GRID = [3.0, 3.3, 3.6, 3.9, 4.2, 4.5]
 
 ADF_P_VALUE_THRESHOLD = float(os.getenv("ADF_P_VALUE_THRESHOLD", 0.20))
-hurstMax = 0.75 # google said <0.5 is mean-reverting, but empirically i found 0.75-0.8 to be better hurst limits which let trades in without suffocating the whole thing
+hurstMax = 0.70 # google said <0.5 is mean-reverting, but empirically i found 0.75-0.8 to be better hurst limits which let trades in without suffocating the whole thing
 
 # gonna log it to excel for persistence. quite useless now that im using cpp so each run on each wfa is like 20s
 OUTPUT_DIR = "wfa_outputs_cpp"
@@ -311,7 +311,8 @@ def bt_strat(data, z_entry, z_exit, z_stop_loss, cptl, txfee, slippage, asset_a,
 
     # just a lil different here than numba
     cpp_pnl_array = cpp_accelerator.run_backtest(
-        close_a.tolist(), close_b.tolist(), z_score.tolist(), beta.tolist(), hurst.tolist(), vol.tolist(),
+        close_a, close_b, z_score,
+        beta, hurst, vol,
         z_entry, z_exit, z_stop_loss, cptl, txfee,
         slippage, abs_stop, hurstMax
     )
@@ -606,6 +607,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n!!! an error occurred during execution: {e}!!!")
         import traceback
-
 
         traceback.print_exc()
