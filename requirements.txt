@@ -1,3 +1,5 @@
+setuptools>=68.0.0
+wheel>=0.42.0
 alpaca-py==0.43.2
 annotated-types==0.7.0
 certifi==2025.11.12
