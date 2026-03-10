@@ -303,31 +303,32 @@ I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, w
 
 ## 7. Results + Discussion of NumPy vs. Numba vs. C++ Performance Benchmark
 
-### Benchmark Results (10,000 bars per run)
+### Benchmark Results (10,000 bars per run, 1,000 runs per method)
 
 | Module | Mean Time per Run | Std. Dev | Speedup vs. NumPy | Speedup vs. Numba |
 | :--- | :--- | :--- | :--- | :--- |
-| **Hybrid NumPy** | 0.703434s | 0.009121s* | 1.0x (Baseline)| - |
-| **Numba JIT** | 0.020776s | 0.000734s | 33.86x | 1.0x |
-| **C++ Module** | 0.012599s | 0.000265s | **55.83x** | **1.65x** |
+| **Hybrid NumPy** | 0.634932s | 0.149813s* | 1.0x (Baseline)| - |
+| **Numba JIT** | 0.017403s | 0.006097s | 36.48x | 1.0x |
+| **C++ Module** | 0.011019s | 0.003322s | 57.62x | 1.58x |
 
 *\*Estimated std. dev for illustration based on typical Python loop variances.*
 
 !(assets/benchmark.png)
 
-*Figure 5: Probability Distribution Graphs of C++ (orange) and Numba (cyan) vs the Hybrid NumPy baseline (red) across runs @ 10,000 Bars.*
+*Figure 5: Probability Distribution Graphs of C++ (orange) and Numba (cyan) across 1,000 runs @ 10,000 Bars.* > 
+**Note on Visualization:** The Hybrid NumPy baseline was omitted from this graph. Because its mean execution time (~0.63s) is over 50x slower than the compiled methods, including it on the same linear x-axis compresses the C++ and Numba curves into indistinguishable vertical lines. You can still view the image under full_benchmark.png in the assets folder.
 
 The benefit of JIT compilation and native C++ over standard Python operations is immense, proving that the state-machine bottleneck is real. Even when pre-calculating everything possible using NumPy's C-backend, the simple act of tracking state and evaluating `if/else` logic line-by-line in Python creates massive overhead.
 
 The advantages of the optimizations can be seen and interpreted in two ways:
-* **Raw Speed:** Numba crushing the Hybrid NumPy approach by nearly 34x shows how powerful JIT compilation is for path-dependent loops. However, the native C++ module completely eliminated Python overhead during the heavy grid-search loops. By leveraging the Zero-Copy technique (passing pointers directly from Python memory to C++ without serialization), the C++ module achieved a ~55.8x speedup over NumPy, and a ~1.65x speedup over Numba.
+* **Raw Speed:** Numba crushing the Hybrid NumPy approach by nearly 36.5x shows how powerful JIT compilation is for path-dependent loops. However, the native C++ module completely eliminated Python overhead during the heavy grid-search loops. By leveraging the Zero-Copy technique (passing pointers directly from Python memory to C++ without serialization), the C++ module achieved a ~57.6x speedup over NumPy, and a ~1.58x speedup over Numba.
 * **Consistency:** The C++ performance distribution is much tighter than the Numba curve. In production, **predictable latency** is crucial, which the C++ engine delivers by being immune to Python's Garbage Collection overhead.
 
 However, we must be aware this benchmark is not perfect and across different batches of runs can give varying results (e.g. C++ being 1.2x - 1.9x faster than Numba). Nevertheless, all batches agree that C++ always has a significantly lower mean and standard deviation compared to both Numba and base Python execution.
 
 ### Key Takeaways
 
-While standard NumPy vectorization is fantastic for stateless math, path-dependent trading logic forces a chronological Python loop that destroys performance. Both Numba and C++ bypass this Python loop tax effectively. Numba is practically magic for rapid research prototyping, but C++ remains the undisputed king for calculation efficiency and reliability, resulting in a tighter deviation and a massive 55.8x speedup over base Python execution. This proves why implementing C++ is paramount to improving the overall efficiency of the WFA workflow, especially for large batches of back-to-back WFA runs.
+While standard NumPy vectorization is fantastic for stateless math, path-dependent trading logic forces a chronological Python loop that destroys performance. Both Numba and C++ bypass this Python loop tax effectively. Numba is practically magic for rapid research prototyping, but C++ remains the undisputed king for calculation efficiency and reliability, resulting in a tighter deviation and a massive 57.6x speedup over base Python execution. This proves why implementing C++ is paramount to improving the overall efficiency of the WFA workflow, especially for large batches of back-to-back WFA runs.
 
 ---
 
@@ -366,7 +367,7 @@ This confirms that the methodology introduced in Section 2 is not just theoretic
 
 From an engineering standpoint, the system achieved its secondary goal as well:
 
-* **Zero-Copy Optimization:** As described in Section 7, the C++ engine reads Python’s NumPy arrays directly in RAM, eliminating the latency introduced by serialization and contributing to the **$\sim 55.8\times$ speedup** over base Python and **$\sim 1.65\times$ speedup** over Numba.
+* **Zero-Copy Optimization:** As described in Section 7, the C++ engine reads Python’s NumPy arrays directly in RAM, eliminating the latency introduced by serialization and contributing to the **$\sim 57.6\times$ speedup** over base Python and **$\sim 1.58\times$ speedup** over Numba.
 * **Portability Solution:** The custom Windows build system ensures the hybrid Python/C++ engine can be installed and run reliably across different environments, paving the way for scalable research or even live trading.
 
 ---
