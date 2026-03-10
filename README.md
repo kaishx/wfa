@@ -313,10 +313,10 @@ I found 0.8 / 0.1 to be the most suitable Hurst and ADF thresholds for my WFA, w
 
 *\*Estimated std. dev for illustration based on typical Python loop variances.*
 
-!(assets/benchmark.png)
+![Benchmark Distribution](assets/benchmark.png)
 
-*Figure 5: Probability Distribution Graphs of C++ (orange) and Numba (cyan) across 1,000 runs @ 10,000 Bars.* > 
-**Note on Visualization:** The Hybrid NumPy baseline was omitted from this graph. Because its mean execution time (~0.63s) is over 50x slower than the compiled methods, including it on the same linear x-axis compresses the C++ and Numba curves into indistinguishable vertical lines. You can still view the image under full_benchmark.png in the assets folder.
+*Figure 5: Probability Distribution Graphs of C++ (orange) and Numba (cyan) across 1,000 runs @ 10,000 Bars.*  
+> **Note on Visualization:** The Hybrid NumPy baseline was omitted from this graph. Because its mean execution time (~0.63s) is over 50x slower than the compiled methods, including it on the same linear x-axis compresses the C++ and Numba curves into indistinguishable vertical lines. You can still view the image under full_benchmark.png in the assets folder.
 
 The benefit of JIT compilation and native C++ over standard Python operations is immense, proving that the state-machine bottleneck is real. Even when pre-calculating everything possible using NumPy's C-backend, the simple act of tracking state and evaluating `if/else` logic line-by-line in Python creates massive overhead.
 
