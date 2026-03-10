@@ -168,8 +168,6 @@ If you encounter any issues compiling the C++ module, you can switch to the Pyth
 * Set `wfa_script = "numba_wfa"` in `batch_runner.py`.
 * Without the C++ module, you will also not be able to benchmark C++ against Numba in `stress.py`.
 
----
-
 ## 6. Results + Discussion of the Walk-Forward Analysis
 
 ### ADF and Hurst
@@ -183,36 +181,33 @@ To get a sense of how sensitive the strategy is to stationarity constraints, I r
 
 Then I added two boundary configurations:
 
-* **(Hurst 0.9, ADF 0.2)** — very looaw, effectively removes most mean-reversion filtering (Lets lots of trades in)
+* **(Hurst 0.9, ADF 0.2)** — very loose, effectively removes most mean-reversion filtering (Lets lots of trades in)
 * **(Hurst 0.7, ADF 0.2)** — very strict, strongly penalizes trending behavior (Blocks lots of trades out)
 
 These extremes reveal how the strategy breaks when the filters are either too loose or too restrictive.
 
-The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, with Max Drawdown on the x-axis and Sharpe Ratio on the y-axis. 
+The scatter plot below shows each pair’s Walk-Forward out-of-sample performance, with Max Drawdown on the x-axis and Sharpe Ratio on the y-axis. 
 
 Each dot is one full WFA run over four years of 15-minute bars. The size of each dot represents its trade volume, and the colors are arbitrary (alphabetically sorted) and not representative of performance.
 
-![Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)  
+![Graphs of Pair Performance (In Sharpe) Across different ADF cutoffs](assets/graphs.png)  
 *Figure 2: Compilation of 6 graphs showing Pair Performance in Sharpe against Max Drawdown. (Click for a higher-res view.)*
 
 Across all pairs, several patterns show up consistently:
 
-* **Stricter filters (e.g., 0.75 / 0.1)**  
-  * Fewer tradable windows, and while some pairs do improve, it is not a universal effect.
-
-* **Looser filters (e.g., 0.80 / 0.2)**  
-  * More trades, but with inflated MDD and no real improvement in Sharpe.
-
-* **A “Goldilocks Zone” emerges (0.75 / 0.2 and 0.80 / 0.1)**  
-  * A good middle ground: still decent volume, controlled drawdowns, and stable median Sharpe per pair.
+* **Stricter filters (e.g., 0.75 / 0.1)**
+    * Fewer tradable windows, and while some pairs do improve, it is not a universal effect.
+* **Looser filters (e.g., 0.80 / 0.2)**
+    * More trades, but with inflated MDD and no real improvement in Sharpe.
+* **A “Goldilocks Zone” emerges (0.75 / 0.2 and 0.80 / 0.1)**
+    * A good middle ground: still decent volume, controlled drawdowns, and stable median Sharpe per pair.
 
 The boundary configs highlight the extremes:
 
-* **(0.9, 0.2)** essentially floods the system with non-stationary spreads.  
-  * Result: MDD increases while offering zero upside. The filters are simply too loose.
-
-* **(0.7, 0.2)** is overly strict.  
-  * Result: Trade volume collapses, often to near zero — which matches real paper-trading observations where many spreads sit around Hurst 0.75–0.9. Only extremely tight pairs like QQQ/QQQM survive.
+* **(0.9, 0.2)** essentially floods the system with non-stationary spreads.
+    * Result: MDD increases while offering zero upside. The filters are simply too loose.
+* **(0.7, 0.2)** is overly strict.
+    * Result: Trade volume collapses, often to near zero — which matches real paper-trading observations where many spreads sit around Hurst 0.75–0.9. Only extremely tight pairs like QQQ/QQQM survive.
 
 Overall, these patterns reinforce why threshold testing matters and why the chosen filters should reflect actual market behavior rather than purely statistical aesthetics. In empirical finance, a Hurst value around 0.7 typically indicates trending (not mean-reverting), and an ADF p-value of 0.2 is far from statistically significant.
 
